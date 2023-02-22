@@ -22,13 +22,14 @@ services:
   web:
     image: tomcat:latest
     container_name: electricrat-ewb
+    privileged: true
     ports:
       - "12666:8080"
     restart: always
     depends_on:
       - db
     volumes:
-      - ./tomcat:/usr/local/tomcat/webapps
-      - ./tomcat:/usr/local/tomcat/logs
+      - ./tomcat/ElectricRat.war:/usr/local/tomcat/webapps/ElectricRat.war
+      - ./tomcat/log:/usr/local/tomcat/logs
     links:
       - db
