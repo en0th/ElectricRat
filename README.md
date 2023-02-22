@@ -1,3 +1,9 @@
+![](https://img.shields.io/badge/web安全-靶场-PTEST)
+![](https://img.shields.io/badge/version-1.0-success)
+![](https://img.shields.io/github/stars/linjiananallnt/ElectricRat.svg)
+![](https://img.shields.io/github/forks/linjiananallnt/ElectricRat.svg)
+![](https://img.shields.io/github/license/linjiananallnt/ElectricRat.svg)
+
 # 项目介绍
 电气鼠靶场系统是一种带有漏洞的Web应用程序，旨在为Web安全渗透测试学习者提供学习和实践的机会。靶场系统包含了各种常见的Web安全漏洞，例如SQL注入、跨站脚本攻击、文件包含漏洞、代码注入漏洞等等，以帮助学习者熟悉和掌握这些漏洞的原理和实际利用方法。
 
@@ -34,11 +40,11 @@ sudo docker exec -it electricrat-mysql /bin/bash -c 'cd /data && mysqladmin -u r
 - SSTI(模板注入)
 
 # 技术栈和依赖项
-中间件：Apache-Tomcat-10.1.5
-数据库：MySQL Server 8.0
-SDK版本：OpenJDK 19.0.1
-构建：Maven
-数据库连接池：Druid-1.2.15
+- 中间件：Apache-Tomcat-10.1.5
+- 数据库：MySQL Server 8.0
+- SDK版本：OpenJDK 19.0.1
+- 构建：Maven
+- 数据库连接池：Druid-1.2.15
 
 # 贡献指南
 非常渴望对该系统的各种良好的建议，鼓励大家提交PR。
