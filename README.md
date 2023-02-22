@@ -1,7 +1,11 @@
 ![](https://img.shields.io/badge/web安全-靶场-PTEST)
+
 ![](https://img.shields.io/badge/version-1.0-success)
+
 ![](https://img.shields.io/github/stars/linjiananallnt/ElectricRat.svg)
+
 ![](https://img.shields.io/github/forks/linjiananallnt/ElectricRat.svg)
+
 ![](https://img.shields.io/github/license/linjiananallnt/ElectricRat.svg)
 
 # 项目介绍
