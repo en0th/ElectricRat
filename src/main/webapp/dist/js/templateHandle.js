@@ -487,7 +487,7 @@ const baseUri = window.location.origin + project_name;
         <a href="${baseUri}index.html" class="nav-link">主页</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">联系作者</a>
+        <a href="https://github.com/linjiananallnt/ElectricRat" class="nav-link">联系作者</a>
       </li>
     </ul>
 
