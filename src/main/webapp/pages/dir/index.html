@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>目录遍历</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+    <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+    <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+    <div class="content-wrapper" id="Wrapper">
+        <section class="content-header" id="WrapperHeader"></section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">目录遍历概述</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="markdown prose w-full break-words dark:prose-invert light"><p>
+                            目录遍历漏洞，也称为目录穿越漏洞，是一种常见的Web应用程序安全漏洞，攻击者可以利用此漏洞获取目标服务器上的敏感信息或者执行任意代码。目录遍历漏洞的原理是，攻击者通过修改Web应用程序中的URL，来访问Web服务器上的非授权目录。</p>
+                            <p>
+                                攻击者通常通过在URL中添加"../"等目录遍历符号，来访问目标服务器上的上层目录，从而绕过Web应用程序的访问控制，访问Web服务器上的敏感文件和目录，例如/etc/passwd、/etc/shadow等系统文件，以及Web应用程序的配置文件、数据库文件、源代码等敏感信息。此外，攻击者还可以通过上传Web
+                                Shell等恶意文件，来实现对服务器的远程控制。</p>
+                            <p>为了防止目录遍历漏洞，开发人员应该采取以下措施：</p>
+                            <ol>
+                                <li><p>对用户输入的参数进行严格的输入验证和过滤，禁止包含"../"等目录遍历符号。</p></li>
+                                <li><p>
+                                    在Web应用程序中，不要将敏感文件和目录存储在Web根目录下，而是应该将它们存储在安全的目录中，并设置适当的访问权限，避免被攻击者访问和执行。</p>
+                                </li>
+                                <li><p>
+                                    对Web服务器和操作系统进行适当的配置和安全加固，例如限制文件访问权限、禁用目录列举功能等。</p>
+                                </li>
+                                <li><p>对Web应用程序进行安全漏洞扫描和渗透测试，及时发现和修复漏洞。</p></li>
+                                <li><p>
+                                    在开发Web应用程序时，使用安全编程的最佳实践，例如使用编程框架、编写安全代码、使用加密算法等。</p>
+                                </li>
+                            </ol>
+                            <p>
+                                总之，避免目录遍历漏洞的发生，需要Web应用程序开发人员和系统管理员共同努力，从多个方面加强Web应用程序的安全性。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <footer class="main-footer"></footer>
+    <script src="../../dist/js/templateHandle.js"></script>
+    <script>
+        setWrapperHeader("目录遍历", ["概述"]);
+    </script>
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="../../dist/js/adminlte.js"></script>
+</body>
+</html>

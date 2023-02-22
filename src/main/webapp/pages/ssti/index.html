@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSTI模板注入</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+    <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+    <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+    <div class="content-wrapper" id="Wrapper">
+        <section class="content-header" id="WrapperHeader"></section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">SSTI模板注入</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="markdown prose w-full break-words dark:prose-invert light"><p>SSTI（Server-Side
+                            Template Injection）是一种常见的Web应用程序漏洞，攻击者可以通过SSTI漏洞在Web应用程序中注入恶意模板代码，从而执行任意的命令或者获取敏感信息。JAVA
+                            SSTI注入漏洞是指在Java应用程序中存在SSTI漏洞的情况。</p>
+                            <p>
+                                在Java应用程序中，常见的模板引擎包括Thymeleaf、FreeMarker、Velocity等。这些模板引擎在处理模板时，通常会将用户输入的数据作为变量传递到模板中进行解析。如果开发人员没有对用户输入进行充分的过滤和验证，攻击者就可以通过构造恶意的模板代码，来执行任意的命令或者获取敏感信息。</p>
+                            <p>JAVA
+                                SSTI注入漏洞通常是由于开发人员在使用模板引擎时，没有对用户输入进行充分的过滤和验证，导致攻击者可以在模板中注入恶意代码。攻击者可以通过修改请求中的参数或者请求头等信息，来触发SSTI漏洞。</p>
+                            <p>JAVA SSTI注入漏洞的危害很大，攻击者可以利用它来执行任意的命令，包括访问系统文件、获取系统权限、窃取敏感数据等。为了防范JAVA
+                                SSTI注入漏洞，开发人员需要对用户输入进行严格的验证和过滤，避免将用户输入直接传递到模板引擎中，同时也需要对模板引擎进行安全配置，禁止使用危险的模板代码。</p>
+                            <p>如果发现了JAVA
+                                SSTI注入漏洞，应该及时采取措施进行修复，包括限制模板引擎的使用范围、过滤用户输入、使用安全的模板代码等。同时，也可以采用WAF（Web应用程序防火墙）等安全防护措施来增强Web应用程序的安全性。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<footer class="main-footer"></footer>
+<script src="../../dist/js/templateHandle.js"></script>
+<script>
+    setWrapperHeader("SSTI模板注入", ["概述"]);
+</script>
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="../../dist/js/adminlte.js"></script>
+</body>
+</html>

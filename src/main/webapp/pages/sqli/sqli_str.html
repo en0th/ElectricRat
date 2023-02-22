@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sql Inject</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+  <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+  <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+  <div class="content-wrapper" id="Wrapper">
+    <section class="content-header" id="WrapperHeader"></section>
+    <section class="content">
+      <div class="container-fluid">
+        <div id="notice"></div>
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">字符型注入</h3>
+          </div>
+          <form action="" onsubmit="return false;">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="userName">通过用户名查询用户：</label>
+                <input type="text" class="form-control" id="userName" placeholder="Enter userName">
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary" onclick="doSelect()">查询</button>
+            </div>
+          </form>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">用户数据</h3>
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered">
+              <thead>
+              <tr>
+                <th>序号</th>
+                <th>用户名</th>
+              </tr>
+              </thead>
+              <tbody id="userData"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card card-primary card-outline" id="showSource">
+          <div class="card-header">
+            <h3 class="card-title">源代码&amp;提示</h3>
+          </div>
+          <div class="card-body">
+            <div>
+              <p>注意：SQL注入篇章使用了第二个数据库，命名为 mycms_gbk。没有使用预编译，在这里你可以任意执行你想要的SQL语句。</p>
+              <p>该数据库默认存在用户名为： jake、jessica、both 的用户</p>
+              <p>这里是通过用户名查询用户，观察代码可以看到，这里SQL拼接的是字符类型。思考一下如何执行你想要的SQL语句？</p>
+              <p><strong>Servlet 代码实现</strong></p>
+              <pre><code>&#x20;&#x20;&#x20;&#x20;&commat;&#x41;&#x70;&#x69;&lpar;&lcub;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x4D;&#x65;&#x74;&#x68;&#x6F;&#x64;&#x54;&#x79;&#x70;&#x65;&period;&#x47;&#x45;&#x54;&comma;&#x20;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x4D;&#x65;&#x74;&#x68;&#x6F;&#x64;&#x54;&#x79;&#x70;&#x65;&period;&#x50;&#x4F;&#x53;&#x54;&rcub;&rpar;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x70;&#x75;&#x62;&#x6C;&#x69;&#x63;&#x20;&#x4D;&#x61;&#x70;&lt;&quest;&comma;&#x20;&quest;&gt;&#x20;&#x73;&#x68;&#x6F;&#x77;&#x55;&#x73;&#x65;&#x72;&#x42;&#x79;&#x55;&#x73;&#x65;&#x72;&#x4E;&#x61;&#x6D;&#x65;&lpar;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&comma;&#x20;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&rpar;&#x20;&#x74;&#x68;&#x72;&#x6F;&#x77;&#x73;&#x20;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&comma;&#x20;&#x49;&#x4F;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x75;&#x73;&#x65;&#x72;&#x6E;&#x61;&#x6D;&#x65;&#x20;&equals;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x50;&#x61;&#x72;&#x61;&#x6D;&#x65;&#x74;&#x65;&#x72;&lpar;&quot;&#x75;&#x73;&#x65;&#x72;&#x6E;&#x61;&#x6D;&#x65;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x6E;&#x74;&#x20;&#x74;&#x79;&#x70;&#x65;&#x20;&equals;&#x20;&#x49;&#x6E;&#x74;&#x65;&#x67;&#x65;&#x72;&period;&#x70;&#x61;&#x72;&#x73;&#x65;&#x49;&#x6E;&#x74;&lpar;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x50;&#x61;&#x72;&#x61;&#x6D;&#x65;&#x74;&#x65;&#x72;&lpar;&quot;&#x74;&#x79;&#x70;&#x65;&quot;&rpar;&#x20;&excl;&equals;&#x20;&#x6E;&#x75;&#x6C;&#x6C;&quest;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x50;&#x61;&#x72;&#x61;&#x6D;&#x65;&#x74;&#x65;&#x72;&lpar;&quot;&#x74;&#x79;&#x70;&#x65;&quot;&rpar;&colon;&quot;&#x30;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&comma;&#x20;&#x4F;&#x62;&#x6A;&#x65;&#x63;&#x74;&gt;&#x20;&#x64;&#x61;&#x74;&#x61;&#x20;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&gt;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x73;&#x77;&#x69;&#x74;&#x63;&#x68;&#x20;&lpar;&#x74;&#x79;&#x70;&#x65;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x61;&#x73;&#x65;&#x20;&#x31;&#x20;&#x2D;&gt;&#x20;&#x64;&#x61;&#x74;&#x61;&period;&#x70;&#x75;&#x74;&lpar;&quot;&#x75;&#x73;&#x65;&#x72;&quot;&comma;&#x20;&#x75;&#x67;&#x64;&#x69;&period;&#x66;&#x69;&#x6E;&#x64;&#x55;&#x73;&#x65;&#x72;&#x42;&#x79;&#x55;&#x73;&#x65;&#x72;&#x6E;&#x61;&#x6D;&#x65;&lpar;&#x75;&#x73;&#x65;&#x72;&#x6E;&#x61;&#x6D;&#x65;&rpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x61;&#x73;&#x65;&#x20;&#x32;&#x20;&#x2D;&gt;&#x20;&#x64;&#x61;&#x74;&#x61;&period;&#x70;&#x75;&#x74;&lpar;&quot;&#x75;&#x73;&#x65;&#x72;&quot;&comma;&#x20;&#x75;&#x67;&#x64;&#x69;&period;&#x66;&#x69;&#x6E;&#x64;&#x55;&#x73;&#x65;&#x72;&#x42;&#x79;&#x55;&#x73;&#x65;&#x72;&#x6E;&#x61;&#x6D;&#x65;&#x46;&#x75;&#x7A;&#x7A;&#x79;&lpar;&#x75;&#x73;&#x65;&#x72;&#x6E;&#x61;&#x6D;&#x65;&rpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x61;&#x73;&#x65;&#x20;&#x33;&#x20;&#x2D;&gt;&#x20;&#x64;&#x61;&#x74;&#x61;&period;&#x70;&#x75;&#x74;&lpar;&quot;&#x75;&#x73;&#x65;&#x72;&quot;&comma;&#x20;&#x75;&#x67;&#x64;&#x69;&period;&#x66;&#x69;&#x6E;&#x64;&#x55;&#x73;&#x65;&#x72;&#x42;&#x79;&#x55;&#x73;&#x65;&#x72;&#x6E;&#x61;&#x6D;&#x65;&#x4D;&#x75;&#x6C;&#x74;&#x69;&#x70;&#x6C;&#x65;&lpar;&#x75;&#x73;&#x65;&#x72;&#x6E;&#x61;&#x6D;&#x65;&rpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x61;&#x73;&#x65;&#x20;&#x34;&#x20;&#x2D;&gt;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&comma;&#x20;&#x4F;&#x62;&#x6A;&#x65;&#x63;&#x74;&gt;&#x20;&#x75;&#x73;&#x65;&#x72;&#x20;&equals;&#x20;&#x75;&#x67;&#x64;&#x69;&period;&#x66;&#x69;&#x6E;&#x64;&#x55;&#x73;&#x65;&#x72;&#x42;&#x79;&#x55;&#x73;&#x65;&#x72;&#x6E;&#x61;&#x6D;&#x65;&lpar;&#x75;&#x73;&#x65;&#x72;&#x6E;&#x61;&#x6D;&#x65;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x75;&#x73;&#x65;&#x72;&period;&#x72;&#x65;&#x6D;&#x6F;&#x76;&#x65;&lpar;&quot;&#x6D;&#x73;&#x67;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x64;&#x61;&#x74;&#x61;&period;&#x70;&#x75;&#x74;&lpar;&quot;&#x75;&#x73;&#x65;&#x72;&quot;&comma;&#x20;&#x75;&#x73;&#x65;&#x72;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x64;&#x65;&#x66;&#x61;&#x75;&#x6C;&#x74;&#x20;&#x2D;&gt;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x75;&#x67;&#x64;&#x69;&period;&#x66;&#x69;&#x6E;&#x64;&#x55;&#x73;&#x65;&#x72;&#x42;&#x79;&#x55;&#x73;&#x65;&#x72;&#x6E;&#x61;&#x6D;&#x65;&lpar;&#x75;&#x73;&#x65;&#x72;&#x6E;&#x61;&#x6D;&#x65;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x64;&#x61;&#x74;&#x61;&period;&#x70;&#x75;&#x74;&lpar;&quot;&#x75;&#x73;&#x65;&#x72;&quot;&comma;&#x20;&#x6E;&#x75;&#x6C;&#x6C;&rpar;&semi;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x64;&#x61;&#x74;&#x61;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;</code></pre>
+              <p><strong>数据库操作代码</strong></p>
+              <pre><code>&#x20;&#x20;&#x20;&#x20;&#x70;&#x75;&#x62;&#x6C;&#x69;&#x63;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&comma;&#x20;&#x4F;&#x62;&#x6A;&#x65;&#x63;&#x74;&gt;&#x20;&#x66;&#x69;&#x6E;&#x64;&#x55;&#x73;&#x65;&#x72;&#x42;&#x79;&#x55;&#x73;&#x65;&#x72;&#x6E;&#x61;&#x6D;&#x65;&lpar;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x75;&#x73;&#x65;&#x72;&#x6E;&#x61;&#x6D;&#x65;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x71;&#x75;&#x65;&#x72;&#x79;&lpar;&quot;&#x73;&#x65;&#x6C;&#x65;&#x63;&#x74;&#x20;&ast;&#x20;&#x66;&#x72;&#x6F;&#x6D;&#x20;&#x73;&#x79;&#x73;&lowbar;&#x61;&#x63;&#x63;&#x6F;&#x75;&#x6E;&#x74;&#x20;&#x77;&#x68;&#x65;&#x72;&#x65;&#x20;&#x75;&#x73;&#x65;&#x72;&#x6E;&#x61;&#x6D;&#x65;&equals;&apos;&quot;&#x20;&plus;&#x20;&#x75;&#x73;&#x65;&#x72;&#x6E;&#x61;&#x6D;&#x65;&#x20;&plus;&#x20;&quot;&apos;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <footer class="main-footer"></footer>
+  <script src="../../dist/js/templateHandle.js"></script>
+  <script>
+    setWrapperHeader("Sql Inject", ["数字型注入"]);
+  </script>
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="../../dist/js/adminlte.js"></script>
+  <script>
+    function doSelect(){
+      let data = {
+        username: $("#userName")[0].value,
+        type: 1
+      }
+      $.post({
+        url: `${project_name}sqli/showUserByUserName`,
+        data,
+        success(resp){
+          console.log(resp)
+          let user = resp['user'];
+          if (user.msg === 'ok'){
+            $("#userData")[0].innerHTML = `<tr>
+              <td>${user.id}</td>
+              <td>${user.username}</td>
+            </tr>`;
+            $("#notice")[0].innerHTML = '';
+          } else {
+            $("#userData")[0].innerHTML = '';
+            $("#notice")[0].innerHTML = generateNote("错误信息：" + user.msg);
+          }
+        }
+      })
+    }
+  </script>
+</body>
+</html>

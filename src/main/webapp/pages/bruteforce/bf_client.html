@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>暴力破解</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+  <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+  <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+  <div class="content-wrapper" id="Wrapper">
+    <section class="content-header" id="WrapperHeader"></section>
+    <section class="content">
+      <div class="container-fluid">
+        <div id="notice"></div>
+        <div class="card card-primary card-outline">
+          <div class="card-header">
+            <h3 class="card-title">验证码绕过(on client)</h3>
+          </div>
+          <div class="card-body">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">后台登录</h3>
+              </div>
+              <form action="" onsubmit="return false" id="Login">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
+                  </div>
+                  <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                  </div>
+                  <div class="form-group">
+                    <label for="code">输入验证码</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" name="code" id="code" placeholder="Enter Code">
+                      <div class="input-group-append">
+                        <input type="text" onclick="createCode()" readonly="readonly" id="checkCode">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary" onclick="doLogin()">登录</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="card card-primary card-outline" id="showSource">
+          <div class="card-header">
+            <h3 class="card-title">源代码&amp;提示</h3>
+          </div>
+          <div class="card-body">
+            <div>
+              <p>数据库中默认存在三个账户，分别是 admin、user1、test</p>
+              <p><strong>JS前端验证码校验代码实现</strong></p>
+              <pre><code>&#x6C;&#x65;&#x74;&#x20;&#x63;&#x6F;&#x64;&#x65;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x66;&#x75;&#x6E;&#x63;&#x74;&#x69;&#x6F;&#x6E;&#x20;&#x63;&#x72;&#x65;&#x61;&#x74;&#x65;&#x43;&#x6F;&#x64;&#x65;&lpar;&rpar;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x6F;&#x64;&#x65;&#x20;&equals;&#x20;&quot;&quot;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x6F;&#x6E;&#x73;&#x74;&#x20;&#x63;&#x6F;&#x64;&#x65;&#x4C;&#x65;&#x6E;&#x67;&#x74;&#x68;&#x20;&equals;&#x20;&#x34;&semi;&sol;&sol;&#x9A8C;&#x8BC1;&#x7801;&#x7684;&#x957F;&#x5EA6;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x6F;&#x6E;&#x73;&#x74;&#x20;&#x63;&#x68;&#x65;&#x63;&#x6B;&#x43;&#x6F;&#x64;&#x65;&#x20;&equals;&#x20;&dollar;&lpar;&quot;&num;&#x63;&#x68;&#x65;&#x63;&#x6B;&#x43;&#x6F;&#x64;&#x65;&quot;&rpar;&lsqb;&#x30;&rsqb;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x6F;&#x6E;&#x73;&#x74;&#x20;&#x73;&#x65;&#x6C;&#x65;&#x63;&#x74;&#x43;&#x68;&#x61;&#x72;&#x20;&equals;&#x20;&lsqb;&#x30;&comma;&#x20;&#x31;&comma;&#x20;&#x32;&comma;&#x20;&#x33;&comma;&#x20;&#x34;&comma;&#x20;&#x35;&comma;&#x20;&#x36;&comma;&#x20;&#x37;&comma;&#x20;&#x38;&comma;&#x20;&#x39;&comma;&#x20;&apos;&#x41;&apos;&comma;&#x20;&apos;&#x42;&apos;&comma;&#x20;&apos;&#x43;&apos;&comma;&#x20;&apos;&#x44;&apos;&comma;&#x20;&apos;&#x45;&apos;&comma;&#x20;&apos;&#x46;&apos;&comma;&#x20;&apos;&#x47;&apos;&comma;&#x20;&apos;&#x48;&apos;&comma;&#x20;&apos;&#x49;&apos;&comma;&#x20;&apos;&#x4A;&apos;&comma;&#x20;&apos;&#x4B;&apos;&comma;&#x20;&apos;&#x4C;&apos;&comma;&#x20;&apos;&#x4D;&apos;&comma;&#x20;&apos;&#x4E;&apos;&comma;&#x20;&apos;&#x4F;&apos;&comma;&#x20;&apos;&#x50;&apos;&comma;&#x20;&apos;&#x51;&apos;&comma;&#x20;&apos;&#x52;&apos;&comma;&#x20;&apos;&#x53;&apos;&comma;&#x20;&apos;&#x54;&apos;&comma;&#x20;&apos;&#x55;&apos;&comma;&#x20;&apos;&#x56;&apos;&comma;&#x20;&apos;&#x57;&apos;&comma;&#x20;&apos;&#x58;&apos;&comma;&#x20;&apos;&#x59;&apos;&comma;&#x20;&apos;&#x5A;&apos;&rsqb;&semi;&sol;&sol;&#x6240;&#x6709;&#x5019;&#x9009;&#x7EC4;&#x6210;&#x9A8C;&#x8BC1;&#x7801;&#x7684;&#x5B57;&#x7B26;&#xFF0C;&#x5F53;&#x7136;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;&#x4E2D;&#x6587;&#x7684;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x66;&#x6F;&#x72;&#x20;&lpar;&#x6C;&#x65;&#x74;&#x20;&#x69;&#x20;&equals;&#x20;&#x30;&semi;&#x20;&#x69;&#x20;&lt;&#x20;&#x63;&#x6F;&#x64;&#x65;&#x4C;&#x65;&#x6E;&#x67;&#x74;&#x68;&semi;&#x20;&#x69;&plus;&plus;&rpar;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x6F;&#x6E;&#x73;&#x74;&#x20;&#x63;&#x68;&#x61;&#x72;&#x49;&#x6E;&#x64;&#x65;&#x78;&#x20;&equals;&#x20;&#x4D;&#x61;&#x74;&#x68;&period;&#x66;&#x6C;&#x6F;&#x6F;&#x72;&lpar;&#x4D;&#x61;&#x74;&#x68;&period;&#x72;&#x61;&#x6E;&#x64;&#x6F;&#x6D;&lpar;&rpar;&#x20;&ast;&#x20;&#x33;&#x36;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x6F;&#x64;&#x65;&#x20;&plus;&equals;&#x20;&#x73;&#x65;&#x6C;&#x65;&#x63;&#x74;&#x43;&#x68;&#x61;&#x72;&lsqb;&#x63;&#x68;&#x61;&#x72;&#x49;&#x6E;&#x64;&#x65;&#x78;&rsqb;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&sol;&sol;&#x61;&#x6C;&#x65;&#x72;&#x74;&lpar;&#x63;&#x6F;&#x64;&#x65;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x66;&#x20;&lpar;&#x63;&#x68;&#x65;&#x63;&#x6B;&#x43;&#x6F;&#x64;&#x65;&rpar;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x68;&#x65;&#x63;&#x6B;&#x43;&#x6F;&#x64;&#x65;&period;&#x76;&#x61;&#x6C;&#x75;&#x65;&#x20;&equals;&#x20;&#x63;&#x6F;&#x64;&#x65;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x66;&#x75;&#x6E;&#x63;&#x74;&#x69;&#x6F;&#x6E;&#x20;&#x76;&#x61;&#x6C;&#x69;&#x64;&#x61;&#x74;&#x65;&lpar;&rpar;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x6F;&#x6E;&#x73;&#x74;&#x20;&#x69;&#x6E;&#x70;&#x75;&#x74;&#x43;&#x6F;&#x64;&#x65;&#x20;&equals;&#x20;&dollar;&lpar;&quot;&num;&#x63;&#x6F;&#x64;&#x65;&quot;&rpar;&lsqb;&#x30;&rsqb;&period;&#x76;&#x61;&#x6C;&#x75;&#x65;&period;&#x74;&#x6F;&#x55;&#x70;&#x70;&#x65;&#x72;&#x43;&#x61;&#x73;&#x65;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x66;&#x20;&lpar;&#x69;&#x6E;&#x70;&#x75;&#x74;&#x43;&#x6F;&#x64;&#x65;&period;&#x6C;&#x65;&#x6E;&#x67;&#x74;&#x68;&#x20;&lt;&equals;&#x20;&#x30;&rpar;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x61;&#x6C;&#x65;&#x72;&#x74;&lpar;&quot;&#x8BF7;&#x8F93;&#x5165;&#x9A8C;&#x8BC1;&#x7801;&#xFF01;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x66;&#x61;&#x6C;&#x73;&#x65;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&#x20;&#x65;&#x6C;&#x73;&#x65;&#x20;&#x69;&#x66;&#x20;&lpar;&#x69;&#x6E;&#x70;&#x75;&#x74;&#x43;&#x6F;&#x64;&#x65;&#x20;&excl;&equals;&equals;&#x20;&#x63;&#x6F;&#x64;&#x65;&rpar;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x61;&#x6C;&#x65;&#x72;&#x74;&lpar;&quot;&#x9A8C;&#x8BC1;&#x7801;&#x8F93;&#x5165;&#x9519;&#x8BEF;&#xFF01;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x72;&#x65;&#x61;&#x74;&#x65;&#x43;&#x6F;&#x64;&#x65;&lpar;&rpar;&semi;&sol;&sol;&#x5237;&#x65B0;&#x9A8C;&#x8BC1;&#x7801;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x66;&#x61;&#x6C;&#x73;&#x65;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x65;&#x6C;&#x73;&#x65;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x74;&#x72;&#x75;&#x65;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;</code></pre>
+              <p>这里只是前端生成验证码并且校验也放在前端。用的接口还是没有验证码校验的登录请求接口。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <footer class="main-footer"></footer>
+  <script src="../../dist/js/templateHandle.js"></script>
+  <script>
+    setWrapperHeader("暴力破解", ["验证码绕过(on client)"]);
+  </script>
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="../../dist/js/adminlte.js"></script>
+  <script>
+    let code;
+    function createCode() {
+      code = "";
+      const codeLength = 4;//验证码的长度
+      const checkCode = $("#checkCode")[0];
+      const selectChar = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];//所有候选组成验证码的字符，当然也可以用中文的
+
+      for (let i = 0; i < codeLength; i++) {
+        const charIndex = Math.floor(Math.random() * 36);
+        code += selectChar[charIndex];
+      }
+      //alert(code);
+      if (checkCode) {
+        checkCode.value = code;
+      }
+    }
+
+    function validate() {
+      const inputCode = $("#code")[0].value.toUpperCase();
+      if (inputCode.length <= 0) {
+        alert("请输入验证码！");
+        return false;
+      } else if (inputCode !== code) {
+        alert("验证码输入错误！");
+        createCode();//刷新验证码
+        return false;
+      }
+      else {
+        return true;
+      }
+    }
+
+
+    createCode();
+    function doLogin(){
+      if(!validate()){return;}
+      let data = {
+        username: $("#username")[0].value,
+        password: $("#password")[0].value,
+      }
+      if (data.username.length <= 0 && data.username.length <= 0)return false;
+      $.post({
+        url: `${project_name}/bruteforce/user/login`,
+        data,
+        dataType: "json",
+        success(resp){
+          if(resp["loginStatus"]){
+            $("#notice")[0].innerHTML = generateNote("登录成功！");
+          } else {
+            $("#notice")[0].innerHTML = generateNote("登录失败，账号或者密码错误！");
+          }
+        }
+      })
+    }
+  </script>
+</body>
+</html>

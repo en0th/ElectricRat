@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RCE</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+    <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+    <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+    <div class="content-wrapper" id="Wrapper">
+        <section class="content-header" id="WrapperHeader"></section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">RCE(remote command/code execute)概述</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="markdown prose w-full break-words dark:prose-invert light"><p>Java RCE（Remote Code
+                            Execution）命令执行漏洞指的是通过Java应用程序漏洞，攻击者可以在受害者服务器上执行恶意代码的安全漏洞。攻击者可以通过向Java应用程序发送精心构造的恶意请求，绕过应用程序的身份验证和授权机制，最终在服务器上执行任意命令。</p>
+                            <p>
+                                该漏洞的产生原因主要是Java应用程序在处理用户输入时，没有对输入数据进行充分的验证和过滤。攻击者可以通过构造精心制作的请求，绕过应用程序的安全控制，从而在服务器上执行恶意代码。</p>
+                            <p>Java RCE命令执行漏洞可能会导致以下危害：</p>
+                            <ol>
+                                <li><p>攻击者可以在服务器上执行任意命令，如上传恶意脚本、执行系统命令等。</p></li>
+                                <li><p>攻击者可以窃取服务器上的敏感数据，如数据库密码、用户信息等。</p></li>
+                            </ol>
+                            <p>为了避免Java RCE命令执行漏洞，开发人员需要采取以下措施：</p>
+                            <ol>
+                                <li><p>对所有用户输入的数据进行充分的验证和过滤，确保输入数据符合预期的格式和范围。</p>
+                                </li>
+                                <li><p>避免使用危险的Java函数，如Runtime.exec()和ProcessBuilder等，尽可能使用安全的Java
+                                    API。</p></li>
+                                <li><p>限制Java应用程序的权限，确保只有必要的用户和进程才能访问服务器。</p></li>
+                                <li><p>定期更新Java应用程序的安全补丁和版本，以确保已知的漏洞被及时修复。</p></li>
+                                <li><p>安装和配置防火墙和入侵检测系统，及时检测和拦截恶意请求。</p></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <footer class="main-footer"></footer>
+    <script src="../../dist/js/templateHandle.js"></script>
+    <script>
+        setWrapperHeader("RCE", ["概述"]);
+    </script>
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="../../dist/js/adminlte.js"></script>
+</body>
+</html>

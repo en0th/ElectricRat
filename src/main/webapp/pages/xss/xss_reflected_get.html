@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cross-Site Scripting</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+  <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+  <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+  <div class="content-wrapper" id="Wrapper">
+    <section class="content-header" id="WrapperHeader"></section>
+    <section class="content">
+      <div class="container-fluid">
+        <div id="notice"></div>
+        <div class="card card-primary card-outline">
+          <div class="card-header">
+            <h3 class="card-title">反射型xss(get)</h3>
+          </div>
+          <div class="card-body">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">任意输入字符，我都不阻拦。</h3>
+              </div>
+              <form action="" onsubmit="return false" id="Login">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="own-text">文本</label>
+                    <input type="text" class="form-control" name="own-text" id="own-text" placeholder="Enter">
+                  </div>
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary" onclick="submitText()">提交</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="card card-primary card-outline" id="showSource">
+          <div class="card-header">
+            <h3 class="card-title">源代码&amp;提示</h3>
+          </div>
+          <div class="card-body">
+            <div>XSS主要是输出到网页中去，执行恶意的Jscript脚本。下面是将未经过滤的内容加入innerHTML的情况。</div>
+            <pre><code>&#x66;&#x75;&#x6E;&#x63;&#x74;&#x69;&#x6F;&#x6E;&#x20;&#x67;&#x65;&#x6E;&#x65;&#x72;&#x61;&#x74;&#x65;&#x4E;&#x6F;&#x74;&#x65;&lpar;&#x6D;&#x65;&#x73;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&grave;&lt;&#x64;&#x69;&#x76;&#x20;&#x63;&#x6C;&#x61;&#x73;&#x73;&equals;&quot;&#x63;&#x61;&#x6C;&#x6C;&#x6F;&#x75;&#x74;&#x20;&#x63;&#x61;&#x6C;&#x6C;&#x6F;&#x75;&#x74;&#x2D;&#x69;&#x6E;&#x66;&#x6F;&quot;&gt;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&lt;&#x68;&#x35;&gt;&lt;&#x69;&#x20;&#x63;&#x6C;&#x61;&#x73;&#x73;&equals;&quot;&#x66;&#x61;&#x73;&#x20;&#x66;&#x61;&#x2D;&#x69;&#x6E;&#x66;&#x6F;&quot;&gt;&lt;&sol;&#x69;&gt;&#x20;&#x4E;&#x6F;&#x74;&#x65;&colon;&lt;&sol;&#x68;&#x35;&gt;&dollar;&lcub;&#x6D;&#x65;&#x73;&rcub;&lt;&sol;&#x64;&#x69;&#x76;&gt;&grave;&semi;&NewLine;&rcub;</code></pre>
+            <p>这个内容会先到服务器中返回，可以看到 <code>response.setContentType("text/html;charset=utf-8")</code> 设置了返回HTML格式的数据。</p>
+            <pre><code>&#x20;&#x20;&#x20;&#x20;&#x70;&#x75;&#x62;&#x6C;&#x69;&#x63;&#x20;&#x76;&#x6F;&#x69;&#x64;&#x20;&#x67;&#x65;&#x74;&#x4D;&#x61;&#x72;&#x6B;&#x44;&#x61;&#x74;&#x61;&lpar;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&comma;&#x20;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&rpar;&#x20;&#x74;&#x68;&#x72;&#x6F;&#x77;&#x73;&#x20;&#x49;&#x4F;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x63;&#x6F;&#x6E;&#x74;&#x65;&#x6E;&#x74;&#x20;&equals;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x50;&#x61;&#x72;&#x61;&#x6D;&#x65;&#x74;&#x65;&#x72;&lpar;&quot;&#x63;&#x6F;&#x6E;&#x74;&#x65;&#x6E;&#x74;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&period;&#x73;&#x65;&#x74;&#x43;&#x6F;&#x6E;&#x74;&#x65;&#x6E;&#x74;&#x54;&#x79;&#x70;&#x65;&lpar;&quot;&#x74;&#x65;&#x78;&#x74;&sol;&#x68;&#x74;&#x6D;&#x6C;&semi;&#x63;&#x68;&#x61;&#x72;&#x73;&#x65;&#x74;&equals;&#x75;&#x74;&#x66;&#x2D;&#x38;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&period;&#x67;&#x65;&#x74;&#x57;&#x72;&#x69;&#x74;&#x65;&#x72;&lpar;&rpar;&period;&#x77;&#x72;&#x69;&#x74;&#x65;&lpar;&quot;&#x6211;&#x4E0D;&#x5728;&#x4E4E;&#x4F60;&#x8F93;&#x5165;&#x7684;&#x662F;&#x4EC0;&#x4E48;&#xFF0C;&#x5C31;&#x7B97;&#x662F;&#xFF1A;&quot;&#x20;&plus;&#x20;&#x63;&#x6F;&#x6E;&#x74;&#x65;&#x6E;&#x74;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;</code></pre>
+            <p>这里存在着2个问题：</p>
+            <ol>
+              <li>返回接口使用了 "text/html"</li>
+              <li>通过 innerHTML 直接输出到页面</li>
+            </ol>
+            <p>可以尝试使用不同的XSS payload进行测试。</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <footer class="main-footer"></footer>
+  <script src="../../dist/js/templateHandle.js"></script>
+  <script>
+    setWrapperHeader("Cross-Site Scripting", ["反射型xss(get)"]);
+  </script>
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="../../dist/js/adminlte.js"></script>
+  <script>
+    function submitText(){
+      let content = $("#own-text")[0].value;
+      $.get({
+        url: `${project_name}xss/getMarkData?content=${content}`,
+        success(resp){
+          $("#notice")[0].innerHTML = generateNote(resp);
+        }
+      })
+    }
+  </script>
+</body>
+</html>

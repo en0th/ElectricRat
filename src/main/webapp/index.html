@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>电气鼠</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__wobble" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+  </div>
+  <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+  <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+  <div class="content-wrapper" id="Wrapper">
+    <section class="content-header" id="WrapperHeader"></section>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="card card-primary card-outline">
+          <div class="card-header">
+            <h3 class="card-title">系统介绍</h3>
+          </div> <!-- /.card-body -->
+          <div class="card-body">
+              <h2 class="v_title">电气鼠靶场系统</h2>
+              <p>电气鼠靶场系统是一种带有漏洞的Web应用程序，旨在为Web安全渗透测试学习者提供学习和实践的机会。靶场系统包含了各种常见的Web安全漏洞，例如SQL注入、跨站脚本攻击、文件包含漏洞、代码注入漏洞等等，以帮助学习者熟悉和掌握这些漏洞的原理和实际利用方法。</p>
+              <p>通过在靶场系统上进行实际漏洞攻击和利用，学习者可以更好地理解和掌握Web安全渗透测试的技术和方法，以及如何保护Web应用程序免受攻击。靶场系统的实际攻击模拟也有助于学习者提高他们的安全意识，了解常见的攻击手段和漏洞利用方式，从而更好地保护他们自己和他们所负责的Web应用程序。</p>
+              <p>靶场系统通常是以虚拟机的形式提供，学习者可以在虚拟机中安装和配置靶场系统，然后使用各种渗透测试工具和技术进行漏洞攻击和利用。靶场系统还提供了漏洞利用的详细说明和步骤，以帮助学习者了解漏洞利用的过程和方法。此外，靶场系统通常还包括一些练习题和挑战，以测试学习者的能力和技能。</p>
+              <p>在技术实现上使用了 Tomcat10 + Mysql8 编写而成。一些漏洞案例的编写上借鉴了使用PHP语言编写的<a href="https://github.com/zhuifengshaonianhanlu">Pikachu</a>靶场。</p>
+              <h2 class="v_title">电气鼠上的漏洞类型列表如下：</h2>
+              <ul class="vul_list_info">
+                <li>Burt Force(暴力破解漏洞)</li>
+                <li>XSS(跨站脚本漏洞)</li>
+                <li>CSRF(跨站请求伪造)</li>
+                <li>SQL-Inject(SQL注入漏洞)</li>
+                <li>RCE(远程命令执行)</li>
+                <li>任意文件上传</li>
+                <li>任意文件下载</li>
+                <li>目录遍历漏洞</li>
+                <li>JAVA反序列化漏洞</li>
+                <li>XXE(XML实体注入漏洞)</li>
+                <li>不安全的URL重定向</li>
+                <li>SSRF(服务器端请求伪造)</li>
+                <li>SPEL(表达式注入)</li>
+                <li>SSTI(模板注入)</li>
+              </ul>
+            <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body</span> <span class="na">data-scrollbar-auto-hide=</span><span class="s">"n"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/body&gt;</span>
+</code></pre></div> </div>
+          </div><!-- /.card-body -->
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  </div>
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <footer class="main-footer"></footer>
+</div>
+
+<script src="dist/js/templateHandle.js"></script>
+<script>
+  setWrapperHeader("主页", ["全览"]);
+</script>
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+</body>
+</html>

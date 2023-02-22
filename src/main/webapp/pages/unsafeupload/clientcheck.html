@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>任意文件上传</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+  <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+  <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+  <div class="content-wrapper" id="Wrapper">
+    <section class="content-header" id="WrapperHeader"></section>
+    <section class="content">
+      <div class="container-fluid">
+        <div id="notice"></div>
+        <div class="card card-primary card-outline">
+          <div class="card-header">
+            <h3 class="card-title">前端校验文件后缀</h3>
+          </div>
+          <div class="card-body">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">图片上传</h3>
+              </div>
+              <form action="" onsubmit="return false;">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="inputFile">选择文件</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputFile" onchange="checkFileExt(this.value)">
+                        <label class="custom-file-label" for="inputFile">Choose file</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary" onclick="uploadImage()">上传</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="card card-primary card-outline" id="showSource">
+          <div class="card-header">
+            <h3 class="card-title">源代码&amp;提示</h3>
+          </div>
+          <div class="card-body">
+            <div>
+              <p>文件上传前端的过滤往往不能起到防护的作用，尝试绕过前端校验吧。</p>
+              <p><strong>Js 文件校验代码</strong></p>
+              <pre><code>&#x20;&#x20;&#x20;&#x20;&#x6C;&#x65;&#x74;&#x20;&#x66;&#x6C;&#x61;&#x67;&#x20;&equals;&#x20;&#x66;&#x61;&#x6C;&#x73;&#x65;&semi;&#x20;&sol;&sol;&#x72B6;&#x6001;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x6C;&#x65;&#x74;&#x20;&#x6E;&#x6F;&#x74;&#x69;&#x63;&#x65;&lowbar;&#x64;&#x6F;&#x6D;&#x20;&equals;&#x20;&dollar;&lpar;&quot;&num;&#x6E;&#x6F;&#x74;&#x69;&#x63;&#x65;&quot;&rpar;&lsqb;&#x30;&rsqb;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x6C;&#x65;&#x74;&#x20;&#x6C;&#x61;&#x62;&#x65;&#x6C;&lowbar;&#x64;&#x6F;&#x6D;&#x20;&equals;&#x20;&dollar;&lpar;&quot;&num;&#x69;&#x6E;&#x70;&#x75;&#x74;&#x46;&#x69;&#x6C;&#x65;&#x20;&plus;&#x20;&#x6C;&#x61;&#x62;&#x65;&#x6C;&quot;&rpar;&lsqb;&#x30;&rsqb;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x66;&#x75;&#x6E;&#x63;&#x74;&#x69;&#x6F;&#x6E;&#x20;&#x63;&#x68;&#x65;&#x63;&#x6B;&#x46;&#x69;&#x6C;&#x65;&#x45;&#x78;&#x74;&lpar;&#x66;&#x69;&#x6C;&#x65;&#x6E;&#x61;&#x6D;&#x65;&rpar;&NewLine;&#x20;&#x20;&#x20;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x66;&#x6C;&#x61;&#x67;&#x20;&equals;&#x20;&#x66;&#x61;&#x6C;&#x73;&#x65;&semi;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x6C;&#x65;&#x74;&#x20;&#x61;&#x72;&#x72;&#x20;&equals;&#x20;&lsqb;&quot;&#x6A;&#x70;&#x67;&quot;&comma;&quot;&#x70;&#x6E;&#x67;&quot;&comma;&quot;&#x67;&#x69;&#x66;&quot;&rsqb;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&sol;&sol;&#x53D6;&#x51FA;&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x7684;&#x6269;&#x5C55;&#x540D;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x6C;&#x65;&#x74;&#x20;&#x69;&#x6E;&#x64;&#x65;&#x78;&#x20;&equals;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x6E;&#x61;&#x6D;&#x65;&period;&#x6C;&#x61;&#x73;&#x74;&#x49;&#x6E;&#x64;&#x65;&#x78;&#x4F;&#x66;&lpar;&quot;&period;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x6C;&#x65;&#x74;&#x20;&#x65;&#x78;&#x74;&#x20;&equals;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x6E;&#x61;&#x6D;&#x65;&period;&#x73;&#x75;&#x62;&#x73;&#x74;&#x72;&lpar;&#x69;&#x6E;&#x64;&#x65;&#x78;&plus;&#x31;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&sol;&sol;&#x6BD4;&#x8F83;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x66;&#x6F;&#x72;&lpar;&#x6C;&#x65;&#x74;&#x20;&#x69;&equals;&#x30;&semi;&#x69;&lt;&#x61;&#x72;&#x72;&period;&#x6C;&#x65;&#x6E;&#x67;&#x74;&#x68;&semi;&#x69;&plus;&plus;&rpar;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x66;&lpar;&#x65;&#x78;&#x74;&#x20;&equals;&equals;&equals;&#x20;&#x61;&#x72;&#x72;&lsqb;&#x69;&rsqb;&rpar;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x66;&#x6C;&#x61;&#x67;&#x20;&equals;&#x20;&#x74;&#x72;&#x75;&#x65;&semi;&#x20;&sol;&sol;&#x4E00;&#x65E6;&#x627E;&#x5230;&#x5408;&#x9002;&#x7684;&#xFF0C;&#x7ACB;&#x5373;&#x9000;&#x51FA;&#x5FAA;&#x73AF;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x6C;&#x61;&#x62;&#x65;&#x6C;&lowbar;&#x64;&#x6F;&#x6D;&period;&#x69;&#x6E;&#x6E;&#x65;&#x72;&#x54;&#x65;&#x78;&#x74;&#x20;&equals;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x6E;&#x61;&#x6D;&#x65;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x6E;&#x6F;&#x74;&#x69;&#x63;&#x65;&lowbar;&#x64;&#x6F;&#x6D;&period;&#x69;&#x6E;&#x6E;&#x65;&#x72;&#x48;&#x54;&#x4D;&#x4C;&#x20;&equals;&#x20;&apos;&apos;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x6C;&#x61;&#x62;&#x65;&#x6C;&lowbar;&#x64;&#x6F;&#x6D;&period;&#x69;&#x6E;&#x6E;&#x65;&#x72;&#x54;&#x65;&#x78;&#x74;&#x20;&equals;&#x20;&quot;&#x43;&#x68;&#x6F;&#x6F;&#x73;&#x65;&#x20;&#x66;&#x69;&#x6C;&#x65;&quot;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x66;&lpar;&excl;&#x66;&#x6C;&#x61;&#x67;&rpar;&#x20;&lcub;&#x6E;&#x6F;&#x74;&#x69;&#x63;&#x65;&lowbar;&#x64;&#x6F;&#x6D;&period;&#x69;&#x6E;&#x6E;&#x65;&#x72;&#x48;&#x54;&#x4D;&#x4C;&#x20;&equals;&#x20;&#x67;&#x65;&#x6E;&#x65;&#x72;&#x61;&#x74;&#x65;&#x4E;&#x6F;&#x74;&#x65;&lpar;&quot;&#x4E0A;&#x4F20;&#x7684;&#x6587;&#x4EF6;&#x4E0D;&#x7B26;&#x5408;&#x8981;&#x6C42;&#xFF0C;&#x8BF7;&#x91CD;&#x65B0;&#x9009;&#x62E9;&#xFF01;&quot;&rpar;&semi;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;</code></pre>
+              <p><strong>Servlet 实现代码</strong></p>
+              <pre><code>&#x20;&#x20;&#x20;&#x20;&#x70;&#x72;&#x69;&#x76;&#x61;&#x74;&#x65;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x75;&#x70;&#x6C;&#x6F;&#x61;&#x64;&#x50;&#x61;&#x74;&#x68;&lpar;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x43;&#x6F;&#x6E;&#x74;&#x65;&#x78;&#x74;&lpar;&rpar;&period;&#x67;&#x65;&#x74;&#x52;&#x65;&#x61;&#x6C;&#x50;&#x61;&#x74;&#x68;&lpar;&#x46;&#x69;&#x6C;&#x65;&#x53;&#x65;&#x72;&#x76;&#x65;&#x72;&#x49;&#x6D;&#x70;&#x6C;&period;&#x55;&#x50;&#x4C;&#x4F;&#x41;&#x44;&lowbar;&#x44;&#x49;&#x52;&#x45;&#x43;&#x54;&#x4F;&#x52;&#x59;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x70;&#x72;&#x69;&#x76;&#x61;&#x74;&#x65;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&comma;&#x20;&#x4F;&#x62;&#x6A;&#x65;&#x63;&#x74;&gt;&#x20;&#x75;&#x70;&#x6C;&#x6F;&#x61;&#x64;&#x46;&#x69;&#x6C;&#x65;&lpar;&#x50;&#x61;&#x72;&#x74;&#x20;&#x69;&#x6D;&#x61;&#x67;&#x65;&#x46;&#x69;&#x6C;&#x65;&comma;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&comma;&#x20;&#x4F;&#x62;&#x6A;&#x65;&#x63;&#x74;&gt;&#x20;&#x64;&#x61;&#x74;&#x61;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&gt;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x74;&#x72;&#x79;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x4E;&#x61;&#x6D;&#x65;&#x20;&equals;&#x20;&#x69;&#x6D;&#x61;&#x67;&#x65;&#x46;&#x69;&#x6C;&#x65;&period;&#x67;&#x65;&#x74;&#x53;&#x75;&#x62;&#x6D;&#x69;&#x74;&#x74;&#x65;&#x64;&#x46;&#x69;&#x6C;&#x65;&#x4E;&#x61;&#x6D;&#x65;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x6C;&#x6F;&#x6E;&#x67;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x53;&#x69;&#x7A;&#x65;&#x20;&equals;&#x20;&#x69;&#x6D;&#x61;&#x67;&#x65;&#x46;&#x69;&#x6C;&#x65;&period;&#x67;&#x65;&#x74;&#x53;&#x69;&#x7A;&#x65;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x66;&lpar;&#x66;&#x69;&#x6C;&#x65;&#x53;&#x69;&#x7A;&#x65;&#x20;&gt;&#x20;&#x46;&#x69;&#x6C;&#x65;&#x53;&#x65;&#x72;&#x76;&#x65;&#x72;&#x49;&#x6D;&#x70;&#x6C;&period;&#x4D;&#x41;&#x58;&lowbar;&#x46;&#x49;&#x4C;&#x45;&lowbar;&#x53;&#x49;&#x5A;&#x45;&rpar;&lcub;&#x64;&#x61;&#x74;&#x61;&period;&#x70;&#x75;&#x74;&lpar;&quot;&#x75;&#x70;&#x6C;&#x6F;&#x61;&#x64;&#x53;&#x74;&#x61;&#x74;&#x75;&#x73;&quot;&comma;&#x20;&#x66;&#x61;&#x6C;&#x73;&#x65;&rpar;&semi;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x64;&#x61;&#x74;&#x61;&semi;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x54;&#x79;&#x70;&#x65;&#x20;&equals;&#x20;&#x69;&#x6D;&#x61;&#x67;&#x65;&#x46;&#x69;&#x6C;&#x65;&period;&#x67;&#x65;&#x74;&#x43;&#x6F;&#x6E;&#x74;&#x65;&#x6E;&#x74;&#x54;&#x79;&#x70;&#x65;&lpar;&rpar;&semi;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x46;&#x69;&#x6C;&#x65;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x20;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x46;&#x69;&#x6C;&#x65;&lpar;&#x66;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x66;&#x20;&lpar;&excl;&#x66;&#x69;&#x6C;&#x65;&period;&#x65;&#x78;&#x69;&#x73;&#x74;&#x73;&lpar;&rpar;&#x20;&amp;&amp;&#x20;&excl;&#x66;&#x69;&#x6C;&#x65;&period;&#x69;&#x73;&#x44;&#x69;&#x72;&#x65;&#x63;&#x74;&#x6F;&#x72;&#x79;&lpar;&rpar;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x66;&#x69;&#x6C;&#x65;&period;&#x6D;&#x6B;&#x64;&#x69;&#x72;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x6D;&#x61;&#x67;&#x65;&#x46;&#x69;&#x6C;&#x65;&period;&#x77;&#x72;&#x69;&#x74;&#x65;&lpar;&#x66;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&plus;&quot;&#x5C;&#x5C;&quot;&plus;&#x66;&#x69;&#x6C;&#x65;&#x4E;&#x61;&#x6D;&#x65;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&comma;&#x20;&#x4F;&#x62;&#x6A;&#x65;&#x63;&#x74;&gt;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x4F;&#x62;&#x6A;&#x65;&#x63;&#x74;&#x20;&equals;&#x20;&#x66;&#x73;&#x69;&period;&#x75;&#x70;&#x6C;&#x6F;&#x61;&#x64;&#x46;&#x69;&#x6C;&#x65;&lpar;&#x6E;&#x65;&#x77;&#x20;&#x46;&#x69;&#x6C;&#x65;&#x45;&#x6E;&#x74;&#x69;&#x74;&#x79;&lpar;&#x66;&#x69;&#x6C;&#x65;&#x4E;&#x61;&#x6D;&#x65;&comma;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x54;&#x79;&#x70;&#x65;&comma;&#x20;&lpar;&#x66;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&plus;&quot;&#x5C;&#x5C;&quot;&plus;&#x66;&#x69;&#x6C;&#x65;&#x4E;&#x61;&#x6D;&#x65;&rpar;&comma;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x79;&#x73;&#x74;&#x65;&#x6D;&period;&#x63;&#x75;&#x72;&#x72;&#x65;&#x6E;&#x74;&#x54;&#x69;&#x6D;&#x65;&#x4D;&#x69;&#x6C;&#x6C;&#x69;&#x73;&lpar;&rpar;&comma;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x53;&#x69;&#x7A;&#x65;&comma;&#x20;&lpar;&#x6E;&#x65;&#x77;&#x20;&#x49;&#x6D;&#x61;&#x67;&#x65;&#x56;&#x65;&#x72;&#x69;&#x66;&#x69;&#x63;&#x61;&#x74;&#x69;&#x6F;&#x6E;&#x43;&#x6F;&#x64;&#x65;&lpar;&rpar;&rpar;&period;&#x47;&#x65;&#x74;&#x52;&#x61;&#x6E;&#x64;&#x6F;&#x6D;&lpar;&#x38;&rpar;&rpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x66;&#x20;&lpar;&#x66;&#x69;&#x6C;&#x65;&#x4F;&#x62;&#x6A;&#x65;&#x63;&#x74;&period;&#x69;&#x73;&#x45;&#x6D;&#x70;&#x74;&#x79;&lpar;&rpar;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x64;&#x61;&#x74;&#x61;&period;&#x70;&#x75;&#x74;&lpar;&quot;&#x75;&#x70;&#x6C;&#x6F;&#x61;&#x64;&#x53;&#x74;&#x61;&#x74;&#x75;&#x73;&quot;&comma;&#x20;&#x66;&#x61;&#x6C;&#x73;&#x65;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x64;&#x61;&#x74;&#x61;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x64;&#x61;&#x74;&#x61;&period;&#x70;&#x75;&#x74;&lpar;&quot;&#x66;&#x69;&#x6C;&#x65;&quot;&comma;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x4F;&#x62;&#x6A;&#x65;&#x63;&#x74;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x64;&#x61;&#x74;&#x61;&period;&#x70;&#x75;&#x74;&lpar;&quot;&#x75;&#x70;&#x6C;&#x6F;&#x61;&#x64;&#x53;&#x74;&#x61;&#x74;&#x75;&#x73;&quot;&comma;&#x20;&#x74;&#x72;&#x75;&#x65;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&#x20;&#x63;&#x61;&#x74;&#x63;&#x68;&#x20;&lpar;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&#x20;&#x65;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x64;&#x61;&#x74;&#x61;&period;&#x70;&#x75;&#x74;&lpar;&quot;&#x75;&#x70;&#x6C;&#x6F;&#x61;&#x64;&#x53;&#x74;&#x61;&#x74;&#x75;&#x73;&quot;&comma;&#x20;&#x66;&#x61;&#x6C;&#x73;&#x65;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x64;&#x61;&#x74;&#x61;&period;&#x70;&#x75;&#x74;&lpar;&quot;&#x6D;&#x73;&#x67;&quot;&comma;&#x20;&#x65;&period;&#x67;&#x65;&#x74;&#x4D;&#x65;&#x73;&#x73;&#x61;&#x67;&#x65;&lpar;&rpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x64;&#x61;&#x74;&#x61;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+  <aside class="control-sidebar control-sidebar-dark">
+  </aside>
+  <footer class="main-footer"></footer>
+  <script src="../../dist/js/templateHandle.js"></script>
+  <script>
+    setWrapperHeader("任意文件上传", ["前端校验文件后缀"]);
+  </script>
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="../../dist/js/adminlte.js"></script>
+  <script>
+
+    let flag = false; //状态
+    let notice_dom = $("#notice")[0];
+    let label_dom = $("#inputFile + label")[0]
+    function checkFileExt(filename)
+    {
+      flag = false;
+
+      let arr = ["jpg","png","gif"];
+      //取出上传文件的扩展名
+      let index = filename.lastIndexOf(".");
+      let ext = filename.substr(index+1);
+      //比较
+      for(let i=0;i<arr.length;i++)
+      {
+        if(ext === arr[i])
+        {
+          flag = true; //一旦找到合适的，立即退出循环
+          label_dom.innerText = filename;
+          notice_dom.innerHTML = '';
+          return;
+        }
+      }
+      label_dom.innerText = "Choose file";
+      if(!flag) {notice_dom.innerHTML = generateNote("上传的文件不符合要求，请重新选择！");}
+    }
+
+    function uploadImage(){
+      //条件判断
+      if(!flag) {notice_dom.innerHTML = generateNote("上传的文件不符合要求，请重新选择！");return;}
+      let files = $("#inputFile")[0].files;
+      if (files.length === 0)return;
+      let fd = new FormData();
+      fd.append('image_file', files[0]);
+      $.post({
+        url: `${project_name}uploadAction/image`,
+        data: fd,
+        processData: false,
+        contentType: false,
+        success(resp){
+          if (resp['uploadStatus']){
+            let fileObj = resp['file'];
+            let path = baseUri + fileObj.url;
+            notice_dom.innerHTML = generateNote(`上传成功文件访问路径为：<a href='${path}' target="_blank" style="color: #53aefd;">${path}</a>`);
+          }
+        }
+      })
+    }
+  </script>
+</body>
+</html>

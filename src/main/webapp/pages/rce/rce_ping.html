@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RCE</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+  <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+  <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+  <div class="content-wrapper" id="Wrapper">
+    <section class="content-header" id="WrapperHeader"></section>
+    <section class="content">
+      <div class="container-fluid">
+        <div id="notice"></div>
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">ping操作</h3>
+          </div>
+          <form action="" onsubmit="return false;">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="ip">请输入IP地址：</label>
+                <input type="text" class="form-control" id="ip" placeholder="Enter ip">
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary" onclick="doPing()">执行</button>
+            </div>
+          </form>
+        </div>
+        <div class="card card-primary card-outline" id="showSource">
+          <div class="card-header">
+            <h3 class="card-title">源代码&amp;提示</h3>
+          </div>
+          <div class="card-body">
+            <div>
+              <p>这里使用了 <code>Runtime.getRuntime().exec(String[] cmdarray)</code> 方法。</p>
+              <p>需要注意 <code>"ping -c 4 " + ip</code> 代码拼接。尝试执行自己的Shell语句吧！</p>
+              <p><strong>Servlet 代码实现</strong></p>
+              <pre><code>&#x20;&#x20;&#x20;&#x20;&commat;&#x41;&#x70;&#x69;&lpar;&lcub;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x4D;&#x65;&#x74;&#x68;&#x6F;&#x64;&#x54;&#x79;&#x70;&#x65;&period;&#x50;&#x4F;&#x53;&#x54;&rcub;&rpar;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x70;&#x75;&#x62;&#x6C;&#x69;&#x63;&#x20;&#x4D;&#x61;&#x70;&lt;&quest;&comma;&#x20;&quest;&gt;&#x20;&#x70;&#x69;&#x6E;&#x67;&lpar;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&comma;&#x20;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&rpar;&#x20;&#x74;&#x68;&#x72;&#x6F;&#x77;&#x73;&#x20;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&comma;&#x20;&#x49;&#x4F;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&comma;&#x20;&#x49;&#x6E;&#x74;&#x65;&#x72;&#x72;&#x75;&#x70;&#x74;&#x65;&#x64;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x69;&#x70;&#x20;&equals;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x50;&#x61;&#x72;&#x61;&#x6D;&#x65;&#x74;&#x65;&#x72;&lpar;&quot;&#x69;&#x70;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&comma;&#x20;&#x4F;&#x62;&#x6A;&#x65;&#x63;&#x74;&gt;&#x20;&#x64;&#x61;&#x74;&#x61;&#x20;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&gt;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x64;&#x61;&#x74;&#x61;&period;&#x70;&#x75;&#x74;&lpar;&quot;&#x64;&#x61;&#x74;&#x61;&quot;&comma;&#x20;&#x65;&#x78;&#x65;&#x63;&#x43;&#x6D;&#x64;&lpar;&quot;&#x70;&#x69;&#x6E;&#x67;&#x20;&#x2D;&#x63;&#x20;&#x34;&#x20;&quot;&#x20;&plus;&#x20;&#x69;&#x70;&rpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x64;&#x61;&#x74;&#x61;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x70;&#x75;&#x62;&#x6C;&#x69;&#x63;&#x20;&#x73;&#x74;&#x61;&#x74;&#x69;&#x63;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x65;&#x78;&#x65;&#x63;&#x43;&#x6D;&#x64;&lpar;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x63;&#x6D;&#x64;&rpar;&#x20;&#x74;&#x68;&#x72;&#x6F;&#x77;&#x73;&#x20;&#x49;&#x4F;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&comma;&#x20;&#x49;&#x6E;&#x74;&#x65;&#x72;&#x72;&#x75;&#x70;&#x74;&#x65;&#x64;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x4C;&#x69;&#x73;&#x74;&lt;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&gt;&#x20;&#x62;&#x61;&#x73;&#x68;&lowbar;&#x63;&#x6D;&#x64;&#x20;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x41;&#x72;&#x72;&#x61;&#x79;&#x4C;&#x69;&#x73;&#x74;&lt;&gt;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x62;&#x61;&#x73;&#x68;&lowbar;&#x63;&#x6D;&#x64;&period;&#x61;&#x64;&#x64;&lpar;&quot;&sol;&#x62;&#x69;&#x6E;&sol;&#x73;&#x68;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x62;&#x61;&#x73;&#x68;&lowbar;&#x63;&#x6D;&#x64;&period;&#x61;&#x64;&#x64;&lpar;&quot;&#x2D;&#x63;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x62;&#x61;&#x73;&#x68;&lowbar;&#x63;&#x6D;&#x64;&period;&#x61;&#x64;&#x64;&lpar;&#x63;&#x6D;&#x64;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x50;&#x72;&#x6F;&#x63;&#x65;&#x73;&#x73;&#x20;&#x70;&#x20;&equals;&#x20;&#x52;&#x75;&#x6E;&#x74;&#x69;&#x6D;&#x65;&period;&#x67;&#x65;&#x74;&#x52;&#x75;&#x6E;&#x74;&#x69;&#x6D;&#x65;&lpar;&rpar;&period;&#x65;&#x78;&#x65;&#x63;&lpar;&#x62;&#x61;&#x73;&#x68;&lowbar;&#x63;&#x6D;&#x64;&period;&#x74;&#x6F;&#x41;&#x72;&#x72;&#x61;&#x79;&lpar;&#x6E;&#x65;&#x77;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&lsqb;&#x62;&#x61;&#x73;&#x68;&lowbar;&#x63;&#x6D;&#x64;&period;&#x73;&#x69;&#x7A;&#x65;&lpar;&rpar;&rsqb;&rpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x49;&#x6E;&#x70;&#x75;&#x74;&#x53;&#x74;&#x72;&#x65;&#x61;&#x6D;&#x20;&#x69;&#x73;&#x20;&equals;&#x20;&#x70;&period;&#x67;&#x65;&#x74;&#x49;&#x6E;&#x70;&#x75;&#x74;&#x53;&#x74;&#x72;&#x65;&#x61;&#x6D;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x42;&#x75;&#x66;&#x66;&#x65;&#x72;&#x65;&#x64;&#x52;&#x65;&#x61;&#x64;&#x65;&#x72;&#x20;&#x72;&#x65;&#x61;&#x64;&#x65;&#x72;&#x20;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x42;&#x75;&#x66;&#x66;&#x65;&#x72;&#x65;&#x64;&#x52;&#x65;&#x61;&#x64;&#x65;&#x72;&lpar;&#x6E;&#x65;&#x77;&#x20;&#x49;&#x6E;&#x70;&#x75;&#x74;&#x53;&#x74;&#x72;&#x65;&#x61;&#x6D;&#x52;&#x65;&#x61;&#x64;&#x65;&#x72;&lpar;&#x69;&#x73;&comma;&#x20;&#x53;&#x74;&#x61;&#x6E;&#x64;&#x61;&#x72;&#x64;&#x43;&#x68;&#x61;&#x72;&#x73;&#x65;&#x74;&#x73;&period;&#x55;&#x54;&#x46;&lowbar;&#x38;&rpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x6C;&#x69;&#x6E;&#x65;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x42;&#x75;&#x69;&#x6C;&#x64;&#x65;&#x72;&#x20;&#x74;&#x65;&#x78;&#x74;&#x20;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x42;&#x75;&#x69;&#x6C;&#x64;&#x65;&#x72;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x77;&#x68;&#x69;&#x6C;&#x65;&lpar;&lpar;&#x6C;&#x69;&#x6E;&#x65;&#x20;&equals;&#x20;&#x72;&#x65;&#x61;&#x64;&#x65;&#x72;&period;&#x72;&#x65;&#x61;&#x64;&#x4C;&#x69;&#x6E;&#x65;&lpar;&rpar;&rpar;&excl;&equals;&#x20;&#x6E;&#x75;&#x6C;&#x6C;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x74;&#x65;&#x78;&#x74;&period;&#x61;&#x70;&#x70;&#x65;&#x6E;&#x64;&lpar;&#x6C;&#x69;&#x6E;&#x65;&rpar;&period;&#x61;&#x70;&#x70;&#x65;&#x6E;&#x64;&lpar;&quot;&#x5C;&#x6E;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x70;&period;&#x77;&#x61;&#x69;&#x74;&#x46;&#x6F;&#x72;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x73;&period;&#x63;&#x6C;&#x6F;&#x73;&#x65;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x61;&#x64;&#x65;&#x72;&period;&#x63;&#x6C;&#x6F;&#x73;&#x65;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x70;&period;&#x64;&#x65;&#x73;&#x74;&#x72;&#x6F;&#x79;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x74;&#x65;&#x78;&#x74;&period;&#x74;&#x6F;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <footer class="main-footer"></footer>
+  <script src="../../dist/js/templateHandle.js"></script>
+  <script>
+    setWrapperHeader("RCE", ["ping操作"]);
+  </script>
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="../../dist/js/adminlte.js"></script>
+  <script>
+    function doPing(){
+      let data = {
+        ip: $("#ip")[0].value,
+      }
+      $.post({
+        url: `${project_name}rce/ping`,
+        data,
+        success(resp){
+          console.log(resp)
+          $("#notice")[0].innerHTML = generateNote(resp['data'].replace(/\n/g,"<br/>"));
+        }
+      })
+    }
+  </script>
+</body>
+</html>

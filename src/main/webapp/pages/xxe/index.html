@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>XXE实体注入</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+    <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+    <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+    <div class="content-wrapper" id="Wrapper">
+        <section class="content-header" id="WrapperHeader"></section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">概述</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="markdown prose w-full break-words dark:prose-invert light"><p>XXE漏洞是指XML外部实体注入漏洞（XML
+                            External Entity
+                            Injection），它是一种Web应用程序安全漏洞，可以让攻击者利用XML解析器漏洞，读取服务器上的任意文件，执行远程请求等恶意操作。</p>
+                            <p>
+                                通常，攻击者会在XML文档中注入恶意的外部实体引用，这些实体引用包含了恶意代码，一旦被服务器解析执行，就会执行相应的操作，例如访问敏感数据、上传恶意文件等。攻击者可以通过修改HTTP请求中的XML数据来触发XXE漏洞。</p>
+                            <p>防范XXE漏洞的措施包括：</p>
+                            <ol>
+                                <li><p>
+                                    不要信任来自外部的XML数据，对用户输入的XML数据进行严格的输入验证和过滤，包括对实体引用进行白名单或黑名单限制。</p>
+                                </li>
+                                <li><p>
+                                    禁用或限制XML解析器中的外部实体功能，例如限制实体的解析范围，禁用或限制DTD解析等。</p>
+                                </li>
+                                <li><p>采用安全编码实践，例如使用SAX解析器，对解析器进行安全配置等。</p></li>
+                                <li><p>对Web应用程序进行安全漏洞扫描和渗透测试，及时发现和修复漏洞。</p></li>
+                            </ol>
+                            <p>
+                                总之，避免XXE漏洞的发生，需要Web应用程序开发人员和系统管理员共同努力，从多个方面加强Web应用程序的安全性。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <footer class="main-footer"></footer>
+    <script src="../../dist/js/templateHandle.js"></script>
+    <script>
+        setWrapperHeader("XXE实体注入", ["概述"]);
+    </script>
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="../../dist/js/adminlte.js"></script>
+</body>
+</html>

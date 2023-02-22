@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cross-Site Scripting</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+  <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+  <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+  <div class="content-wrapper" id="Wrapper">
+    <section class="content-header" id="WrapperHeader"></section>
+    <section class="content">
+      <div class="container-fluid">
+        <div id="notice"></div>
+        <div class="card card-primary card-outline">
+          <div class="card-header">
+            <h3 class="card-title">xss之href输出</h3>
+          </div>
+          <div class="card-body">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">任意输入字符，我都不阻拦。</h3>
+              </div>
+              <form action="" onsubmit="return false" id="Login">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="own-text">文本</label>
+                    <input type="text" class="form-control" name="own-text" id="own-text" placeholder="Enter">
+                  </div>
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary" onclick="submitText()">提交</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="card card-primary card-outline" id="showSource">
+          <div class="card-header">
+            <h3 class="card-title">源代码&amp;提示</h3>
+          </div>
+          <div class="card-body">
+            <div>
+              <p>这里将用户输入的内容拼接到 a 标签的 href 属性上面去了，看看有什么办法触发XSS？</p>
+              <p><strong>代码实现</strong></p>
+              <pre><code>&#x20;&#x20;&#x20;&#x20;&#x66;&#x75;&#x6E;&#x63;&#x74;&#x69;&#x6F;&#x6E;&#x20;&#x73;&#x75;&#x62;&#x6D;&#x69;&#x74;&#x54;&#x65;&#x78;&#x74;&lpar;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x6C;&#x65;&#x74;&#x20;&#x63;&#x6F;&#x6E;&#x74;&#x65;&#x6E;&#x74;&#x20;&equals;&#x20;&dollar;&lpar;&quot;&num;&#x6F;&#x77;&#x6E;&#x2D;&#x74;&#x65;&#x78;&#x74;&quot;&rpar;&lsqb;&#x30;&rsqb;&period;&#x76;&#x61;&#x6C;&#x75;&#x65;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&dollar;&lpar;&quot;&num;&#x6E;&#x6F;&#x74;&#x69;&#x63;&#x65;&quot;&rpar;&lsqb;&#x30;&rsqb;&period;&#x69;&#x6E;&#x6E;&#x65;&#x72;&#x48;&#x54;&#x4D;&#x4C;&#x20;&equals;&#x20;&#x67;&#x65;&#x6E;&#x65;&#x72;&#x61;&#x74;&#x65;&#x4E;&#x6F;&#x74;&#x65;&lpar;&quot;&#x6211;&#x4E0D;&#x5728;&#x4E4E;&#x4F60;&#x8F93;&#x5165;&#x7684;&#x662F;&#x4EC0;&#x4E48;&#xFF0C;&#x5C31;&#x7B97;&#x662F;&#xFF1A;&lt;&#x61;&#x20;&#x68;&#x72;&#x65;&#x66;&equals;&quot;&#x20;&plus;&#x20;&#x63;&#x6F;&#x6E;&#x74;&#x65;&#x6E;&#x74;&#x20;&plus;&#x20;&quot;&apos;&#x20;&#x73;&#x74;&#x79;&#x6C;&#x65;&equals;&#x5C;&quot;&quot;&#x20;&plus;&#x20;&quot;&#x63;&#x6F;&#x6C;&#x6F;&#x72;&colon;&#x20;&#x63;&#x6F;&#x72;&#x6E;&#x66;&#x6C;&#x6F;&#x77;&#x65;&#x72;&#x62;&#x6C;&#x75;&#x65;&semi;&quot;&#x20;&plus;&#x20;&quot;&#x5C;&quot;&gt;&#x8FD9;&#x662F;&#x4E2A;&#x5355;&#x7EAF;&#x7684;&#x94FE;&#x63A5;&lt;&sol;&#x61;&gt;&quot;&rpar;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <footer class="main-footer"></footer>
+  <script src="../../dist/js/templateHandle.js"></script>
+  <script>
+    setWrapperHeader("Cross-Site Scripting", ["xss之href输出"]);
+  </script>
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="../../dist/js/adminlte.js"></script>
+  <script>
+    function submitText(){
+      let content = $("#own-text")[0].value;
+      $("#notice")[0].innerHTML = generateNote("我不在乎你输入的是什么，就算是：<a href=" + content + "' style=\"" + "color: cornflowerblue;" + "\">这是个单纯的链接</a>")
+    }
+  </script>
+</body>
+</html>

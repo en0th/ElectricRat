@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>暴力破解</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+    <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+    <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+    <div class="content-wrapper" id="Wrapper">
+        <section class="content-header" id="WrapperHeader"></section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">Burte Force（暴力破解）概述</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="markdown prose w-full break-words dark:prose-invert light"><p>暴力破解（Brute
+                            Force）是黑客常用的一种密码破解方法，其基本思想是不断尝试所有可能的密码组合，直到找到正确的密码为止。通常，黑客会使用自动化的脚本或工具来进行暴力破解攻击，从而加快密码破解的速度。</p>
+                            <p>具体来说，暴力破解攻击通常通过以下步骤实现：</p>
+                            <ol>
+                                <li><p>
+                                    枚举可能的密码：黑客会根据目标账户的相关信息，如用户名、生日、常用词汇等，生成一份可能的密码字典。</p>
+                                </li>
+                                <li><p>
+                                    尝试所有可能的密码组合：黑客会使用自动化的工具，逐个尝试所有可能的密码组合，直到找到正确的密码为止。</p>
+                                </li>
+                                <li><p>
+                                    破解成功：一旦黑客找到了正确的密码，就可以使用该密码访问目标账户，进而窃取敏感信息或者进行其他恶意行为。</p>
+                                </li>
+                            </ol>
+                            <p>为了防止暴力破解攻击，通常采取以下措施：</p>
+                            <ol>
+                                <li><p>
+                                    强密码策略：要求用户设置复杂度较高的密码，如长度大于8个字符、包含大小写字母、数字和特殊字符等。</p>
+                                </li>
+                                <li><p>密码锁定策略：如果用户多次输入错误密码，可以暂时锁定用户账户，防止暴力破解攻击。</p>
+                                </li>
+                                <li><p>
+                                    多因素认证：除了密码，还需要使用其他身份验证方式，如短信验证码、指纹识别、硬件令牌等，增加攻击者的破解难度。</p>
+                                </li>
+                                <li><p>
+                                    安全监控和报警：对于异常的登录行为，及时进行监控和报警，以便尽早发现并阻止攻击行为的发生。</p>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <footer class="main-footer"></footer>
+    <script src="../../dist/js/templateHandle.js"></script>
+    <script>
+        setWrapperHeader("暴力破解", ["概述"]);
+    </script>
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="../../dist/js/adminlte.js"></script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cross-Site Scripting</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+  <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+  <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+  <div class="content-wrapper" id="Wrapper">
+    <section class="content-header" id="WrapperHeader"></section>
+    <section class="content">
+      <div class="container-fluid">
+        <div id="notice"></div>
+<!--        提交评论-->
+        <div class="card card-primary card-outline">
+          <div class="card-header">
+            <h3 class="card-title">xss盲打</h3>
+          </div>
+          <div class="card-body">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">评论提交</h3>
+              </div>
+              <form action="" onsubmit="return false" id="commit">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="author">作者</label>
+                    <input type="text" class="form-control" name="author" id="author" placeholder="Enter author">
+                  </div>
+                  <div class="form-group">
+                    <label for="comment">评论内容</label>
+                    <textarea class="form-control" id="comment" name="comment" placeholder="请输入评论"></textarea>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary" onclick="submitComment()">提交</button>
+                  <button type="button" class="btn btn-primary" onclick="showForm(2)">登录后台</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+<!--        后台登录-->
+        <div class="card card-primary card-outline">
+          <div class="card-header">
+            <h3 class="card-title">xss盲打</h3>
+          </div>
+          <div class="card-body">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">后台登录</h3>
+              </div>
+              <form action="" onsubmit="return false" id="Login">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
+                  </div>
+                  <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary" onclick="doLogin()">登录</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+<!--        显示信息-->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">xss盲打</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table class="table table-bordered">
+              <thead>
+              <tr>
+                <th>编号</th>
+                <th>提交时间</th>
+                <th>评论内容</th>
+                <th>评论作者</th>
+                <th>操作</th>
+              </tr>
+              </thead>
+              <tbody id="comments"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card card-primary card-outline" id="showSource">
+          <div class="card-header">
+            <h3 class="card-title">源代码&amp;提示</h3>
+          </div>
+          <div class="card-body">
+            <div>
+              <p>XSS盲打其实就是你输入的内容进入到了后台，一般存在于信息反馈之类的地方。</p>
+              <p>这里提交完后可以登录进入后台去看。不过接口没有发生改变，且接口没有做用户校验，也就是说可以越权调用接口。</p>
+              <p><strong>显示所有评论 Servlet 实现</strong></p>
+              <pre><code>&#x20;&#x20;&#x20;&#x20;&commat;&#x41;&#x70;&#x69;&lpar;&lcub;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x4D;&#x65;&#x74;&#x68;&#x6F;&#x64;&#x54;&#x79;&#x70;&#x65;&period;&#x47;&#x45;&#x54;&rcub;&rpar;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x70;&#x75;&#x62;&#x6C;&#x69;&#x63;&#x20;&#x4D;&#x61;&#x70;&lt;&quest;&comma;&#x20;&quest;&gt;&#x20;&#x73;&#x68;&#x6F;&#x77;&#x41;&#x6C;&#x6C;&#x43;&#x6F;&#x6D;&#x6D;&#x65;&#x6E;&#x74;&#x42;&#x79;&#x4D;&#x61;&#x70;&lpar;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&comma;&#x20;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&comma;&#x20;&#x4C;&#x69;&#x73;&#x74;&lt;&#x4D;&#x61;&#x70;&lt;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&comma;&#x20;&#x4F;&#x62;&#x6A;&#x65;&#x63;&#x74;&gt;&gt;&gt;&#x20;&#x64;&#x61;&#x74;&#x61;&#x20;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&gt;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x64;&#x61;&#x74;&#x61;&period;&#x70;&#x75;&#x74;&lpar;&quot;&#x63;&#x6F;&#x6D;&#x6D;&#x65;&#x6E;&#x74;&#x73;&quot;&comma;&#x20;&#x63;&#x73;&#x69;&period;&#x67;&#x65;&#x74;&#x41;&#x6C;&#x6C;&#x43;&#x6F;&#x6D;&#x6D;&#x65;&#x6E;&#x74;&#x4C;&#x69;&#x73;&#x74;&lpar;&rpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x64;&#x61;&#x74;&#x61;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <footer class="main-footer"></footer>
+  <script src="../../dist/js/templateHandle.js"></script>
+  <script>
+    setWrapperHeader("Cross-Site Scripting", ["xss盲打"]);
+  </script>
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="../../dist/js/adminlte.js"></script>
+  <script>
+    const notice_dom = $("#notice")[0];
+    const out_msg = "<a href='#' onClick='loginOut()' style='color: #6db3ff;'>点击登出</a>";
+    if (document.cookie!=='' && document.cookie.indexOf('token') !== -1){
+      showForm(3)
+      notice_dom.innerHTML = generateNote("欢迎管理员，" + out_msg);
+      getComments();
+    } else {
+      showForm(1)
+    }
+    function submitComment(){
+      let data = {
+        content: $("#comment")[0].value,
+        author: $("#author")[0].value,
+      }
+      if (data.content.length <= 0 || data.author.length <=0)return false;
+      $.post({
+        url: `${project_name}/xss/commitComment`,
+        data,
+        dataType: "json",
+        success(resp){
+          if(resp["commitCommentStatus"]){
+            $("#notice")[0].innerHTML = generateNote("评论提交成功！");
+            showForm(2);
+          } else {
+            $("#notice")[0].innerHTML = generateNote("评论提交失败！");
+          }
+        }
+      })
+    }
+
+    function getComments(){
+      $.get({
+        url: `${project_name}/xss/showAllCommentByMap`,
+        success(resp) {
+          let g = '';
+          let data_list = resp["comments"];
+          console.log(data_list)
+          for(let item of data_list){
+            g += `<tr>
+                  <td>${item.id}</td>
+                  <td>${item.create_time}</td>
+                  <td>${item.content}</td>
+                  <td>${item.author}</td>
+                  <td><a href="#" onclick="deleteCommentById(${item.id})">删除</a></td>
+                </tr>`
+          }
+          $("#comments")[0].innerHTML = g;
+        }
+      })
+    }
+
+    function deleteCommentById(id){
+      $.get({
+        url: `${project_name}/xss/deleteComment?id=${id}`,
+        success(resp) {
+          getComments();
+          $("#notice")[0].innerHTML = generateNote("删除评论成功！");
+        }
+      })
+    }
+    function loginOut(){
+      document.cookie = '';
+      showForm(1);
+      notice_dom.innerHTML='';
+      $.get({
+        url: `${project_name}xss/loginOut`,
+        xhrFields: {
+          withCredentials: true
+        },
+        success(resp) {
+          location.reload();
+        }
+      })
+    }
+
+    function showForm(index){
+      let forms = $("#Wrapper > section.content > div > div:nth-child(n+2)")
+      forms[0].style  = index === 1 ? "display:block" : "display:none"
+      forms[1].style  = index === 2 ? "display:block" : "display:none"
+      forms[2].style  = index === 3 ? "display:block" : "display:none"
+    }
+
+    function doLogin(){
+      let data = {
+        username: $("#username")[0].value,
+        password: $("#password")[0].value,
+      }
+      if (data.username.length <= 0 && data.username.length <= 0)return false;
+      $.post({
+        url: `${project_name}/xss/login`,
+        data,
+        dataType: "json",
+        success(resp){
+          console.log(resp)
+          if(resp["loginStatus"]){
+            notice_dom.innerHTML = generateNote("登录成功！"+out_msg);
+            showForm(3);
+            getComments();
+          } else {
+            notice_dom.innerHTML = generateNote("登录失败，账号或者密码错误！");
+          }
+        }
+      })
+    }
+  </script>
+</body>
+</html>

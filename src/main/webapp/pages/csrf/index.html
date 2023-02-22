@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSRF</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+    <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+    <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+    <div class="content-wrapper" id="Wrapper">
+        <section class="content-header" id="WrapperHeader"></section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">CSRF概述</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="markdown prose w-full break-words dark:prose-invert light"><p>跨站请求伪造（Cross-Site
+                            Request Forgery，CSRF）是一种常见的网络攻击方式，也被称为“one-click attack”或者“session
+                            riding”。它利用用户在已登录的网站中的身份验证状态，向目标网站发送伪造的请求，从而实现攻击者的恶意目的。</p>
+                            <p>具体来说，CSRF攻击通常包括以下步骤：</p>
+                            <ol>
+                                <li><p>攻击者构造一个恶意网页，其中包含一个指向目标网站的请求，如一个图片、链接或表单。</p>
+                                </li>
+                                <li><p>
+                                    用户在已经登录的目标网站中打开了恶意网页，浏览器自动向目标网站发送了一个请求，这个请求被目标网站认为是合法的，并且被执行。</p>
+                                </li>
+                                <li><p>目标网站根据用户的身份认证状态，处理了这个伪造请求，导致攻击者实现了攻击目的。</p>
+                                </li>
+                            </ol>
+                            <p>
+                                CSRF攻击可以造成的危害包括但不限于：修改用户信息、发起转账、删除数据、发表评论等。常见的CSRF防御措施包括：</p>
+                            <ol>
+                                <li><p>验证码：在敏感操作前增加验证码验证，防止被伪造请求攻击。</p></li>
+                                <li><p>Referer检查：在服务器端检查请求的来源地址是否合法。</p></li>
+                                <li><p>
+                                    Token验证：为每个用户生成一个唯一的令牌（Token），并在表单中提交该Token，确保请求来源的合法性。</p>
+                                </li>
+                                <li><p>SameSite
+                                    Cookie：设置Cookie的SameSite属性，限制Cookie只在同一站点下有效，防止跨站Cookie攻击。</p>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <footer class="main-footer"></footer>
+    <script src="../../dist/js/templateHandle.js"></script>
+    <script>
+        setWrapperHeader("CSRF", ["概述"]);
+    </script>
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="../../dist/js/adminlte.js"></script>
+</body>
+</html>

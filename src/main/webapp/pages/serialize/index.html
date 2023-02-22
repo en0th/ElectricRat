@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JAVA反序列化</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+    <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+    <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+    <div class="content-wrapper" id="Wrapper">
+        <section class="content-header" id="WrapperHeader"></section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">JAVA反序列化</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="markdown prose w-full break-words dark:prose-invert light"><p>
+                            Java反序列化漏洞是指攻击者利用Java中的反序列化功能，通过构造特定的序列化数据来实现远程代码执行等攻击。Java中的反序列化功能可以将二进制数据转换成Java对象，反序列化通常用于数据持久化、网络传输等场景。然而，如果攻击者可以控制反序列化的数据，就有可能通过构造恶意的序列化数据，来实现任意的代码执行。</p>
+                            <p>
+                                Java反序列化漏洞通常存在于需要从网络或其他不受信任的来源接收对象的应用程序中，比如RMI、JMX、JMS、HTTP、SOAP等。攻击者可以通过发送构造的恶意序列化数据到目标应用程序，来实现远程代码执行等攻击。</p>
+                            <p>
+                                Java反序列化漏洞的危害很大，攻击者可以通过它来实现远程命令执行、窃取敏感信息、篡改数据等攻击。为了防范Java反序列化漏洞，开发人员应该对用户输入进行严格的验证和过滤，避免将不受信任的序列化数据传递给反序列化函数。同时，也可以采用一些安全防护措施，比如使用安全的序列化协议、对序列化数据进行数字签名等。</p>
+                            <p>
+                                如果发现了Java反序列化漏洞，应该及时采取措施进行修复，比如禁用不安全的序列化协议、限制序列化数据的长度、使用安全的序列化协议等。同时，也可以采用WAF（Web应用程序防火墙）等安全防护措施来增强应用程序的安全性。</p>
+                            <p>一个经典的Java反序列化漏洞业务案例是Apache Struts框架的漏洞CVE-2017-5638。这个漏洞影响了Apache
+                                Struts
+                                2.3.x和2.5.x版本，攻击者可以通过构造恶意的HTTP请求，将恶意数据传递给服务器，触发服务器上的反序列化操作，并最终导致远程代码执行等攻击。</p>
+                            <p>
+                                具体来说，攻击者可以构造一个带有恶意Payload的Content-Type头的HTTP请求，当服务器对这个请求进行解析时，就会触发反序列化操作，并将Payload中的代码执行。攻击者可以通过这种方式实现远程命令执行、窃取敏感信息、篡改数据等攻击。</p>
+                            <p>
+                                这个漏洞曾被用于攻击一些知名网站，比如美国信用报告机构Equifax，在此次攻击中，攻击者利用这个漏洞入侵了Equifax的服务器，窃取了超过145万美国人的个人信息，引起了巨大的社会关注和负面影响。</p>
+                            <p>
+                                为了防范Java反序列化漏洞，开发人员应该在应用程序中严格过滤和验证用户输入，并使用安全的序列化协议。此外，也可以使用一些开源工具来扫描和检测Java反序列化漏洞，比如Ysoserial、Java-Deserialization-Scanner等。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<footer class="main-footer"></footer>
+<script src="../../dist/js/templateHandle.js"></script>
+<script>
+    setWrapperHeader("JAVA反序列化", ["概述"]);
+</script>
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="../../dist/js/adminlte.js"></script>
+</body>
+</html>

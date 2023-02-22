@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SSRF服务器端请求伪造</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+  <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+  <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+  <div class="content-wrapper" id="Wrapper">
+    <section class="content-header" id="WrapperHeader"></section>
+    <section class="content">
+      <div class="container-fluid">
+        <div id="notice"></div>
+        <div class="card card-primary card-outline">
+          <div class="card-header">
+            <h3 class="card-title">远程拉取图片</h3>
+          </div>
+          <div class="card-body">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">远程拉取图片</h3>
+              </div>
+              <form action="" onsubmit="return false">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="imgURL">远程图片地址</label>
+                    <input type="text" class="form-control" name="imgURL" id="imgURL" placeholder="Enter imgURL">
+                  </div>
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary" onclick="getImage()">拉取</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="filter-container">
+              <div class="filtr-item">
+                <a href="#" id="showImage"  data-toggle="lightbox" data-title="sample 1 - white" style="display: none;">
+                  <img src="" class="img-fluid mb-2">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card card-primary card-outline" id="showSource">
+          <div class="card-header">
+            <h3 class="card-title">源代码&amp;提示</h3>
+          </div>
+          <div class="card-body">
+            <div>
+              <p>这里使用了一个常见的业务，远程拉取图片数据，作为案例。其中 URLConnection 建立连接的 URL 是我们可以任意修改的，这就导致了SSRF的产生。</p>
+              <p><strong>Servlet 实现代码</strong></p>
+              <pre><code>&#x20;&#x20;&#x20;&#x20;&#x70;&#x75;&#x62;&#x6C;&#x69;&#x63;&#x20;&#x76;&#x6F;&#x69;&#x64;&#x20;&#x67;&#x65;&#x74;&#x52;&#x65;&#x6D;&#x6F;&#x74;&#x65;&#x49;&#x6D;&#x61;&#x67;&#x65;&lpar;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&comma;&#x20;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&rpar;&#x20;&#x74;&#x68;&#x72;&#x6F;&#x77;&#x73;&#x20;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&comma;&#x20;&#x49;&#x4F;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x75;&#x72;&#x6C;&#x20;&equals;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x50;&#x61;&#x72;&#x61;&#x6D;&#x65;&#x74;&#x65;&#x72;&lpar;&quot;&#x69;&#x6D;&#x61;&#x67;&#x65;&#x55;&#x52;&#x4C;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x74;&#x72;&#x79;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x55;&#x52;&#x4C;&#x20;&#x75;&#x20;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x55;&#x52;&#x4C;&lpar;&#x75;&#x72;&#x6C;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x55;&#x52;&#x4C;&#x43;&#x6F;&#x6E;&#x6E;&#x65;&#x63;&#x74;&#x69;&#x6F;&#x6E;&#x20;&#x75;&#x72;&#x6C;&#x43;&#x6F;&#x6E;&#x6E;&#x65;&#x63;&#x74;&#x69;&#x6F;&#x6E;&#x20;&equals;&#x20;&#x75;&period;&#x6F;&#x70;&#x65;&#x6E;&#x43;&#x6F;&#x6E;&#x6E;&#x65;&#x63;&#x74;&#x69;&#x6F;&#x6E;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x42;&#x75;&#x66;&#x66;&#x65;&#x72;&#x65;&#x64;&#x49;&#x6E;&#x70;&#x75;&#x74;&#x53;&#x74;&#x72;&#x65;&#x61;&#x6D;&#x20;&#x69;&#x6E;&#x20;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x42;&#x75;&#x66;&#x66;&#x65;&#x72;&#x65;&#x64;&#x49;&#x6E;&#x70;&#x75;&#x74;&#x53;&#x74;&#x72;&#x65;&#x61;&#x6D;&lpar;&#x75;&#x72;&#x6C;&#x43;&#x6F;&#x6E;&#x6E;&#x65;&#x63;&#x74;&#x69;&#x6F;&#x6E;&period;&#x67;&#x65;&#x74;&#x49;&#x6E;&#x70;&#x75;&#x74;&#x53;&#x74;&#x72;&#x65;&#x61;&#x6D;&lpar;&rpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x4C;&#x69;&#x73;&#x74;&lt;&#x42;&#x79;&#x74;&#x65;&gt;&#x20;&#x62;&#x75;&#x66;&#x66;&#x65;&#x72;&#x20;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x41;&#x72;&#x72;&#x61;&#x79;&#x4C;&#x69;&#x73;&#x74;&lt;&gt;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x6E;&#x74;&#x20;&#x6C;&#x65;&#x6E;&#x67;&#x74;&#x68;&#x20;&equals;&#x20;&#x2D;&#x31;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x77;&#x68;&#x69;&#x6C;&#x65;&#x20;&lpar;&lpar;&#x6C;&#x65;&#x6E;&#x67;&#x74;&#x68;&#x20;&equals;&#x20;&#x69;&#x6E;&period;&#x72;&#x65;&#x61;&#x64;&lpar;&rpar;&rpar;&#x20;&excl;&equals;&#x20;&#x2D;&#x31;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x62;&#x75;&#x66;&#x66;&#x65;&#x72;&period;&#x61;&#x64;&#x64;&lpar;&lpar;&#x62;&#x79;&#x74;&#x65;&rpar;&#x20;&#x6C;&#x65;&#x6E;&#x67;&#x74;&#x68;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x6E;&period;&#x63;&#x6C;&#x6F;&#x73;&#x65;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x62;&#x79;&#x74;&#x65;&lsqb;&rsqb;&#x20;&#x69;&#x6D;&#x61;&#x67;&#x65;&#x32;&#x20;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x62;&#x79;&#x74;&#x65;&lsqb;&#x62;&#x75;&#x66;&#x66;&#x65;&#x72;&period;&#x73;&#x69;&#x7A;&#x65;&lpar;&rpar;&rsqb;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x66;&#x6F;&#x72;&#x20;&lpar;&#x69;&#x6E;&#x74;&#x20;&#x69;&#x20;&equals;&#x20;&#x30;&semi;&#x20;&#x69;&#x20;&lt;&#x20;&#x62;&#x75;&#x66;&#x66;&#x65;&#x72;&period;&#x73;&#x69;&#x7A;&#x65;&lpar;&rpar;&semi;&#x20;&#x69;&plus;&plus;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x6D;&#x61;&#x67;&#x65;&#x32;&lsqb;&#x69;&rsqb;&#x20;&equals;&#x20;&#x62;&#x75;&#x66;&#x66;&#x65;&#x72;&period;&#x67;&#x65;&#x74;&lpar;&#x69;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&period;&#x67;&#x65;&#x74;&#x57;&#x72;&#x69;&#x74;&#x65;&#x72;&lpar;&rpar;&period;&#x61;&#x70;&#x70;&#x65;&#x6E;&#x64;&lpar;&quot;&#x64;&#x61;&#x74;&#x61;&colon;&#x69;&#x6D;&#x61;&#x67;&#x65;&sol;&#x6A;&#x70;&#x65;&#x67;&semi;&#x62;&#x61;&#x73;&#x65;&#x36;&#x34;&comma;&quot;&rpar;&period;&#x61;&#x70;&#x70;&#x65;&#x6E;&#x64;&lpar;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&lpar;&#x42;&#x61;&#x73;&#x65;&#x36;&#x34;&period;&#x67;&#x65;&#x74;&#x45;&#x6E;&#x63;&#x6F;&#x64;&#x65;&#x72;&lpar;&rpar;&period;&#x65;&#x6E;&#x63;&#x6F;&#x64;&#x65;&lpar;&#x69;&#x6D;&#x61;&#x67;&#x65;&#x32;&rpar;&rpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&#x20;&#x63;&#x61;&#x74;&#x63;&#x68;&#x20;&lpar;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&#x20;&#x65;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&period;&#x73;&#x65;&#x74;&#x53;&#x74;&#x61;&#x74;&#x75;&#x73;&lpar;&#x34;&#x30;&#x30;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <footer class="main-footer"></footer>
+  <script src="../../dist/js/templateHandle.js"></script>
+  <script>
+    setWrapperHeader("SSRF服务器端请求伪造", ["远程拉取图片"]);
+  </script>
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="../../dist/js/adminlte.js"></script>
+  <script>
+    function getImage(){
+
+      let data = {
+        imageURL: $("#imgURL")[0].value
+      }
+      $.post({
+        url: `${project_name}ssrf/getRemoteImage`,
+        data,
+        success(resp){
+          $("#showImage")[0].style = "display: block";
+          $("#showImage > img")[0].src=resp
+          console.log(resp)
+        }
+      })
+    }
+  </script>
+</body>
+</html>

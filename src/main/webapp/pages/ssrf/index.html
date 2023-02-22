@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSRF服务器端请求伪造</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+    <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+    <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+    <div class="content-wrapper" id="Wrapper">
+        <section class="content-header" id="WrapperHeader"></section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">SSRF服务器端请求伪造概述</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="markdown prose w-full break-words dark:prose-invert light"><p>SSRF漏洞（Server-Side
+                            Request
+                            Forgery）指的是攻击者在Web应用程序中发起恶意请求，让服务器端向指定的地址发送网络请求，而这个地址是由攻击者控制的，攻击者可以通过该漏洞访问到应用程序无权访问的资源，比如内部网络中的其他服务、系统文件等。SSRF漏洞很危险，因为攻击者可以利用它来窃取敏感数据、发起攻击、甚至直接获取服务器的控制权。</p>
+                            <p>
+                                SSRF漏洞通常是由于Web应用程序在处理输入时，没有对用户输入进行充分的验证和过滤，导致攻击者可以构造恶意的请求。攻击者可以通过修改HTTP请求中的URL参数或POST请求中的数据来触发SSRF漏洞，例如修改请求中的域名或IP地址，或者使用URL编码、IP地址转换等技术来绕过过滤。</p>
+                            <p>防范SSRF漏洞的措施包括：</p>
+                            <ol>
+                                <li><p>
+                                    对用户输入的URL参数或POST数据进行严格的验证和过滤，包括对协议、域名、IP地址等进行白名单限制。</p>
+                                </li>
+                                <li><p>
+                                    对Web应用程序中发起的网络请求进行安全配置，例如限制请求的目标范围、禁用危险的协议等。</p>
+                                </li>
+                                <li><p>对Web应用程序进行安全漏洞扫描和渗透测试，及时发现和修复漏洞。</p></li>
+                                <li><p>在服务器端进行安全配置，例如限制网络端口、禁用危险的系统命令等。</p></li>
+                            </ol>
+                            <p>
+                                总之，为了防范SSRF漏洞，需要Web应用程序开发人员和系统管理员共同努力，从多个方面加强Web应用程序的安全性。同时，如果发现了SSRF漏洞，应该及时采取措施进行修复。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<footer class="main-footer"></footer>
+<script src="../../dist/js/templateHandle.js"></script>
+<script>
+    setWrapperHeader("SSRF服务器端请求伪造", ["概述"]);
+</script>
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="../../dist/js/adminlte.js"></script>
+</body>
+</html>

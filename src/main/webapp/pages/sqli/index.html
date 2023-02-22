@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sql Inject</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+    <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+    <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+    <div class="content-wrapper" id="Wrapper">
+        <section class="content-header" id="WrapperHeader"></section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">Sql Inject概述</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="markdown prose w-full break-words dark:prose-invert light"><p>SQL注入（SQL
+                            Injection）是一种常见的Web安全漏洞，攻击者通过利用应用程序没有对用户输入进行充分验证的缺陷，将恶意的SQL语句注入到后端数据库中，从而导致数据库的数据被窃取、篡改、破坏等风险。</p>
+                            <p>
+                                通常，SQL注入攻击发生的原因是开发人员没有对用户输入的数据进行充分验证或过滤，或者使用了不安全的SQL查询方法。攻击者可以通过输入特定的字符串或符号来欺骗程序，从而注入恶意的SQL语句。</p>
+                            <p>具体来说，SQL注入攻击可以包括以下步骤：</p>
+                            <ol>
+                                <li><p>
+                                    攻击者找到一个目标网站，并通过输入恶意的SQL语句，试图绕过应用程序的身份验证或其他安全控制。</p>
+                                </li>
+                                <li><p>应用程序没有对用户输入进行充分的过滤和验证，将恶意的SQL语句传递给后端数据库。</p>
+                                </li>
+                                <li><p>
+                                    后端数据库执行了攻击者注入的恶意SQL语句，从而使攻击者可以访问、篡改、删除数据库中的数据。</p>
+                                </li>
+                            </ol>
+                            <p>攻击者可以利用SQL注入漏洞实现以下恶意行为：</p>
+                            <ol>
+                                <li><p>窃取敏感数据，如用户名、密码、信用卡号等。</p></li>
+                                <li><p>修改或删除数据库中的数据。</p></li>
+                                <li><p>执行任意代码，如恶意脚本、程序等。</p></li>
+                            </ol>
+                            <p>为了防止SQL注入攻击，开发人员应该采取以下措施：</p>
+                            <ol>
+                                <li><p>对所有用户输入的数据进行充分的验证和过滤，确保输入数据符合预期的格式和范围。</p>
+                                </li>
+                                <li><p>使用安全的SQL查询方法，如参数化查询、存储过程等，避免拼接SQL语句。</p></li>
+                                <li><p>限制数据库用户的权限，确保只有必要的用户能够访问和修改数据库。</p></li>
+                                <li><p>定期审计数据库日志，及时发现和处理异常行为。</p></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <footer class="main-footer"></footer>
+    <script src="../../dist/js/templateHandle.js"></script>
+    <script>
+        setWrapperHeader("Sql Inject", ["概述"]);
+    </script>
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="../../dist/js/adminlte.js"></script>
+</body>
+</html>
