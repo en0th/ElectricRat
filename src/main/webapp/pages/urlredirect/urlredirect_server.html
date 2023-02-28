@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>URL重定向</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+  <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+  <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+  <div class="content-wrapper" id="Wrapper">
+    <section class="content-header" id="WrapperHeader"></section>
+    <section class="content">
+      <div class="container-fluid">
+        <div id="notice"></div>
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">不安全的URL跳转（后端校验）</h3>
+          </div>
+          <form action="" onsubmit="return false;">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="url">输入你想去的地址：</label>
+                <input type="text" class="form-control" id="url" placeholder="Enter url">
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary" onclick="goUrl()">跳转</button>
+            </div>
+          </form>
+        </div>
+        <div class="card card-primary card-outline" id="showSource">
+          <div class="card-header">
+            <h3 class="card-title">源代码&amp;提示</h3>
+          </div>
+          <div class="card-body">
+            <div>
+              <p>这里采用了后端进行校验，开头必须是基本路径，并且需要包含 ElectricRat。注意只是需要包含，那么存在的位置是否可以不同？思考一下！</p>
+              <p><strong>Servlet 代码实现</strong></p>
+              <pre><code>&#x20;&#x20;&#x20;&#x20;&#x70;&#x75;&#x62;&#x6C;&#x69;&#x63;&#x20;&#x76;&#x6F;&#x69;&#x64;&#x20;&#x67;&#x6F;&#x74;&#x6F;&#x55;&#x52;&#x4C;&lpar;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&comma;&#x20;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&rpar;&#x20;&#x74;&#x68;&#x72;&#x6F;&#x77;&#x73;&#x20;&#x49;&#x4F;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x75;&#x72;&#x6C;&#x20;&equals;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x50;&#x61;&#x72;&#x61;&#x6D;&#x65;&#x74;&#x65;&#x72;&lpar;&quot;&#x75;&#x72;&#x6C;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x70;&#x61;&#x74;&#x68;&#x20;&equals;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x43;&#x6F;&#x6E;&#x74;&#x65;&#x78;&#x74;&#x50;&#x61;&#x74;&#x68;&lpar;&rpar;&semi;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&sol;&sol;&#x20;&#x83B7;&#x5F97;&#x5F53;&#x524D;&#x670D;&#x52A1;&#x5668;&#x57FA;&#x672C;&#x5730;&#x5740;&#x20;&#x68;&#x74;&#x74;&#x70;&colon;&sol;&sol;&#x6C;&#x6F;&#x63;&#x61;&#x6C;&#x68;&#x6F;&#x73;&#x74;&colon;&#x38;&#x30;&#x38;&#x30;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x62;&#x61;&#x73;&#x65;&#x50;&#x61;&#x74;&#x68;&#x20;&equals;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x53;&#x63;&#x68;&#x65;&#x6D;&#x65;&lpar;&rpar;&#x20;&plus;&#x20;&quot;&colon;&sol;&sol;&quot;&#x20;&plus;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x53;&#x65;&#x72;&#x76;&#x65;&#x72;&#x4E;&#x61;&#x6D;&#x65;&lpar;&rpar;&#x20;&plus;&#x20;&quot;&colon;&quot;&#x20;&plus;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x53;&#x65;&#x72;&#x76;&#x65;&#x72;&#x50;&#x6F;&#x72;&#x74;&lpar;&rpar;&semi;&NewLine;&NewLine;&sol;&sol;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x79;&#x73;&#x74;&#x65;&#x6D;&period;&#x6F;&#x75;&#x74;&period;&#x70;&#x72;&#x69;&#x6E;&#x74;&#x6C;&#x6E;&lpar;&#x62;&#x61;&#x73;&#x65;&#x50;&#x61;&#x74;&#x68;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x66;&#x20;&lpar;&#x75;&#x72;&#x6C;&#x20;&excl;&equals;&#x20;&#x6E;&#x75;&#x6C;&#x6C;&#x20;&amp;&amp;&#x20;&#x75;&#x72;&#x6C;&period;&#x73;&#x74;&#x61;&#x72;&#x74;&#x73;&#x57;&#x69;&#x74;&#x68;&lpar;&#x62;&#x61;&#x73;&#x65;&#x50;&#x61;&#x74;&#x68;&rpar;&#x20;&amp;&amp;&#x20;&#x75;&#x72;&#x6C;&period;&#x63;&#x6F;&#x6E;&#x74;&#x61;&#x69;&#x6E;&#x73;&lpar;&#x70;&#x61;&#x74;&#x68;&rpar;&rpar;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&period;&#x73;&#x65;&#x6E;&#x64;&#x52;&#x65;&#x64;&#x69;&#x72;&#x65;&#x63;&#x74;&lpar;&#x75;&#x72;&#x6C;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&#x20;&#x65;&#x6C;&#x73;&#x65;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&period;&#x73;&#x65;&#x74;&#x53;&#x74;&#x61;&#x74;&#x75;&#x73;&lpar;&#x34;&#x30;&#x34;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <footer class="main-footer"></footer>
+  <script src="../../dist/js/templateHandle.js"></script>
+  <script>
+    setWrapperHeader("URL重定向", ["不安全的URL跳转"]);
+  </script>
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="../../dist/js/adminlte.js"></script>
+  <script>
+    const notice_dom = $("#notice")[0];
+    function goUrl(){
+
+      const inputUrl = $("#url")[0].value;
+
+      if (!inputUrl.includes(window.location.origin)) {
+        notice_dom.innerHTML = generateNote('未经过验证的URL');
+        return;
+      }
+
+      window.location.href = baseUri + "redirect/gotoURL?url=" + inputUrl;
+    }
+  </script>
+</body>
+</html>

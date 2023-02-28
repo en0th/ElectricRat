@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>文件包含</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+  <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+  <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+  <div class="content-wrapper" id="Wrapper">
+    <section class="content-header" id="WrapperHeader"></section>
+    <section class="content">
+      <div class="container-fluid">
+        <div id="notice"></div>
+        <div class="card card-primary card-outline">
+          <div class="card-header">
+            <h3 class="card-title">读取本地文件</h3>
+          </div>
+          <div class="card-body">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">读取本地文件</h3>
+              </div>
+              <form action="" onsubmit="return false">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="filePath">本地文件</label>
+                    <select class="custom-select form-control-border" id="filePath">
+                      <option value="pageFooter.jsp">页面底部模板</option>
+                      <option value="pageHeader.jsp">页面头部模板</option>
+                    </select>
+                  </div>
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary" onclick="getLocalFile()">拉取</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="filter-container">
+              <div class="filter-item">
+                <div id="showData" style="display: none"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card card-primary card-outline" id="showSource">
+          <div class="card-header">
+            <h3 class="card-title">源代码&amp;提示</h3>
+          </div>
+          <div class="card-body">
+            <div>
+              <p>无论是 JSP 中的 include 还是 Servlet 中的 getRequestDispatcher 中只能接受包含的是Servlet。JSP本质上也是Servlet。</p>
+              <p>为了实现文件包含既能解析JSP又能获取敏感文件的情况，我通过 <code>file.getName().endsWith(".jsp")</code> 针对 JSP 文件进行的判断。</p>
+              <p>getRequestDispatcher 限制了路径不能穿越到项目目录之外，所以存在一定的限制。无论如何，请试试使用目录穿越的方式寻找敏感文件吧。</p>
+              <p><strong>Servlet 实现代码</strong></p>
+              <pre><code>&#x20;&#x20;&#x20;&#x20;&#x70;&#x75;&#x62;&#x6C;&#x69;&#x63;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x63;&#x75;&#x72;&#x72;&#x65;&#x6E;&#x74;&#x46;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&lpar;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x43;&#x6F;&#x6E;&#x74;&#x65;&#x78;&#x74;&lpar;&rpar;&period;&#x67;&#x65;&#x74;&#x52;&#x65;&#x61;&#x6C;&#x50;&#x61;&#x74;&#x68;&lpar;&#x46;&#x69;&#x6C;&#x65;&#x49;&#x6E;&#x63;&#x6C;&#x75;&#x64;&#x65;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&period;&#x46;&#x4F;&#x52;&#x42;&#x49;&#x44;&#x44;&#x45;&#x4E;&lowbar;&#x50;&#x41;&#x54;&#x48;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&commat;&#x4F;&#x76;&#x65;&#x72;&#x72;&#x69;&#x64;&#x65;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x70;&#x72;&#x6F;&#x74;&#x65;&#x63;&#x74;&#x65;&#x64;&#x20;&#x76;&#x6F;&#x69;&#x64;&#x20;&#x64;&#x6F;&#x47;&#x65;&#x74;&lpar;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&comma;&#x20;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&rpar;&#x20;&#x74;&#x68;&#x72;&#x6F;&#x77;&#x73;&#x20;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&comma;&#x20;&#x49;&#x4F;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&sol;&sol;&#x20;&#x5982;&#x679C;&#x662F;&#x666E;&#x901A;&#x6587;&#x4EF6;&#x5C31;&#x76F4;&#x63A5;&#x83B7;&#x53D6;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x6A;&#x73;&#x70;&#x5C31;&#x8FDB;&#x884C;&#x67;&#x65;&#x74;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x44;&#x69;&#x73;&#x70;&#x61;&#x74;&#x63;&#x68;&#x65;&#x72;&#x20;&#x69;&#x6E;&#x63;&#x6C;&#x75;&#x64;&#x65;&#x8BF7;&#x6CE8;&#x610F;&#x4F20;&#x5165;&#x7684;&#x8DEF;&#x5F84;&#x4E0D;&#x80FD;&#x8D85;&#x51FA;&#x9879;&#x76EE;&#x8DEF;&#x5F84;&#x3002;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&period;&#x73;&#x65;&#x74;&#x43;&#x6F;&#x6E;&#x74;&#x65;&#x6E;&#x74;&#x54;&#x79;&#x70;&#x65;&lpar;&quot;&#x74;&#x65;&#x78;&#x74;&sol;&#x68;&#x74;&#x6D;&#x6C;&semi;&#x63;&#x68;&#x61;&#x72;&#x73;&#x65;&#x74;&equals;&#x75;&#x74;&#x66;&#x2D;&#x38;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&#x20;&equals;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x50;&#x61;&#x72;&#x61;&#x6D;&#x65;&#x74;&#x65;&#x72;&lpar;&quot;&#x66;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x66;&#x20;&lpar;&#x66;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&#x20;&equals;&equals;&#x20;&#x6E;&#x75;&#x6C;&#x6C;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&period;&#x73;&#x65;&#x74;&#x53;&#x74;&#x61;&#x74;&#x75;&#x73;&lpar;&#x34;&#x30;&#x34;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x72;&#x65;&#x61;&#x6C;&#x46;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&#x20;&equals;&#x20;&#x63;&#x75;&#x72;&#x72;&#x65;&#x6E;&#x74;&#x46;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&lpar;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&rpar;&#x20;&plus;&#x20;&#x46;&#x69;&#x6C;&#x65;&period;&#x73;&#x65;&#x70;&#x61;&#x72;&#x61;&#x74;&#x6F;&#x72;&#x20;&plus;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x46;&#x69;&#x6C;&#x65;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x20;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x46;&#x69;&#x6C;&#x65;&lpar;&#x72;&#x65;&#x61;&#x6C;&#x46;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x66;&#x20;&lpar;&#x66;&#x69;&#x6C;&#x65;&period;&#x67;&#x65;&#x74;&#x4E;&#x61;&#x6D;&#x65;&lpar;&rpar;&period;&#x65;&#x6E;&#x64;&#x73;&#x57;&#x69;&#x74;&#x68;&lpar;&quot;&period;&#x6A;&#x73;&#x70;&quot;&rpar;&rpar;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x6E;&#x61;&#x6D;&#x65;&#x20;&equals;&#x20;&quot;&sol;&quot;&#x20;&plus;&#x20;&#x46;&#x69;&#x6C;&#x65;&#x49;&#x6E;&#x63;&#x6C;&#x75;&#x64;&#x65;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&period;&#x46;&#x4F;&#x52;&#x42;&#x49;&#x44;&#x44;&#x45;&#x4E;&lowbar;&#x50;&#x41;&#x54;&#x48;&#x20;&plus;&#x20;&quot;&sol;&quot;&#x20;&plus;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x79;&#x73;&#x74;&#x65;&#x6D;&period;&#x6F;&#x75;&#x74;&period;&#x70;&#x72;&#x69;&#x6E;&#x74;&#x6C;&#x6E;&lpar;&#x6E;&#x61;&#x6D;&#x65;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x44;&#x69;&#x73;&#x70;&#x61;&#x74;&#x63;&#x68;&#x65;&#x72;&lpar;&#x6E;&#x61;&#x6D;&#x65;&rpar;&period;&#x69;&#x6E;&#x63;&#x6C;&#x75;&#x64;&#x65;&lpar;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&comma;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&#x20;&#x65;&#x6C;&#x73;&#x65;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x46;&#x69;&#x6C;&#x65;&#x49;&#x6E;&#x70;&#x75;&#x74;&#x53;&#x74;&#x72;&#x65;&#x61;&#x6D;&#x20;&#x66;&#x69;&#x73;&#x20;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x46;&#x69;&#x6C;&#x65;&#x49;&#x6E;&#x70;&#x75;&#x74;&#x53;&#x74;&#x72;&#x65;&#x61;&#x6D;&lpar;&#x66;&#x69;&#x6C;&#x65;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x4F;&#x75;&#x74;&#x70;&#x75;&#x74;&#x53;&#x74;&#x72;&#x65;&#x61;&#x6D;&#x20;&#x6F;&#x75;&#x74;&#x20;&equals;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&period;&#x67;&#x65;&#x74;&#x4F;&#x75;&#x74;&#x70;&#x75;&#x74;&#x53;&#x74;&#x72;&#x65;&#x61;&#x6D;&lpar;&rpar;&semi;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x62;&#x79;&#x74;&#x65;&lsqb;&rsqb;&#x20;&#x62;&#x75;&#x66;&#x66;&#x65;&#x72;&#x20;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x62;&#x79;&#x74;&#x65;&lsqb;&#x31;&#x30;&#x32;&#x34;&rsqb;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x6E;&#x74;&#x20;&#x6C;&#x65;&#x6E;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x77;&#x68;&#x69;&#x6C;&#x65;&#x20;&lpar;&lpar;&#x6C;&#x65;&#x6E;&#x20;&equals;&#x20;&#x66;&#x69;&#x73;&period;&#x72;&#x65;&#x61;&#x64;&lpar;&#x62;&#x75;&#x66;&#x66;&#x65;&#x72;&rpar;&rpar;&#x20;&excl;&equals;&#x20;&#x2D;&#x31;&rpar;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x6F;&#x75;&#x74;&period;&#x77;&#x72;&#x69;&#x74;&#x65;&lpar;&#x62;&#x75;&#x66;&#x66;&#x65;&#x72;&comma;&#x20;&#x30;&comma;&#x20;&#x6C;&#x65;&#x6E;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x66;&#x69;&#x73;&period;&#x63;&#x6C;&#x6F;&#x73;&#x65;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x6F;&#x75;&#x74;&period;&#x66;&#x6C;&#x75;&#x73;&#x68;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x6F;&#x75;&#x74;&period;&#x63;&#x6C;&#x6F;&#x73;&#x65;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <footer class="main-footer"></footer>
+  <script src="../../dist/js/templateHandle.js"></script>
+  <script>
+    setWrapperHeader("文件包含", ["本地文件包含"]);
+  </script>
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="../../dist/js/adminlte.js"></script>
+  <script>
+    function getLocalFile(){
+      let filePath = $("#filePath")[0].value
+      $.get({
+        url: `${project_name}fileInclude/includeLocalFile?filePath=${filePath}`,
+        success(resp){
+          $("#showData")[0].style = "display: block";
+          $("#showData")[0].innerText=resp
+        }
+      })
+    }
+  </script>
+</body>
+</html>

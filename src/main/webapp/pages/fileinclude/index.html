@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>文件包含</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+    <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+    <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+    <div class="content-wrapper" id="Wrapper">
+        <section class="content-header" id="WrapperHeader"></section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">文件包含概述</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="markdown prose w-full break-words dark:prose-invert light">
+                            <p>Java文件包含漏洞（Java File Inclusion Vulnerability）是一种Web应用程序安全漏洞，也称为目录遍历漏洞（Directory
+                                Traversal Vulnerability）或路径遍历漏洞（Path Traversal Vulnerability）。</p>
+                            <p>
+                                Java文件包含漏洞的原因是Web应用程序在处理用户输入时没有正确地验证和过滤输入的数据，导致攻击者可以通过构造恶意的输入来访问包含在Web应用程序中的其他文件。攻击者可以利用此漏洞来读取或执行任意文件，包括敏感文件，如密码文件、配置文件、日志文件等，从而获得系统的控制权。</p>
+                            <p>要防范Java文件包含漏洞，开发人员可以采取以下措施：</p>
+                            <ol>
+                                <li><p>
+                                    对用户输入的数据进行正确的验证和过滤，避免使用不可信的输入来动态包含文件。可以使用白名单机制来限制用户可以访问的文件和目录，避免让用户访问到Web应用程序之外的其他目录或文件。</p>
+                                </li>
+                                <li><p>
+                                    使用相对路径而不是绝对路径来引用被包含的文件。相对路径是相对于当前JSP页面的路径，可以避免直接引用Web应用程序之外的文件。</p>
+                                </li>
+                                <li><p>
+                                    避免在包含文件时使用外部变量，尤其是来自HTTP请求的变量。这样做容易受到攻击者的恶意操作，从而导致文件包含漏洞。</p>
+                                </li>
+                                <li><p>
+                                    对Web应用程序中的所有输入和输出进行安全审计，及时发现和修复潜在的安全漏洞。可以使用Web应用程序安全扫描工具或漏洞扫描工具来检测Java文件包含漏洞。</p>
+                                </li>
+                                <li><p>
+                                    更新和升级Web应用程序中使用的第三方库和框架，确保这些库和框架中没有Java文件包含漏洞。同时，及时关注安全补丁和更新，保持Web应用程序的安全性和稳定性。</p>
+                                </li>
+                            </ol>
+                            <p>
+                                总之，防范Java文件包含漏洞需要开发人员在编写Web应用程序时，加强输入验证和过滤、使用相对路径、避免使用外部变量、进行安全审计、更新第三方库和框架等多方面进行综合防范。这样才能保障Web应用程序的安全性和可靠性。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+    
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <footer class="main-footer"></footer>
+    <script src="../../dist/js/templateHandle.js"></script>
+    <script>
+        setWrapperHeader("文件包含", ["概述"]);
+    </script>
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="../../dist/js/adminlte.js"></script>
+</body>
+</html>

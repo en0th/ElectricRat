@@ -13,6 +13,7 @@ public class FileServerImpl implements FileServer {
     public static final String UPLOAD_DIRECTORY = "/upload";
     public static final String[] IMAGE_FILE_TYPE = {"png", "jpg", "gif"};
     public static final String[] BLACK_FILE_TYPE = {".html", ".htm", ".phtml", ".jsp", ".jspa", ".jspx", ".jsw", ".jsv", ".jspf", ".jtml"};
+    public static final String[] White_FILE_TYPE = {".png", ".jpg", ".gif"};
 
     // 上传配置
     public static final int MEMORY_THRESHOLD   = 1024 * 1024 * 3;  // 3MB
@@ -35,5 +36,13 @@ public class FileServerImpl implements FileServer {
         HashMap<String, Object> data = new HashMap<>();
         data.put("data", fdi.queryAllMap());
         return data;
+    }
+
+    public String getFilePathById(int id){
+        return fdi.queryById(new FileEntity(id)).getFilePath();
+    }
+
+    public boolean updateFilePath(int id,String newFileName, String filePath){
+        return fdi.update(new FileEntity(id,newFileName,filePath)) != null;
     }
 }

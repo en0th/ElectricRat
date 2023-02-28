@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>文件包含</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+    <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+    <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+    <div class="content-wrapper" id="Wrapper">
+        <section class="content-header" id="WrapperHeader"></section>
+        <section class="content">
+            <div class="container-fluid">
+                <div id="notice"></div>
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">添加模板静态文件</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">图片上传</h3>
+                            </div>
+                            <form action="" onsubmit="return false;">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="inputFile">选择文件</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="inputFile" onchange="checkFileExt(this.value)">
+                                                <label class="custom-file-label" for="inputFile">Choose file</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary" onclick="uploadImage()">上传</button>
+                                    <a href="beautifulPage.jsp" class="btn btn-primary" target="_blank">游览模板</a>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">文件操作</h3>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>编号</th>
+                                        <th>文件名</th>
+                                        <th>文件类型</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="FileData"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="modal-default" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">将文件移动到模板目录</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="hidden" id="fileID" name="fileID">
+                                        <div class="form-group">
+                                            <label for="newFileName">文件名字</label>
+                                            <input type="text" class="form-control" id="newFileName" name="newFileName">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="moveFile()">确认移动</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-primary card-outline" id="showSource">
+                    <div class="card-header">
+                        <h3 class="card-title">源代码&amp;提示</h3>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <p>这里模拟了一个移动文件覆盖的情景。同目录下存在一个命名为beautifulPage的JSP文件。我们先来看看它的代码实现。</p>
+                            <pre><code>&lt;&percnt;&commat;&#x20;&#x70;&#x61;&#x67;&#x65;&#x20;&#x63;&#x6F;&#x6E;&#x74;&#x65;&#x6E;&#x74;&#x54;&#x79;&#x70;&#x65;&equals;&quot;&#x74;&#x65;&#x78;&#x74;&sol;&#x68;&#x74;&#x6D;&#x6C;&semi;&#x63;&#x68;&#x61;&#x72;&#x73;&#x65;&#x74;&equals;&#x55;&#x54;&#x46;&#x2D;&#x38;&quot;&#x20;&#x6C;&#x61;&#x6E;&#x67;&#x75;&#x61;&#x67;&#x65;&equals;&quot;&#x6A;&#x61;&#x76;&#x61;&quot;&#x20;&percnt;&gt;&NewLine;&lt;&#x68;&#x74;&#x6D;&#x6C;&gt;&NewLine;&lt;&#x68;&#x65;&#x61;&#x64;&gt;&NewLine;&#x20;&#x20;&#x20;&#x20;&lt;&#x74;&#x69;&#x74;&#x6C;&#x65;&gt;&#x54;&#x69;&#x74;&#x6C;&#x65;&lt;&sol;&#x74;&#x69;&#x74;&#x6C;&#x65;&gt;&NewLine;&lt;&sol;&#x68;&#x65;&#x61;&#x64;&gt;&NewLine;&lt;&#x62;&#x6F;&#x64;&#x79;&gt;&NewLine;&lt;&percnt;&commat;&#x69;&#x6E;&#x63;&#x6C;&#x75;&#x64;&#x65;&#x20;&#x66;&#x69;&#x6C;&#x65;&equals;&quot;&#x74;&#x65;&#x6D;&#x70;&#x6C;&#x61;&#x74;&#x65;&#x73;&sol;&#x70;&#x61;&#x67;&#x65;&#x48;&#x65;&#x61;&#x64;&#x65;&#x72;&period;&#x6A;&#x73;&#x70;&quot;&percnt;&gt;&NewLine;&lt;&#x64;&#x69;&#x76;&gt;&#x8FD9;&#x662F;&#x62;&#x65;&#x61;&#x75;&#x74;&#x69;&#x66;&#x75;&#x6C;&#x20;&#x70;&#x61;&#x67;&#x65;&#x3002;&lt;&sol;&#x64;&#x69;&#x76;&gt;&NewLine;&lt;&percnt;&commat;&#x69;&#x6E;&#x63;&#x6C;&#x75;&#x64;&#x65;&#x20;&#x66;&#x69;&#x6C;&#x65;&equals;&quot;&#x74;&#x65;&#x6D;&#x70;&#x6C;&#x61;&#x74;&#x65;&#x73;&sol;&#x70;&#x61;&#x67;&#x65;&#x46;&#x6F;&#x6F;&#x74;&#x65;&#x72;&period;&#x6A;&#x73;&#x70;&quot;&percnt;&gt;&NewLine;&lt;&sol;&#x62;&#x6F;&#x64;&#x79;&gt;&NewLine;&lt;&sol;&#x68;&#x74;&#x6D;&#x6C;&gt;&NewLine;</code></pre>
+                            <p>可以看到这里包含了两个文件分别是 <code>templates/pageHeader.jsp</code> 和 <code>templates/pageFooter.jsp</code></p>
+                            <p>这里的文件上传，只能上传图片。这是后端白名单校验，校验了MIME TYPE 和文件后缀（包括大小写），但没有校验文件内容。</p>
+                            <pre><code>&#x20;&#x20;&#x20;&#x20;&commat;&#x41;&#x70;&#x69;&lpar;&lcub;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x4D;&#x65;&#x74;&#x68;&#x6F;&#x64;&#x54;&#x79;&#x70;&#x65;&period;&#x50;&#x4F;&#x53;&#x54;&rcub;&rpar;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x70;&#x75;&#x62;&#x6C;&#x69;&#x63;&#x20;&#x4D;&#x61;&#x70;&lt;&quest;&comma;&#x20;&quest;&gt;&#x20;&#x69;&#x6D;&#x61;&#x67;&#x65;&#x57;&#x68;&#x69;&#x74;&#x65;&#x4C;&#x69;&#x73;&#x74;&lpar;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&comma;&#x20;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&rpar;&#x20;&#x74;&#x68;&#x72;&#x6F;&#x77;&#x73;&#x20;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&comma;&#x20;&#x49;&#x4F;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x50;&#x61;&#x72;&#x74;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x20;&equals;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x50;&#x61;&#x72;&#x74;&lpar;&quot;&#x69;&#x6D;&#x61;&#x67;&#x65;&lowbar;&#x66;&#x69;&#x6C;&#x65;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x4E;&#x61;&#x6D;&#x65;&#x20;&equals;&#x20;&#x66;&#x69;&#x6C;&#x65;&period;&#x67;&#x65;&#x74;&#x53;&#x75;&#x62;&#x6D;&#x69;&#x74;&#x74;&#x65;&#x64;&#x46;&#x69;&#x6C;&#x65;&#x4E;&#x61;&#x6D;&#x65;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x66;&#x6F;&#x72;&lpar;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x69;&#x20;&colon;&#x20;&#x46;&#x69;&#x6C;&#x65;&#x53;&#x65;&#x72;&#x76;&#x65;&#x72;&#x49;&#x6D;&#x70;&#x6C;&period;&#x49;&#x4D;&#x41;&#x47;&#x45;&lowbar;&#x46;&#x49;&#x4C;&#x45;&lowbar;&#x54;&#x59;&#x50;&#x45;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x66;&#x20;&lpar;&#x66;&#x69;&#x6C;&#x65;&period;&#x67;&#x65;&#x74;&#x43;&#x6F;&#x6E;&#x74;&#x65;&#x6E;&#x74;&#x54;&#x79;&#x70;&#x65;&lpar;&rpar;&period;&#x65;&#x71;&#x75;&#x61;&#x6C;&#x73;&lpar;&quot;&#x69;&#x6D;&#x61;&#x67;&#x65;&sol;&quot;&plus;&#x69;&rpar;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&comma;&#x20;&#x4F;&#x62;&#x6A;&#x65;&#x63;&#x74;&gt;&#x20;&#x64;&#x61;&#x74;&#x61;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&gt;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x64;&#x61;&#x74;&#x61;&period;&#x70;&#x75;&#x74;&lpar;&quot;&#x75;&#x70;&#x6C;&#x6F;&#x61;&#x64;&#x53;&#x74;&#x61;&#x74;&#x75;&#x73;&quot;&comma;&#x20;&#x66;&#x61;&#x6C;&#x73;&#x65;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x64;&#x61;&#x74;&#x61;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x73;&#x75;&#x66;&#x66;&#x69;&#x78;&#x4E;&#x61;&#x6D;&#x65;&#x20;&equals;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x4E;&#x61;&#x6D;&#x65;&period;&#x73;&#x75;&#x62;&#x73;&#x74;&#x72;&#x69;&#x6E;&#x67;&lpar;&#x66;&#x69;&#x6C;&#x65;&#x4E;&#x61;&#x6D;&#x65;&period;&#x6C;&#x61;&#x73;&#x74;&#x49;&#x6E;&#x64;&#x65;&#x78;&#x4F;&#x66;&lpar;&quot;&period;&quot;&rpar;&rpar;&period;&#x74;&#x6F;&#x4C;&#x6F;&#x77;&#x65;&#x72;&#x43;&#x61;&#x73;&#x65;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x66;&#x6F;&#x72;&lpar;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x69;&#x20;&colon;&#x20;&#x46;&#x69;&#x6C;&#x65;&#x53;&#x65;&#x72;&#x76;&#x65;&#x72;&#x49;&#x6D;&#x70;&#x6C;&period;&#x57;&#x68;&#x69;&#x74;&#x65;&lowbar;&#x46;&#x49;&#x4C;&#x45;&lowbar;&#x54;&#x59;&#x50;&#x45;&rpar;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x66;&#x20;&lpar;&#x73;&#x75;&#x66;&#x66;&#x69;&#x78;&#x4E;&#x61;&#x6D;&#x65;&period;&#x65;&#x71;&#x75;&#x61;&#x6C;&#x73;&lpar;&#x69;&rpar;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x75;&#x70;&#x6C;&#x6F;&#x61;&#x64;&#x46;&#x69;&#x6C;&#x65;&lpar;&#x66;&#x69;&#x6C;&#x65;&comma;&#x20;&#x75;&#x70;&#x6C;&#x6F;&#x61;&#x64;&#x50;&#x61;&#x74;&#x68;&lpar;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&rpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&comma;&#x20;&#x4F;&#x62;&#x6A;&#x65;&#x63;&#x74;&gt;&#x20;&#x64;&#x61;&#x74;&#x61;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&gt;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x64;&#x61;&#x74;&#x61;&period;&#x70;&#x75;&#x74;&lpar;&quot;&#x75;&#x70;&#x6C;&#x6F;&#x61;&#x64;&#x53;&#x74;&#x61;&#x74;&#x75;&#x73;&quot;&comma;&#x20;&#x66;&#x61;&#x6C;&#x73;&#x65;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x64;&#x61;&#x74;&#x61;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;</code></pre>
+                            <p>其中 <code>White_FILE_TYPE</code> 的值为 <code>{".png", ".jpg", ".gif"}</code></p>
+                            <p>我们尝试访问 templates 目录是禁止的。为了实现这个情景，我实现了一个移动文件带覆盖功能的Servlet</p>
+                            <pre><code>&#x20;&#x20;&#x20;&#x20;&commat;&#x41;&#x70;&#x69;&lpar;&lcub;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x4D;&#x65;&#x74;&#x68;&#x6F;&#x64;&#x54;&#x79;&#x70;&#x65;&period;&#x50;&#x4F;&#x53;&#x54;&rcub;&rpar;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x70;&#x75;&#x62;&#x6C;&#x69;&#x63;&#x20;&#x4D;&#x61;&#x70;&lt;&quest;&comma;&#x20;&quest;&gt;&#x20;&#x6D;&#x6F;&#x76;&#x65;&#x46;&#x69;&#x6C;&#x65;&lpar;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&comma;&#x20;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&rpar;&#x20;&#x74;&#x68;&#x72;&#x6F;&#x77;&#x73;&#x20;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&comma;&#x20;&#x49;&#x4F;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&comma;&#x20;&#x4F;&#x62;&#x6A;&#x65;&#x63;&#x74;&gt;&#x20;&#x64;&#x61;&#x74;&#x61;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&gt;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x6E;&#x74;&#x20;&#x66;&#x69;&#x6C;&#x65;&#x49;&#x44;&#x20;&equals;&#x20;&#x49;&#x6E;&#x74;&#x65;&#x67;&#x65;&#x72;&period;&#x70;&#x61;&#x72;&#x73;&#x65;&#x49;&#x6E;&#x74;&lpar;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x50;&#x61;&#x72;&#x61;&#x6D;&#x65;&#x74;&#x65;&#x72;&lpar;&quot;&#x66;&#x69;&#x6C;&#x65;&#x49;&#x44;&quot;&rpar;&rpar;&semi;&#x20;&sol;&sol;&#x20;&#x6E90;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x6E;&#x65;&#x77;&#x46;&#x69;&#x6C;&#x65;&#x4E;&#x61;&#x6D;&#x65;&#x20;&equals;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x50;&#x61;&#x72;&#x61;&#x6D;&#x65;&#x74;&#x65;&#x72;&lpar;&quot;&#x6E;&#x65;&#x77;&#x46;&#x69;&#x6C;&#x65;&#x4E;&#x61;&#x6D;&#x65;&quot;&rpar;&semi;&#x20;&sol;&sol;&#x20;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x73;&#x6F;&#x75;&#x72;&#x63;&#x65;&#x46;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&#x20;&equals;&#x20;&#x66;&#x73;&#x69;&period;&#x67;&#x65;&#x74;&#x46;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&#x42;&#x79;&#x49;&#x64;&lpar;&#x66;&#x69;&#x6C;&#x65;&#x49;&#x44;&rpar;&semi;&#x20;&sol;&sol;&#x20;&#x6E90;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x74;&#x61;&#x72;&#x67;&#x65;&#x74;&#x46;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&#x20;&equals;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x43;&#x6F;&#x6E;&#x74;&#x65;&#x78;&#x74;&lpar;&rpar;&period;&#x67;&#x65;&#x74;&#x52;&#x65;&#x61;&#x6C;&#x50;&#x61;&#x74;&#x68;&lpar;&#x46;&#x69;&#x6C;&#x65;&#x49;&#x6E;&#x63;&#x6C;&#x75;&#x64;&#x65;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&period;&#x46;&#x4F;&#x52;&#x42;&#x49;&#x44;&#x44;&#x45;&#x4E;&lowbar;&#x50;&#x41;&#x54;&#x48;&rpar;&plus;&quot;&sol;&quot;&plus;&#x6E;&#x65;&#x77;&#x46;&#x69;&#x6C;&#x65;&#x4E;&#x61;&#x6D;&#x65;&semi;&#x20;&sol;&sol;&#x20;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x46;&#x69;&#x6C;&#x65;&#x20;&#x73;&#x6F;&#x75;&#x72;&#x63;&#x65;&#x46;&#x69;&#x6C;&#x65;&#x20;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x46;&#x69;&#x6C;&#x65;&lpar;&#x73;&#x6F;&#x75;&#x72;&#x63;&#x65;&#x46;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x46;&#x69;&#x6C;&#x65;&#x20;&#x74;&#x61;&#x72;&#x67;&#x65;&#x74;&#x46;&#x69;&#x6C;&#x65;&#x20;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x46;&#x69;&#x6C;&#x65;&lpar;&#x74;&#x61;&#x72;&#x67;&#x65;&#x74;&#x46;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x66;&#x20;&lpar;&excl;&#x73;&#x6F;&#x75;&#x72;&#x63;&#x65;&#x46;&#x69;&#x6C;&#x65;&period;&#x65;&#x78;&#x69;&#x73;&#x74;&#x73;&lpar;&rpar;&rpar;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x64;&#x61;&#x74;&#x61;&period;&#x70;&#x75;&#x74;&lpar;&quot;&#x6D;&#x6F;&#x76;&#x65;&#x46;&#x69;&#x6C;&#x65;&#x53;&#x74;&#x61;&#x74;&#x75;&#x73;&quot;&comma;&#x20;&#x66;&#x61;&#x6C;&#x73;&#x65;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x64;&#x61;&#x74;&#x61;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x50;&#x61;&#x74;&#x68;&#x20;&#x6D;&#x6F;&#x76;&#x65;&#x20;&equals;&#x20;&#x46;&#x69;&#x6C;&#x65;&#x73;&period;&#x6D;&#x6F;&#x76;&#x65;&lpar;&#x73;&#x6F;&#x75;&#x72;&#x63;&#x65;&#x46;&#x69;&#x6C;&#x65;&period;&#x74;&#x6F;&#x50;&#x61;&#x74;&#x68;&lpar;&rpar;&comma;&#x20;&#x74;&#x61;&#x72;&#x67;&#x65;&#x74;&#x46;&#x69;&#x6C;&#x65;&period;&#x74;&#x6F;&#x50;&#x61;&#x74;&#x68;&lpar;&rpar;&comma;&#x20;&#x53;&#x74;&#x61;&#x6E;&#x64;&#x61;&#x72;&#x64;&#x43;&#x6F;&#x70;&#x79;&#x4F;&#x70;&#x74;&#x69;&#x6F;&#x6E;&period;&#x52;&#x45;&#x50;&#x4C;&#x41;&#x43;&#x45;&lowbar;&#x45;&#x58;&#x49;&#x53;&#x54;&#x49;&#x4E;&#x47;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x61;&#x73;&#x73;&#x65;&#x72;&#x74;&#x20;&#x6D;&#x6F;&#x76;&#x65;&period;&#x65;&#x71;&#x75;&#x61;&#x6C;&#x73;&lpar;&#x74;&#x61;&#x72;&#x67;&#x65;&#x74;&#x46;&#x69;&#x6C;&#x65;&period;&#x74;&#x6F;&#x50;&#x61;&#x74;&#x68;&lpar;&rpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x62;&#x6F;&#x6F;&#x6C;&#x65;&#x61;&#x6E;&#x20;&#x72;&#x65;&#x73;&#x20;&equals;&#x20;&#x6D;&#x6F;&#x76;&#x65;&period;&#x65;&#x71;&#x75;&#x61;&#x6C;&#x73;&lpar;&#x74;&#x61;&#x72;&#x67;&#x65;&#x74;&#x46;&#x69;&#x6C;&#x65;&period;&#x74;&#x6F;&#x50;&#x61;&#x74;&#x68;&lpar;&rpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x66;&#x20;&lpar;&#x72;&#x65;&#x73;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x66;&#x73;&#x69;&period;&#x75;&#x70;&#x64;&#x61;&#x74;&#x65;&#x46;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&lpar;&#x66;&#x69;&#x6C;&#x65;&#x49;&#x44;&comma;&#x20;&#x6E;&#x65;&#x77;&#x46;&#x69;&#x6C;&#x65;&#x4E;&#x61;&#x6D;&#x65;&comma;&#x20;&#x74;&#x61;&#x72;&#x67;&#x65;&#x74;&#x46;&#x69;&#x6C;&#x65;&#x50;&#x61;&#x74;&#x68;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x64;&#x61;&#x74;&#x61;&period;&#x70;&#x75;&#x74;&lpar;&quot;&#x6D;&#x6F;&#x76;&#x65;&#x46;&#x69;&#x6C;&#x65;&#x53;&#x74;&#x61;&#x74;&#x75;&#x73;&quot;&comma;&#x20;&#x72;&#x65;&#x73;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x64;&#x61;&#x74;&#x61;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;</code></pre>
+                            <p>其中 <code>FORBIDDEN_PATH</code> 的值为 <code>"pages/fileinclude/templates"</code>。也就是说你进行移动操作之后会将文件移动到 templates 目录。</p>
+                            <p>那么你只需要覆盖 pageHeader.jsp 或者 pageFooter.jsp 其中一个即可。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<footer class="main-footer"></footer>
+<script src="../../dist/js/templateHandle.js"></script>
+<script>
+    setWrapperHeader("文件包含", ["添加模板静态文件"]);
+</script>
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="../../dist/js/adminlte.js"></script>
+<script>
+    let notice_dom = $("#notice")[0];
+    let label_dom = $("#inputFile + label")[0]
+    function checkFileExt(filename){
+        label_dom.innerText = filename;
+        notice_dom.innerHTML = '';
+    }
+
+    function uploadImage(){
+        let files = $("#inputFile")[0].files;
+        if (files.length === 0)return;
+        let fd = new FormData();
+        fd.append('image_file', files[0]);
+        $.post({
+            url: `${project_name}uploadAction/imageWhiteList`,
+            data: fd,
+            processData: false,
+            contentType: false,
+            success(resp){
+                if (resp['uploadStatus']){
+                    let fileObj = resp['file'];
+                    let path = baseUri + fileObj.url;
+                    notice_dom.innerHTML = generateNote(`上传成功文件访问路径为：<a href='${path}' target="_blank" style="color: #53aefd;">${path}</a>`);
+                } else {
+                    notice_dom.innerHTML = generateNote("上传失败");
+                }
+            }
+        })
+    }
+    showFiles()
+    function showFiles(){
+        $.get({
+            url: `${project_name}fileAction/showFiles`,
+            success(resp){
+                let {data} = resp;
+                if (data != null && data.length > 0){
+                    let ghtml = "";
+                    for (let i of data){
+                        let g = `<tr>
+                <td>${i.id}</td>
+                <td>${i.fileName}</td>
+                <td>${i.fileType}</td>
+                <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default" onclick="setFileID(${i.id})">移动文件</button></td>
+              </tr>`;
+                        ghtml += g;
+                    }
+                    $("#FileData")[0].innerHTML = ghtml;
+                }
+            }
+        })
+    }
+    function setFileID(id){
+        $("#fileID")[0].value = id;
+    }
+    function moveFile(){
+        let data = {
+            fileID: $("#fileID")[0].value,
+            newFileName: $("#newFileName")[0].value,
+        }
+        $.post({
+            url: `${project_name}uploadAction/moveFile`,
+            data,
+            success(resp){
+                if(resp['moveFileStatus']){
+                    notice_dom.innerHTML = generateNote('移动文件成功！文件被移动到 pages/fileinclude/templates 目录下。');
+                    showFiles();
+                } else {
+                    notice_dom.innerHTML = generateNote('移动文件失败！');
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

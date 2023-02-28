@@ -3,16 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
-<!--    <filter>-->
-<!--        <filter-name>BaseFilter</filter-name>-->
-<!--        <filter-class>com.pika.electricrat.web.filter.BaseFilter</filter-class>-->
-<!--    </filter>-->
-<!--    <filter-mapping>-->
-<!--        <filter-name>BaseFilter</filter-name>-->
-<!--        &lt;!&ndash; 拦截路径 &ndash;&gt;-->
-<!--        <url-pattern>/*</url-pattern>-->
-<!--    </filter-mapping>-->
-
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>

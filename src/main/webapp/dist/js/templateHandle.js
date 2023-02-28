@@ -300,6 +300,12 @@ const baseUri = window.location.origin + project_name;
                   <p>不安全的URL跳转</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="${baseUri}pages/urlredirect/urlredirect_server.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>后端校验URL</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
@@ -475,6 +481,42 @@ const baseUri = window.location.origin + project_name;
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="${baseUri}pages/fileinclude/index.html" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+              <p>
+                文件包含漏洞
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="${baseUri}pages/fileinclude/index.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>概述</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="${baseUri}pages/fileinclude/include_local.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>本地文件包含</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="${baseUri}pages/fileinclude/include_remote.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>远程文件包含</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="${baseUri}pages/fileinclude/move_file.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>添加模板静态文件</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          
         </ul>
       </nav>`
     const Navbar = `

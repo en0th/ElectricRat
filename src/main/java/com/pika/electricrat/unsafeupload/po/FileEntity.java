@@ -22,6 +22,21 @@ public class FileEntity implements BaseEntity {
     public FileEntity() {
     }
 
+    public FileEntity(int id, String fileName, String filePath) {
+        this.id = id;
+        this.fileName = fileName;
+        this.filePath = filePath;
+    }
+
+    public FileEntity(int id, String filePath) {
+        this.id = id;
+        this.filePath = filePath;
+    }
+
+    public FileEntity(int id) {
+        this.id = id;
+    }
+
     public String getUnid() {
         return unid;
     }

@@ -98,6 +98,8 @@
             let fileObj = resp['file'];
             let path = baseUri + fileObj.url;
             notice_dom.innerHTML = generateNote(`上传成功文件访问路径为：<a href='${path}' target="_blank" style="color: #53aefd;">${path}</a>`);
+          } else {
+            notice_dom.innerHTML = generateNote("上传失败");
           }
         }
       })

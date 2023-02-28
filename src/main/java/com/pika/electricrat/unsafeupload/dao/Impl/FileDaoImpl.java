@@ -33,6 +33,15 @@ public class FileDaoImpl implements FileDao {
         }
     }
 
+    public FileEntity queryById(FileEntity entity){
+        try {
+            return jt.queryForObject("select * from " + fe.getSqlTableName() + " where id=?",
+                    new BeanPropertyRowMapper<>(FileEntity.class), entity.getId());
+        }catch (Exception e){
+            return null;
+        }
+    }
+
     @Override
     public FileEntity delect(FileEntity entity) {
         return null;
@@ -40,7 +49,17 @@ public class FileDaoImpl implements FileDao {
 
     @Override
     public FileEntity update(FileEntity entity) {
-        return null;
+        try {
+            int res = jt.update("update " + fe.getSqlTableName() + " set fileName=?,filePath=? where id=?",
+                    entity.getFileName(),entity.getFilePath(), entity.getId());
+            if (res<1){
+                return null;
+            }
+            return queryById(entity);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
