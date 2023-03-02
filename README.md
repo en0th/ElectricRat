@@ -25,6 +25,7 @@ sudo docker-compose up -d
 sudo docker exec electricrat-mysql /bin/bash -c 'cd /data && mysqladmin -u root -pAAsd123rdsgA create mycms && mysqladmin -u root -pAAsd123rdsgA create mycms_gbk && mysql -u root -pAAsd123rdsgA -Dmycms < dump-mycms-202302201704.sql && mysql -u root -pAAsd123rdsgA -Dmycms_gbk < dump-mycms_gbk-202302201704.sql'
 ```
 4. 访问 `http://127.0.0.1:12666/ElectricRat/index.html` 。
+> 值得注意的是，为了解决runc版本问题，我在创建 electricrat-web 时使用了 privileged: true。这会造成 docker 逃逸漏洞，考虑到安全问题，搭建时不应放在公网，或者其他可能造成风险的地方。
 
 # 👩🏼‍💻 电气鼠上的漏洞类型列表如下：
 - Burt Force(暴力破解漏洞)
@@ -41,6 +42,7 @@ sudo docker exec electricrat-mysql /bin/bash -c 'cd /data && mysqladmin -u root 
 - SSRF(服务器端请求伪造)
 - SPEL(表达式注入)
 - SSTI(模板注入)
+- 文件包含漏洞
 
 # ✨ 效果图
 ![首页效果](https://user-images.githubusercontent.com/67619247/220506698-444237fb-0a1b-4b33-884b-5ed7c19754e1.png)
