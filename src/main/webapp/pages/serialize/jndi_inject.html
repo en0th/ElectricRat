@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JAVA反序列化</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+  <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+  <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+  <div class="content-wrapper" id="Wrapper">
+    <section class="content-header" id="WrapperHeader"></section>
+    <section class="content">
+      <div class="container-fluid">
+        <div id="notice"></div>
+        <div class="card card-primary card-outline">
+          <div class="card-header">
+            <h3 class="card-title">JNDI注入</h3>
+          </div>
+          <div class="card-body">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">提供RMI服务或者LDAP服务</h3>
+              </div>
+              <form action="" onsubmit="return false" id="Login">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="own-text">服务地址</label>
+                    <input type="text" class="form-control" name="own-text" id="own-text" placeholder="Enter Path">
+                  </div>
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary" onclick="submitText()">提交</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="card card-primary card-outline" id="showSource">
+          <div class="card-header">
+            <h3 class="card-title">源代码&amp;提示</h3>
+          </div>
+          <div class="card-body">
+            <div>
+              <p>JNDI注入比较常见的是RMI和LDAP注入，其中RMI在JDK1.8.181版本之后删除了ReferenceWrapper，需要额外引入对应的 jar 包才能使用。</p>
+              <p>无论是反序列化还是JNDI注入，都是利用依赖存在动态反射触发函数执行造成的RCE。这个项目中存在 <code>commons-collections:3.2.1</code> 依赖。</p>
+              <p>尽管JDK版本高，但还是存在触发RCE的利用链，推荐使用工具 <code>https://github.com/cckuailong/JNDI-Injection-Exploit-Plus</code></p>
+              <p>可以使用 <code>deserialCommonsCollections6</code> 也可以尝试其他利用链。</p>
+              <pre><code>&#x20;&#x20;&#x20;&#x20;&#x70;&#x75;&#x62;&#x6C;&#x69;&#x63;&#x20;&#x76;&#x6F;&#x69;&#x64;&#x20;&#x52;&#x4D;&#x49;&#x45;&#x78;&#x65;&#x63;&lpar;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&comma;&#x20;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&rpar;&#x20;&#x74;&#x68;&#x72;&#x6F;&#x77;&#x73;&#x20;&#x4E;&#x61;&#x6D;&#x69;&#x6E;&#x67;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&comma;&#x20;&#x49;&#x4F;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&#x20;&lcub;&NewLine;&sol;&sol;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x79;&#x73;&#x74;&#x65;&#x6D;&period;&#x73;&#x65;&#x74;&#x50;&#x72;&#x6F;&#x70;&#x65;&#x72;&#x74;&#x79;&lpar;&quot;&#x63;&#x6F;&#x6D;&period;&#x73;&#x75;&#x6E;&period;&#x6A;&#x6E;&#x64;&#x69;&period;&#x72;&#x6D;&#x69;&period;&#x6F;&#x62;&#x6A;&#x65;&#x63;&#x74;&period;&#x74;&#x72;&#x75;&#x73;&#x74;&#x55;&#x52;&#x4C;&#x43;&#x6F;&#x64;&#x65;&#x62;&#x61;&#x73;&#x65;&quot;&comma;&#x20;&quot;&#x74;&#x72;&#x75;&#x65;&quot;&rpar;&semi;&NewLine;&sol;&sol;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x79;&#x73;&#x74;&#x65;&#x6D;&period;&#x73;&#x65;&#x74;&#x50;&#x72;&#x6F;&#x70;&#x65;&#x72;&#x74;&#x79;&lpar;&quot;&#x63;&#x6F;&#x6D;&period;&#x73;&#x75;&#x6E;&period;&#x6A;&#x6E;&#x64;&#x69;&period;&#x6C;&#x64;&#x61;&#x70;&period;&#x6F;&#x62;&#x6A;&#x65;&#x63;&#x74;&period;&#x74;&#x72;&#x75;&#x73;&#x74;&#x55;&#x52;&#x4C;&#x43;&#x6F;&#x64;&#x65;&#x62;&#x61;&#x73;&#x65;&quot;&comma;&#x20;&quot;&#x74;&#x72;&#x75;&#x65;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x70;&#x61;&#x74;&#x68;&#x20;&equals;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x50;&#x61;&#x72;&#x61;&#x6D;&#x65;&#x74;&#x65;&#x72;&lpar;&quot;&#x70;&#x61;&#x74;&#x68;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x66;&#x20;&lpar;&#x70;&#x61;&#x74;&#x68;&#x20;&equals;&equals;&#x20;&#x6E;&#x75;&#x6C;&#x6C;&rpar;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&period;&#x67;&#x65;&#x74;&#x57;&#x72;&#x69;&#x74;&#x65;&#x72;&lpar;&rpar;&period;&#x61;&#x70;&#x70;&#x65;&#x6E;&#x64;&lpar;&quot;&#x8BF7;&#x8F93;&#x5165;&#x20;&#x70;&#x61;&#x74;&#x68;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x4F;&#x62;&#x6A;&#x65;&#x63;&#x74;&#x20;&#x6F;&#x20;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x49;&#x6E;&#x69;&#x74;&#x69;&#x61;&#x6C;&#x43;&#x6F;&#x6E;&#x74;&#x65;&#x78;&#x74;&lpar;&rpar;&period;&#x6C;&#x6F;&#x6F;&#x6B;&#x75;&#x70;&lpar;&#x70;&#x61;&#x74;&#x68;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <footer class="main-footer"></footer>
+  <script src="../../dist/js/templateHandle.js"></script>
+  <script>
+    setWrapperHeader("JAVA反序列化", ["JNDI注入"]);
+  </script>
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="../../dist/js/adminlte.js"></script>
+  <script>
+    let notice_dom = $("#notice")[0];
+    function submitText(){
+      let path = $("#own-text")[0].value;
+      if(!path)notice_dom.innerHTML = generateNote("请输入服务地址");
+      $.get({
+        url: `${project_name}serializeAction/RMIExec?path=${path}`,
+        success(resp){
+          notice_dom.innerHTML = generateNote("输出结果：" + resp);
+        },
+      })
+    }
+  </script>
+</body>
+</html>

@@ -10,6 +10,8 @@ import org.apache.commons.collections.functors.ChainedTransformer;
 import org.apache.commons.collections.functors.ConstantTransformer;
 import org.apache.commons.collections.functors.InvokerTransformer;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import java.io.*;
 import java.util.Base64;
 
@@ -17,7 +19,7 @@ import java.util.Base64;
 @WebServlet("/serializeAction/*")
 public class SerializeServlet extends BaseServlet {
 
-    public void serializeView(HttpServletRequest request, HttpServletResponse response){
+    public void serializeView(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/plan;charset=utf-8");
         try {
             Cookie hasCookie = checkCookie(request);
@@ -38,7 +40,7 @@ public class SerializeServlet extends BaseServlet {
             }
         } catch (Exception e){
             e.printStackTrace();
-            response.setStatus(500);
+            response.getWriter().append(e.getMessage());
         }
     }
 
@@ -92,5 +94,21 @@ public class SerializeServlet extends BaseServlet {
             }
         }
         return null;
+    }
+
+    public void RMIExec(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//        System.setProperty("com.sun.jndi.rmi.object.trustURLCodebase", "true");
+//        System.setProperty("com.sun.jndi.ldap.object.trustURLCodebase", "true");
+        try{
+            String path = request.getParameter("path");
+            if (path == null) {
+                response.getWriter().append("请输入 path");
+                return;
+            }
+            Object o = new InitialContext().lookup(path);
+        } catch (Exception e){
+            response.getWriter().append(e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

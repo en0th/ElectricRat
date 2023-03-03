@@ -96,9 +96,10 @@
     let serialize_text_dom = $("#serializeText")[0];
     initCookie();
     function subCmd(){
-
+      let cmd = $("#cmd")[0].value;
+      if (!cmd)notice_dom.innerHTML = generateNote("请输入命令");
       let data = {
-        cmd: $("#cmd")[0].value
+        cmd
       }
       $.post({
         url: `${project_name}serializeAction/deserialize`,

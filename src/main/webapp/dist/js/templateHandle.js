@@ -479,6 +479,12 @@ const baseUri = window.location.origin + project_name;
                   <p>动态反序列化对象</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="${baseUri}pages/serialize/jndi_inject.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>JNDI注入</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
