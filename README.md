@@ -22,7 +22,7 @@
 3. 输入命令，使用`docker-compose`启动项目，并且导入数据库。
 ```
 sudo docker-compose up -d
-sudo docker exec electricrat-mysql /bin/bash -c 'cd /data && mysqladmin -u root -pAAsd123rdsgA create mycms && mysqladmin -u root -pAAsd123rdsgA create mycms_gbk && mysql -u root -pAAsd123rdsgA -Dmycms < dump-mycms-202302201704.sql && mysql -u root -pAAsd123rdsgA -Dmycms_gbk < dump-mycms_gbk-202302201704.sql'
+sudo docker exec electricrat-mysql /bin/bash -c 'cd /data && mysqladmin -u root -pAAsd123rdsgA create mycms && mysqladmin -u root -pAAsd123rdsgA create mycms_gbk && mysql -u root -pAAsd123rdsgA -Dmycms < dump-mycms.sql && mysql -u root -pAAsd123rdsgA -Dmycms_gbk < dump-mycms_gbk.sql'
 ```
 4. 访问 `http://127.0.0.1:12666/ElectricRat/index.html` 。
 > 值得注意的是，为了解决runc版本问题，我在创建 electricrat-web 时使用了 privileged: true。这会造成 docker 逃逸漏洞，考虑到安全问题，搭建时不应放在公网，或者其他可能造成风险的地方。

@@ -17,11 +17,16 @@ public class StudentServlet extends BaseServlet {
     StudentServerImpl ssi = new StudentServerImpl();
     @Api({RequestMethodType.POST})
     public Map<?, ?> studentLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        long number = Long.parseLong(request.getParameter("number"));
-        String password = request.getParameter("password");
+        HashMap<String, Object> data = new HashMap<>();
+        try{
+            long number = Long.parseLong(request.getParameter("number"));
+            String password = request.getParameter("password");
 
-        HashMap<String, Boolean> data = new HashMap<>();
-        data.put("loginStatus", ssi.login(number,password));
+            data.put("loginStatus", ssi.login(number,password));
+        } catch (Exception e){
+            data.put("loginStatus", false);
+            data.put("msg", e.getMessage());
+        }
         return data;
     }
 }
