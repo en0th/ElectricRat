@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>暴力破解</title>
+    <title>敏感信息泄露</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
@@ -20,12 +20,12 @@
                 <div id="notice"></div>
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title">基于表单的暴力破解</h3>
+                        <h3 class="card-title">页面泄露敏感文件</h3>
                     </div>
                     <div class="card-body">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">后台登录</h3>
+                                <h3 class="card-title">学生教学系统登录</h3>
                             </div>
                             <form action="" onsubmit="return false" id="Login">
                                 <div class="card-body">
@@ -42,6 +42,11 @@
                                     <button type="submit" class="btn btn-primary" onclick="doLogin()">登录</button>
                                 </div>
                             </form>
+                            <blockquote>
+                                <p>用户名为学生学号。系统默认密码为：eru@123</p>
+<!--                                修改人：信息中心罗奇葩 修改原因：目录变更已弃用 修改时间:2003年03月1日-->
+<!--                                <a href="/upload/入学学生名单.xls">入学学生名单</a>-->
+                            </blockquote>
                         </div>
                     </div>
                 </div>
@@ -51,13 +56,7 @@
                     </div>
                     <div class="card-body">
                         <div>
-                            <p>数据库中默认存在三个账户，分别是 admin、user1、test</p>
-                            <p><strong>Servlet 实现</strong></p>
-                            <pre style=""><code>&commat;&#x41;&#x70;&#x69;&lpar;&lcub;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x4D;&#x65;&#x74;&#x68;&#x6F;&#x64;&#x54;&#x79;&#x70;&#x65;&period;&#x50;&#x4F;&#x53;&#x54;&rcub;&rpar;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x70;&#x75;&#x62;&#x6C;&#x69;&#x63;&#x20;&#x4D;&#x61;&#x70;&lt;&quest;&comma;&#x20;&quest;&gt;&#x20;&#x6C;&#x6F;&#x67;&#x69;&#x6E;&lpar;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&comma;&#x20;&#x48;&#x74;&#x74;&#x70;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x52;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&#x20;&#x72;&#x65;&#x73;&#x70;&#x6F;&#x6E;&#x73;&#x65;&rpar;&#x20;&#x74;&#x68;&#x72;&#x6F;&#x77;&#x73;&#x20;&#x53;&#x65;&#x72;&#x76;&#x6C;&#x65;&#x74;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&comma;&#x20;&#x49;&#x4F;&#x45;&#x78;&#x63;&#x65;&#x70;&#x74;&#x69;&#x6F;&#x6E;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x75;&#x73;&#x65;&#x72;&#x6E;&#x61;&#x6D;&#x65;&#x20;&equals;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x50;&#x61;&#x72;&#x61;&#x6D;&#x65;&#x74;&#x65;&#x72;&lpar;&quot;&#x75;&#x73;&#x65;&#x72;&#x6E;&#x61;&#x6D;&#x65;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&#x20;&#x70;&#x61;&#x73;&#x73;&#x77;&#x6F;&#x72;&#x64;&#x20;&equals;&#x20;&#x72;&#x65;&#x71;&#x75;&#x65;&#x73;&#x74;&period;&#x67;&#x65;&#x74;&#x50;&#x61;&#x72;&#x61;&#x6D;&#x65;&#x74;&#x65;&#x72;&lpar;&quot;&#x70;&#x61;&#x73;&#x73;&#x77;&#x6F;&#x72;&#x64;&quot;&rpar;&semi;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&#x53;&#x74;&#x72;&#x69;&#x6E;&#x67;&comma;&#x20;&#x42;&#x6F;&#x6F;&#x6C;&#x65;&#x61;&#x6E;&gt;&#x20;&#x64;&#x61;&#x74;&#x61;&#x20;&equals;&#x20;&#x6E;&#x65;&#x77;&#x20;&#x48;&#x61;&#x73;&#x68;&#x4D;&#x61;&#x70;&lt;&gt;&lpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x64;&#x61;&#x74;&#x61;&period;&#x70;&#x75;&#x74;&lpar;&quot;&#x6C;&#x6F;&#x67;&#x69;&#x6E;&#x53;&#x74;&#x61;&#x74;&#x75;&#x73;&quot;&comma;&#x20;&#x75;&#x64;&#x69;&period;&#x6C;&#x6F;&#x67;&#x69;&#x6E;&lpar;&#x75;&#x73;&#x65;&#x72;&#x6E;&#x61;&#x6D;&#x65;&comma;&#x70;&#x61;&#x73;&#x73;&#x77;&#x6F;&#x72;&#x64;&rpar;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x64;&#x61;&#x74;&#x61;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;</code></pre>
-                            <p>
-                                从上方可以大致看出，这里进行登录业务逻辑处理时没有任何验证码的校验。导致我们可以针对用户凭据进行暴力破解。
-                                我们可以使用Burp工具进行字典爆破，观察返回值便能知道哪些爆破成功哪些失败。
-                            </p>
+
                         </div>
                     </div>
                 </div>
@@ -65,13 +64,14 @@
         </section>
     </div>
 </div>
+
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
     </aside>
     <footer class="main-footer"></footer>
     <script src="../../dist/js/templateHandle.js"></script>
     <script>
-        setWrapperHeader("暴力破解", ["基于表单的暴力破解"]);
+        setWrapperHeader("敏感信息泄露", ["页面泄露敏感文件"]);
     </script>
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -80,11 +80,11 @@
     <script>
         function doLogin(){
             let data = {
-                username: $("#username")[0].value,
+                number: $("#username")[0].value,
                 password: $("#password")[0].value,
             }
             $.post({
-                url: `${project_name}/bruteforce/user/login`,
+                url: `${project_name}infoleak/studentLogin`,
                 data,
                 dataType: "json",
                 success(resp){

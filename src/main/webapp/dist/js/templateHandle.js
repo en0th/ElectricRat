@@ -522,7 +522,29 @@ const baseUri = window.location.origin + project_name;
               </li>
             </ul>
           </li>
-          
+          <li class="nav-item">
+            <a href="${baseUri}pages/infoleak/index.html" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+              <p>
+                敏感信息泄露
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="${baseUri}pages/infoleak/index.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>概述</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="${baseUri}pages/infoleak/html_file_leak.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>页面泄露敏感文件</p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>`
     const Navbar = `

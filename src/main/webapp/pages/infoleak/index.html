@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>敏感信息泄露</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+    <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+    <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+    <div class="content-wrapper" id="Wrapper">
+        <section class="content-header" id="WrapperHeader"></section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">敏感信息泄露概述</h3>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <p>
+                                敏感信息泄露漏洞是指由于软件或系统中的漏洞、错误或不当配置等原因，导致敏感信息（如用户密码、信用卡号、身份证号等）被未经授权的第三方获取或访问的安全问题。这种漏洞可能会对用户的隐私造成严重威胁，也会对企业的信誉和品牌形象造成重大影响。</p>
+                            <h3 id='软件敏感信息'><span>软件敏感信息</span></h3>
+                            <ul>
+                                <li><span>操作系统版本 可用namp扫描得知</span></li>
+                                <li><span>中间件的类型、版本 http返回头404报错页面使用工具(如whatweb)</span></li>
+                                <li><span>Web程序(cms类型及版本、敏感文件) 可用whatweb、cms_identify</span></li>
+                            </ul>
+                            <h3 id='web敏感信息'><span>Web敏感信息</span></h3>
+                            <ul>
+                                <li><span>phpinfo()信息泄漏 http://[ip]/test.php和http://[ip]/phpinfo.php</span></li>
+                                <li><span>测试页面泄漏在外网 test.cgi、phpinfo.php、info.php等 编辑器备份文件泄漏在外网 http://[ip]/.test.php.swp http://[ip]/test.php.bak http://[ip]/test.jsp.old http://[ip]/cgi~</span>
+                                </li>
+                                <li><span>版本管理工具(如git)文件信息泄漏 http://[ip]/.git/config http://[ip]/CVS/Entriesp http://[ip]/.svn/entriesp</span>
+                                </li>
+                                <li><span>HTTP认证泄漏漏洞 http://[ip]/basic/index.phpWeb目录开启了HTTP Basic认证，但未限制IP，导致可暴力破解账号、密码</span>
+                                </li>
+                                <li><span>管理后台地址泄漏 http://[ip]/login.php http://[ip]/admin.php http://[ip]/manager.php http://[ip]/admin_login.php</span>
+                                </li>
+                                <li><span>泄漏员工邮箱、分机号码泄漏邮箱及分机号码可被社工，也可生成字典</span></li>
+                                <li><span>错误页面暴漏信息面熟sql错误、php错误、暴漏cms版本等</span></li>
+                                <li><span>探针文件</span></li>
+                                <li><span>robots.txt</span></li>
+                                <li><span>phpMyAdmin</span></li>
+                                <li><span>网站源码备份文件(www.rar/sitename.tar.gz/web/zip等)</span></li>
+                                <li><span>其他</span></li>
+                            </ul>
+                            <h3 id='网络信息泄漏'><span>网络信息泄漏</span></h3>
+                            <ul>
+                                <li><span>DNS域传送漏洞</span></li>
+                                <li><span>运维</span></a><span>监控系统弱口令</span></li>
+                                <li><span>网络拓扑泄漏</span></li>
+                                <li><span>zabbix弱口令</span></li>
+                                <li><span>zabbix sql注入等</span></li>
+                            </ul>
+                            <h3 id='第三方软件应用'><span>第三方软件应用</span></h3>
+                            <ul>
+                                <li><span>github上源码、数据库、邮箱密码泄漏搜类似：smtp 163 password关键字</span></li>
+                                <li><span>百度网盘被员工不小心上传敏感文件</span></li>
+                                <li><span>QQ群被员工不小心上传敏感文件</span></li>
+                            </ul>
+                            <h3 id='安全建议或者修复方案'><span>安全建议或者修复方案：</span></h3>
+                            <ul>
+                                <li>
+                                    <span>禁止在代码中存储敏感数据：禁止在代码中存储如数据库连接字符串、口令和密钥之类的敏感数据，这样容易导致泄密。用于加密密钥的密钥可以硬编码在代码中。</span>
+                                </li>
+                                <li><span>禁止密钥或帐号的口令以明文形式存储在数据库或者文件中：密钥或帐号的口令必须经过加密存储。例外情况，如果Web容器的配置文件中只能以明文方式配置连接数据库的用户名和口令，那么就不用强制遵循该规则，将该配置文件的属性改为只有属主可读写。</span>
+                                </li>
+                                <li><span>禁止在 cookie 中以明文形式存储敏感数据：cookie信息容易被窃取，尽量不要在cookie中存储敏感数据；如果条件限制必须使用cookie存储敏感信息时，必须先对敏感信息加密再存储到cookie。</span>
+                                </li>
+                                <li><span>禁止在隐藏域中存放明文形式的敏感数据。</span></li>
+                                <li><span>禁止用自己开发的加密算法，必须使用公开、安全的标准加密算法。</span></li>
+                                <li><span>禁止在日志中记录明文的敏感数据：禁止在日志中记录明文的敏感数据（如口令、会话标识jsessionid等）， 防止敏感信息泄漏。</span>
+                                </li>
+                                <li>
+                                    <span>禁止带有敏感数据的Web页面缓存：带有敏感数据的Web页面都应该禁止缓存，以防止敏感信息泄漏或通过代理服务器上网的用户数据互窜问题。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<footer class="main-footer"></footer>
+<script src="../../dist/js/templateHandle.js"></script>
+<script>
+    setWrapperHeader("敏感信息泄露", ["概述"]);
+</script>
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="../../dist/js/adminlte.js"></script>
+</body>
+</html>
