@@ -43,6 +43,7 @@ sudo docker exec electricrat-mysql /bin/bash -c 'cd /data && mysqladmin -u root 
 - SPEL(表达式注入)
 - SSTI(模板注入)
 - 文件包含漏洞
+- 敏感信息泄露漏洞
 
 # ✨ 效果图
 ![首页效果](https://user-images.githubusercontent.com/67619247/220506698-444237fb-0a1b-4b33-884b-5ed7c19754e1.png)
