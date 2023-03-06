@@ -37,7 +37,7 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public List<StudentEntity> findAll(List<StudentEntity> entityList) {
+    public List<StudentEntity> findAll() {
         return null;
     }
 

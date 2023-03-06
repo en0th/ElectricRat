@@ -25,17 +25,20 @@ public class UserInfoServlet extends BaseServlet {
     public Map<?, ?> loginWithCookie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        HashMap<String, Boolean> data = new HashMap<>();
+        HashMap<String, Object> data = new HashMap<>();
         UserEntity login_res = udi.loginResEntity(username, password);
         data.put("loginStatus", login_res!=null);
         if (login_res!=null){
             String key = UUID.randomUUID().toString();
             Cookie cookie = new Cookie("token", key);
-
+            cookie.setPath("/");
+            Cookie user_cookie = new Cookie("user", login_res.getUsername());
             cookie.setPath("/");
             response.addCookie(cookie);
+            response.addCookie(user_cookie);
             HttpSession session = request.getSession();
             session.setAttribute(key, login_res);
+            data.put("userID", login_res.getId());
             return data;
         }
         return data;
@@ -71,6 +74,28 @@ public class UserInfoServlet extends BaseServlet {
         data.put("userData", userinfo);
         data.put("userName", user.getUsername());
         return data;
+    }
+
+    @Api({RequestMethodType.GET})
+    public Map<?, ?> showInfoByUserID(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        HashMap<String, Object> map = checkLogin(request, response);
+        boolean isLogin = (boolean) map.get("loginStatus");
+
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("loginStatus", isLogin);
+        if (!isLogin) return data;
+        try{
+            int userID = Integer.parseInt(request.getParameter("userID"));
+            HashMap<String, String> userinfo = uisi.findByUserId(userID);
+            data.put("userData", userinfo);
+            UserEntity user = (UserEntity) map.get("user");
+            data.put("userName", user.getUsername());
+            return data;
+        } catch (Exception e){
+            data.put("userData", null);
+            data.put("userName", null);
+            return data;
+        }
     }
 
     @Api({RequestMethodType.POST, RequestMethodType.GET})
@@ -124,6 +149,26 @@ public class UserInfoServlet extends BaseServlet {
         session.setAttribute("csrf_token", token);
         HashMap<String, String> data = new HashMap<>();
         data.put("csrf_token", token);
+        return data;
+    }
+
+    @Api({RequestMethodType.GET})
+    public Map<?,?> getUserInfoAll(HttpServletRequest request, HttpServletResponse response){
+        HashMap<String, Object> map = checkLogin(request, response);
+        boolean isLogin = (boolean) map.get("loginStatus");
+
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("loginStatus", isLogin);
+        if (!isLogin) return data;
+
+        String user = "";
+        Cookie[] cookies = request.getCookies();
+        for (Cookie c : cookies) {
+            if (c.getName().compareTo("user") == 0) {
+                user = c.getValue();
+            }
+        }
+        data.put("data", uisi.findAll(user, ((UserEntity) map.get("user")).getId()));
         return data;
     }
 }

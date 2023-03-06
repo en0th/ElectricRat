@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>越权</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+    <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+    <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+    <div class="content-wrapper" id="Wrapper">
+        <section class="content-header" id="WrapperHeader"></section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">越权概述</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="markdown prose w-full break-words dark:prose-invert light"><p>越权漏洞（Authorization
+                            Vulnerabilities）是指攻击者利用未经授权的访问权限来访问和操作系统、应用程序或其他计算机系统中的数据和资源的安全漏洞。这种漏洞通常出现在系统的访问控制机制或身份验证系统存在缺陷或被破坏的情况下。</p>
+                            <p>越权漏洞通常可以通过以下几种方式进行分类：</p>
+                            <ol>
+                                <li><p>横向越权：攻击者利用受害者账号的权限来访问其他同级别账号的数据或系统资源。</p></li>
+                                <li><p>
+                                    纵向越权：攻击者利用低权限账号或匿名账号通过漏洞攻击系统，提升自己的权限，从而访问高权限账号的数据或系统资源。</p>
+                                </li>
+                                <li><p>特权提升：攻击者利用漏洞或错误配置来提升自己的权限，从而访问受限制的系统资源。</p>
+                                </li>
+                            </ol>
+                            <p>攻击者利用越权漏洞可以进行多种不同的攻击，例如：</p>
+                            <ol>
+                                <li><p>
+                                    数据泄露：攻击者可以通过越权漏洞来访问敏感数据，例如个人身份信息、财务信息或商业机密等。</p>
+                                </li>
+                                <li><p>
+                                    篡改数据：攻击者可以通过越权漏洞修改敏感数据，例如假冒他人身份、篡改账户余额或更改订单信息等。</p>
+                                </li>
+                                <li><p>
+                                    拒绝服务攻击：攻击者可以利用越权漏洞来拒绝服务或破坏系统的正常运行，例如删除数据或关键配置文件。</p>
+                                </li>
+                            </ol>
+                            <p>为了防范越权漏洞，应该采取以下措施：</p>
+                            <ol>
+                                <li><p>实施最小特权原则：给用户或程序分配尽可能少的权限，只有在需要的时候才授权。</p></li>
+                                <li><p>
+                                    实现强制访问控制：使用强制访问控制（MAC）或基于角色的访问控制（RBAC）等授权机制来限制用户的访问权限。</p>
+                                </li>
+                                <li><p>
+                                    更新和修补软件：及时更新和修补操作系统和应用程序中的安全漏洞，以防止攻击者利用这些漏洞。</p>
+                                </li>
+                                <li><p>
+                                    对于Web应用程序，需要采取一些额外的措施来防范越权漏洞，例如实现有效的身份验证和授权，使用安全的编程实践和对用户提交的数据进行有效的输入验证。</p>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<footer class="main-footer"></footer>
+<script src="../../dist/js/templateHandle.js"></script>
+<script>
+    setWrapperHeader("越权", ["概述"]);
+</script>
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="../../dist/js/adminlte.js"></script>
+</body>
+</html>

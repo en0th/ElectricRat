@@ -42,7 +42,7 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
-    public List<CommentEntity> findAll(List<CommentEntity> entityList) {
+    public List<CommentEntity> findAll() {
         return null;
     }
 

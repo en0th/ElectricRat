@@ -545,6 +545,35 @@ const baseUri = window.location.origin + project_name;
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="${baseUri}pages/vires/index.html" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+              <p>
+                越权
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="${baseUri}pages/vires/index.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>概述</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="${baseUri}pages/vires/horizontal.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>水平越权</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="${baseUri}pages/vires/vertical.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>垂直越权</p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>`
     const Navbar = `

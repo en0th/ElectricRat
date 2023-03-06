@@ -37,7 +37,7 @@ public class ImageCodeDaoImpl implements ImageCodeDao {
     }
 
     @Override
-    public List<ImageCodeEntity> findAll(List<ImageCodeEntity> entityList) {
+    public List<ImageCodeEntity> findAll() {
         return null;
     }
 

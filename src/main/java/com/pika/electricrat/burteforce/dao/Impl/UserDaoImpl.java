@@ -27,6 +27,16 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    public UserEntity findByID(UserEntity entity) {
+        try {
+            String sql = "select * from sys_account where id=?";
+            return jt.queryForObject(sql, new BeanPropertyRowMapper<>(UserEntity.class), entity.getId());
+        } catch (DataAccessException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     @Override
     public UserEntity delect(UserEntity entity) {
         return null;
@@ -38,9 +48,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<UserEntity> findAll(List<UserEntity> entityList) {
-        return null;
-    }
+    public List<UserEntity> findAll() {return null;}
 
     @Override
     public List<UserEntity> addByList(List<UserEntity> entityList) {

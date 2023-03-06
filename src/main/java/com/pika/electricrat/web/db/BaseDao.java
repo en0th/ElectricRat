@@ -1,14 +1,11 @@
 package com.pika.electricrat.web.db;
 
-import com.pika.electricrat.burteforce.po.UserEntity;
 import com.pika.electricrat.util.JdbcUtil;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public interface BaseDao<T> {
@@ -36,11 +33,11 @@ public interface BaseDao<T> {
             return find(entity);
         }
         return null;
-    };
+    }
     T find(T entity);
     T delect(T entity);
     T update(T entity);
-    List<T> findAll(List<T> entityList);
+    List<T> findAll();
     List<T> addByList(List<T> entityList);
     List<T> delectByList(List<T> entityList);
     List<T> updateByList(List<T> entityList);

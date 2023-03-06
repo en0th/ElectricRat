@@ -63,7 +63,7 @@ public class FileDaoImpl implements FileDao {
     }
 
     @Override
-    public List<FileEntity> findAll(List<FileEntity> entityList) {
+    public List<FileEntity> findAll() {
         return null;
     }
 
