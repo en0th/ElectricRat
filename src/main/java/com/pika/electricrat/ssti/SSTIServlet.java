@@ -9,7 +9,6 @@ import org.apache.velocity.app.Velocity;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.lang.reflect.InvocationTargetException;
 
 @WebServlet("/ssti/*")
 public class SSTIServlet extends BaseServlet {
@@ -21,6 +20,8 @@ public class SSTIServlet extends BaseServlet {
         VelocityContext context = new VelocityContext();
         StringWriter sw = new StringWriter();
         Velocity.evaluate(context, sw, "test", template);
+        String result = sw.toString();
+        response.getWriter().write(result);
     }
 
 }
