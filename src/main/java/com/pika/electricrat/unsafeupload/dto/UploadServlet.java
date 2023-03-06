@@ -13,11 +13,13 @@ import jakarta.servlet.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 @WebServlet("/uploadAction/*")
 @MultipartConfig
@@ -26,7 +28,7 @@ public class UploadServlet extends BaseServlet {
 
     private String uploadPath(HttpServletRequest request){
         return request.getServletContext().getRealPath(FileServerImpl.UPLOAD_DIRECTORY);
-    };
+    }
 
     @Api({RequestMethodType.POST})
     public Map<?, ?> image(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,7 +51,6 @@ public class UploadServlet extends BaseServlet {
     public Map<?, ?> imageBlackList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part file = request.getPart("image_file");
         String fileName = file.getSubmittedFileName();
-//        String suffixName = fileName.substring(fileName.lastIndexOf(".")).toLowerCase();
         String suffixName = fileName.substring(fileName.lastIndexOf("."));
         System.out.println(suffixName);
         for(String i : FileServerImpl.BLACK_FILE_TYPE) {
@@ -136,6 +137,74 @@ public class UploadServlet extends BaseServlet {
         data.put("moveFileStatus", res);
         return data;
     }
-    /*TODO
-     *  压缩解压*/
+
+    @Api({RequestMethodType.POST})
+    public Map<?, ?> uploadZip(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Part file = request.getPart("file");
+        String fileName = file.getSubmittedFileName();
+        String suffixName = fileName.substring(fileName.lastIndexOf(".")).toLowerCase();
+        if (suffixName.equals(".zip")){
+            return uploadFileUnzip(file, uploadPath(request));
+        }
+        HashMap<String, Object> data= new HashMap<>();
+        data.put("uploadStatus", false);
+        return data;
+    }
+    private List<HashMap<String, Object>> unZip(File file) throws IOException {
+        List<HashMap<String, Object>> fileList = new ArrayList<>();
+        try (ZipInputStream zipInput = new ZipInputStream(Files.newInputStream(file.toPath()))) {
+            ZipEntry entry = zipInput.getNextEntry();
+            while (entry != null) {
+                if (!entry.isDirectory()) {
+                    File outFile = new File(file.getParentFile(), entry.getName());
+                    if(!outFile.exists()){
+                        Files.copy(zipInput, outFile.toPath());
+                        String fileName = entry.getName();
+                        HashMap<String, Object> fileObject = fsi.uploadFile(new FileEntity(fileName, fileName.substring(fileName.lastIndexOf(".")).toLowerCase(), outFile.getAbsolutePath(),
+                                System.currentTimeMillis(), entry.getSize(), (new ImageVerificationCode()).GetRandom(8)));
+                        fileList.add(fileObject);
+                    }
+                }
+                zipInput.closeEntry();
+                entry = zipInput.getNextEntry();
+            }
+        } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+        // 删除原始压缩文件
+        Files.delete(file.toPath());
+        return fileList;
+    }
+
+    private HashMap<String, Object> uploadFileUnzip(Part imageFile,String filePath){
+        HashMap<String, Object> data= new HashMap<>();
+        try {
+            String fileName = imageFile.getSubmittedFileName();
+            long fileSize = imageFile.getSize();
+            if(fileSize > FileServerImpl.MAX_FILE_SIZE){data.put("uploadStatus", false);return data;}
+            String fileType = imageFile.getContentType();
+
+            File file = new File(filePath);
+            if (!file.exists() && !file.isDirectory()){
+                file.mkdir();
+            }
+
+            imageFile.write(filePath+"\\"+fileName);
+            if (!fileName.toLowerCase().endsWith(".zip")) {
+                data.put("uploadStatus", false);
+                return data;
+            }
+            List<HashMap<String, Object>> fileObject = unZip(new File(filePath+"\\"+fileName));
+            if (fileObject.isEmpty()){
+                data.put("uploadStatus", false);
+                return data;
+            }
+            data.put("file", fileObject);
+            data.put("uploadStatus", true);
+        } catch (Exception e){
+            data.put("uploadStatus", false);
+            data.put("msg", e.getMessage());
+        }
+        return data;
+    }
 }

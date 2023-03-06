@@ -341,6 +341,12 @@ const baseUri = window.location.origin + project_name;
                   <p>后端文件后缀</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="${baseUri}pages/unsafeupload/unzip.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>上传压缩文件</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">

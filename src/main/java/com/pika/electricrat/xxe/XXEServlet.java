@@ -32,7 +32,4 @@ public class XXEServlet extends BaseServlet {
         response.setContentType("text/xml;charset=UTF-8");
         response.getWriter().append(result);
     }
-
-    /*TODO
-    *  提供模板xml*/
 }

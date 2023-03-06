@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>任意文件上传</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+  <nav id="Navbar" class="main-header navbar navbar-expand navbar-dark"></nav>
+  <aside id="Container" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+  <div class="content-wrapper" id="Wrapper">
+    <section class="content-header" id="WrapperHeader"></section>
+    <section class="content">
+      <div class="container-fluid">
+        <div id="notice"></div>
+        <div class="card card-primary card-outline">
+          <div class="card-header">
+            <h3 class="card-title">上传压缩包</h3>
+          </div>
+          <div class="card-body">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">压缩包上传</h3>
+              </div>
+              <form action="" onsubmit="return false;">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="inputFile">选择文件</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputFile" onchange="checkFileExt(this.value)">
+                        <label class="custom-file-label" for="inputFile">Choose file</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary" onclick="uploadImage()">上传</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="card card-primary card-outline" id="showSource">
+          <div class="card-header">
+            <h3 class="card-title">源代码&amp;提示</h3>
+          </div>
+          <div class="card-body">
+            <div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+  <aside class="control-sidebar control-sidebar-dark">
+  </aside>
+  <footer class="main-footer"></footer>
+  <script src="../../dist/js/templateHandle.js"></script>
+  <script>
+    setWrapperHeader("任意文件上传", ["上传压缩包"]);
+  </script>
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="../../dist/js/adminlte.js"></script>
+  <script>
+
+    let notice_dom = $("#notice")[0];
+    let label_dom = $("#inputFile + label")[0]
+    function checkFileExt(filename){
+      label_dom.innerText = filename;
+      notice_dom.innerHTML = '';
+    }
+
+    function uploadImage(){
+      let files = $("#inputFile")[0].files;
+      if (files.length === 0)return;
+      let fd = new FormData();
+      fd.append('file', files[0]);
+      $.post({
+        url: `${project_name}uploadAction/uploadZip`,
+        data: fd,
+        processData: false,
+        contentType: false,
+        success(resp){
+          if (resp['uploadStatus']){
+            let fileObj = resp['file'];
+            console.log(fileObj);
+            if (fileObj.length > 0){
+              for (let i = 0; i < fileObj.length; i++){
+                let path = baseUri + fileObj[i].url;
+                notice_dom.innerHTML += generateNote(`上传成功文件访问路径为：<a href='${path}' target="_blank" style="color: #53aefd;">${path}</a>`);
+              }
+            }
+          } else {
+            notice_dom.innerHTML = generateNote("上传失败");
+          }
+        }
+      })
+    }
+  </script>
+</body>
+</html>
