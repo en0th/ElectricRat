@@ -72,7 +72,7 @@
   <script src="../../dist/js/adminlte.js"></script>
   <script>
     function submitText(){
-      let content = $("#own-text")[0].value;
+      let content = $("#own-text").val().replace(/<\/?[^>]+(>|$)/g, "").replace(/(<\w+)([^>]*)(on\w+)([^>]*>)/gi, "$1$2$4");
       $("#notice")[0].innerHTML = generateNote("我不在乎你输入的是什么，就算是：<a href=" + content + "' style=\"" + "color: cornflowerblue;" + "\">这是个单纯的链接</a>")
     }
   </script>

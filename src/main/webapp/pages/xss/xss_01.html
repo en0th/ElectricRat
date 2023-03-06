@@ -47,9 +47,8 @@
           </div>
           <div class="card-body">
             <div>
-              <p>这里针对用户输入的内容进行了一个简单的过滤，思考一下如何绕过？</p>
-              <p><strong>实现代码</strong></p>
-              <pre><code>&#x20;&#x20;&#x20;&#x20;&#x66;&#x75;&#x6E;&#x63;&#x74;&#x69;&#x6F;&#x6E;&#x20;&#x73;&#x75;&#x62;&#x6D;&#x69;&#x74;&#x54;&#x65;&#x78;&#x74;&lpar;&rpar;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x6C;&#x65;&#x74;&#x20;&#x63;&#x6F;&#x6E;&#x74;&#x65;&#x6E;&#x74;&#x20;&equals;&#x20;&dollar;&lpar;&quot;&num;&#x6F;&#x77;&#x6E;&#x2D;&#x74;&#x65;&#x78;&#x74;&quot;&rpar;&lsqb;&#x30;&rsqb;&period;&#x76;&#x61;&#x6C;&#x75;&#x65;&period;&#x72;&#x65;&#x70;&#x6C;&#x61;&#x63;&#x65;&#x41;&#x6C;&#x6C;&lpar;&quot;&lt;&#x73;&#x63;&#x72;&#x69;&#x70;&#x74;&quot;&comma;&apos;&apos;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&dollar;&lpar;&quot;&num;&#x6E;&#x6F;&#x74;&#x69;&#x63;&#x65;&quot;&rpar;&lsqb;&#x30;&rsqb;&period;&#x69;&#x6E;&#x6E;&#x65;&#x72;&#x48;&#x54;&#x4D;&#x4C;&#x20;&equals;&#x20;&#x67;&#x65;&#x6E;&#x65;&#x72;&#x61;&#x74;&#x65;&#x4E;&#x6F;&#x74;&#x65;&lpar;&quot;&#x6211;&#x4E0D;&#x5728;&#x4E4E;&#x4F60;&#x8F93;&#x5165;&#x7684;&#x662F;&#x4EC0;&#x4E48;&#xFF0C;&#x5C31;&#x7B97;&#x662F;&#xFF1A;&quot;&#x20;&plus;&#x20;&#x63;&#x6F;&#x6E;&#x74;&#x65;&#x6E;&#x74;&rpar;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;</code></pre>
+              <p>针对用户输入内容的闭合进行了过滤，但实际使用了 <code>decodeURIComponent</code> 解析。这是致命的问题，尽管做了一些过滤，但还是能绕过。</p>
+              <pre><code>&#x20;&#x20;&#x20;&#x20;&#x66;&#x75;&#x6E;&#x63;&#x74;&#x69;&#x6F;&#x6E;&#x20;&#x73;&#x75;&#x62;&#x6D;&#x69;&#x74;&#x54;&#x65;&#x78;&#x74;&lpar;&rpar;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x6F;&#x6E;&#x73;&#x74;&#x20;&#x69;&#x6E;&#x70;&#x75;&#x74;&#x20;&equals;&#x20;&#x64;&#x65;&#x63;&#x6F;&#x64;&#x65;&#x55;&#x52;&#x49;&#x43;&#x6F;&#x6D;&#x70;&#x6F;&#x6E;&#x65;&#x6E;&#x74;&lpar;&#x4A;&#x53;&#x4F;&#x4E;&period;&#x70;&#x61;&#x72;&#x73;&#x65;&lpar;&apos;&quot;&apos;&#x20;&plus;&#x20;&dollar;&lpar;&quot;&num;&#x6F;&#x77;&#x6E;&#x2D;&#x74;&#x65;&#x78;&#x74;&quot;&rpar;&period;&#x76;&#x61;&#x6C;&lpar;&rpar;&period;&#x72;&#x65;&#x70;&#x6C;&#x61;&#x63;&#x65;&lpar;&sol;&lt;&#x5C;&sol;&quest;&lsqb;&Hat;&gt;&rsqb;&plus;&lpar;&gt;&vert;&dollar;&rpar;&sol;&#x67;&comma;&#x20;&quot;&quot;&rpar;&#x20;&plus;&#x20;&apos;&quot;&apos;&rpar;&rpar;&period;&#x72;&#x65;&#x70;&#x6C;&#x61;&#x63;&#x65;&lpar;&sol;&lt;&period;&ast;&quest;&#x6F;&#x6E;&period;&ast;&quest;&equals;&period;&ast;&quest;&gt;&sol;&#x67;&#x69;&#x6D;&comma;&#x20;&quot;&quot;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x6F;&#x6E;&#x73;&#x74;&#x20;&#x61;&#x6C;&#x6C;&#x6F;&#x77;&#x65;&#x64;&#x54;&#x61;&#x67;&#x73;&#x20;&equals;&#x20;&lsqb;&apos;&#x70;&apos;&comma;&#x20;&apos;&#x61;&apos;&comma;&#x20;&apos;&#x62;&#x72;&apos;&rsqb;&semi;&#x20;&sol;&sol;&#x20;&#x5141;&#x8BB8;&#x7684;&#x6807;&#x7B7E;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x6F;&#x6E;&#x73;&#x74;&#x20;&#x61;&#x6C;&#x6C;&#x6F;&#x77;&#x65;&#x64;&#x41;&#x74;&#x74;&#x72;&#x69;&#x62;&#x75;&#x74;&#x65;&#x73;&#x20;&equals;&#x20;&lsqb;&apos;&#x68;&#x72;&#x65;&#x66;&apos;&comma;&#x20;&apos;&#x73;&#x72;&#x63;&apos;&comma;&#x20;&apos;&#x61;&#x6C;&#x74;&apos;&rsqb;&semi;&#x20;&sol;&sol;&#x20;&#x5141;&#x8BB8;&#x7684;&#x5C5E;&#x6027;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x6F;&#x6E;&#x73;&#x74;&#x20;&#x73;&#x61;&#x6E;&#x69;&#x74;&#x69;&#x7A;&#x65;&#x64;&#x49;&#x6E;&#x70;&#x75;&#x74;&#x20;&equals;&#x20;&#x73;&#x61;&#x6E;&#x69;&#x74;&#x69;&#x7A;&#x65;&#x49;&#x6E;&#x70;&#x75;&#x74;&lpar;&#x69;&#x6E;&#x70;&#x75;&#x74;&comma;&#x20;&#x61;&#x6C;&#x6C;&#x6F;&#x77;&#x65;&#x64;&#x54;&#x61;&#x67;&#x73;&comma;&#x20;&#x61;&#x6C;&#x6C;&#x6F;&#x77;&#x65;&#x64;&#x41;&#x74;&#x74;&#x72;&#x69;&#x62;&#x75;&#x74;&#x65;&#x73;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x6F;&#x6E;&#x73;&#x6F;&#x6C;&#x65;&period;&#x6C;&#x6F;&#x67;&lpar;&#x69;&#x6E;&#x70;&#x75;&#x74;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x6F;&#x6E;&#x73;&#x6F;&#x6C;&#x65;&period;&#x6C;&#x6F;&#x67;&lpar;&#x73;&#x61;&#x6E;&#x69;&#x74;&#x69;&#x7A;&#x65;&#x64;&#x49;&#x6E;&#x70;&#x75;&#x74;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x64;&#x6F;&#x63;&#x75;&#x6D;&#x65;&#x6E;&#x74;&period;&#x67;&#x65;&#x74;&#x45;&#x6C;&#x65;&#x6D;&#x65;&#x6E;&#x74;&#x42;&#x79;&#x49;&#x64;&lpar;&quot;&#x6E;&#x6F;&#x74;&#x69;&#x63;&#x65;&quot;&rpar;&period;&#x69;&#x6E;&#x6E;&#x65;&#x72;&#x48;&#x54;&#x4D;&#x4C;&#x20;&equals;&#x20;&#x67;&#x65;&#x6E;&#x65;&#x72;&#x61;&#x74;&#x65;&#x4E;&#x6F;&#x74;&#x65;&lpar;&quot;&#x6211;&#x4E0D;&#x5728;&#x4E4E;&#x4F60;&#x8F93;&#x5165;&#x7684;&#x662F;&#x4EC0;&#x4E48;&#xFF0C;&#x5C31;&#x7B97;&#x662F;&#xFF1A;&quot;&#x20;&plus;&#x20;&#x73;&#x61;&#x6E;&#x69;&#x74;&#x69;&#x7A;&#x65;&#x64;&#x49;&#x6E;&#x70;&#x75;&#x74;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x66;&#x75;&#x6E;&#x63;&#x74;&#x69;&#x6F;&#x6E;&#x20;&#x73;&#x61;&#x6E;&#x69;&#x74;&#x69;&#x7A;&#x65;&#x49;&#x6E;&#x70;&#x75;&#x74;&lpar;&#x69;&#x6E;&#x70;&#x75;&#x74;&comma;&#x20;&#x61;&#x6C;&#x6C;&#x6F;&#x77;&#x65;&#x64;&#x54;&#x61;&#x67;&#x73;&comma;&#x20;&#x61;&#x6C;&#x6C;&#x6F;&#x77;&#x65;&#x64;&#x41;&#x74;&#x74;&#x72;&#x69;&#x62;&#x75;&#x74;&#x65;&#x73;&rpar;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x6F;&#x6E;&#x73;&#x74;&#x20;&#x64;&#x69;&#x76;&#x20;&equals;&#x20;&#x64;&#x6F;&#x63;&#x75;&#x6D;&#x65;&#x6E;&#x74;&period;&#x63;&#x72;&#x65;&#x61;&#x74;&#x65;&#x45;&#x6C;&#x65;&#x6D;&#x65;&#x6E;&#x74;&lpar;&apos;&#x64;&#x69;&#x76;&apos;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x64;&#x69;&#x76;&period;&#x69;&#x6E;&#x6E;&#x65;&#x72;&#x48;&#x54;&#x4D;&#x4C;&#x20;&equals;&#x20;&#x69;&#x6E;&#x70;&#x75;&#x74;&semi;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x6F;&#x6E;&#x73;&#x74;&#x20;&#x65;&#x6C;&#x65;&#x6D;&#x65;&#x6E;&#x74;&#x73;&#x20;&equals;&#x20;&#x64;&#x69;&#x76;&period;&#x71;&#x75;&#x65;&#x72;&#x79;&#x53;&#x65;&#x6C;&#x65;&#x63;&#x74;&#x6F;&#x72;&#x41;&#x6C;&#x6C;&lpar;&apos;&ast;&apos;&rpar;&semi;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x66;&#x6F;&#x72;&#x20;&lpar;&#x6C;&#x65;&#x74;&#x20;&#x69;&#x20;&equals;&#x20;&#x30;&semi;&#x20;&#x69;&#x20;&lt;&#x20;&#x65;&#x6C;&#x65;&#x6D;&#x65;&#x6E;&#x74;&#x73;&period;&#x6C;&#x65;&#x6E;&#x67;&#x74;&#x68;&semi;&#x20;&#x69;&plus;&plus;&rpar;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x6F;&#x6E;&#x73;&#x74;&#x20;&#x65;&#x6C;&#x65;&#x6D;&#x65;&#x6E;&#x74;&#x20;&equals;&#x20;&#x65;&#x6C;&#x65;&#x6D;&#x65;&#x6E;&#x74;&#x73;&lsqb;&#x69;&rsqb;&semi;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x66;&#x20;&lpar;&excl;&#x61;&#x6C;&#x6C;&#x6F;&#x77;&#x65;&#x64;&#x54;&#x61;&#x67;&#x73;&period;&#x69;&#x6E;&#x63;&#x6C;&#x75;&#x64;&#x65;&#x73;&lpar;&#x65;&#x6C;&#x65;&#x6D;&#x65;&#x6E;&#x74;&period;&#x74;&#x61;&#x67;&#x4E;&#x61;&#x6D;&#x65;&period;&#x74;&#x6F;&#x4C;&#x6F;&#x77;&#x65;&#x72;&#x43;&#x61;&#x73;&#x65;&lpar;&rpar;&rpar;&rpar;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x65;&#x6C;&#x65;&#x6D;&#x65;&#x6E;&#x74;&period;&#x70;&#x61;&#x72;&#x65;&#x6E;&#x74;&#x4E;&#x6F;&#x64;&#x65;&period;&#x72;&#x65;&#x6D;&#x6F;&#x76;&#x65;&#x43;&#x68;&#x69;&#x6C;&#x64;&lpar;&#x65;&#x6C;&#x65;&#x6D;&#x65;&#x6E;&#x74;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x6F;&#x6E;&#x74;&#x69;&#x6E;&#x75;&#x65;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x6F;&#x6E;&#x73;&#x74;&#x20;&#x61;&#x74;&#x74;&#x72;&#x69;&#x62;&#x75;&#x74;&#x65;&#x73;&#x20;&equals;&#x20;&#x65;&#x6C;&#x65;&#x6D;&#x65;&#x6E;&#x74;&period;&#x61;&#x74;&#x74;&#x72;&#x69;&#x62;&#x75;&#x74;&#x65;&#x73;&semi;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x66;&#x6F;&#x72;&#x20;&lpar;&#x6C;&#x65;&#x74;&#x20;&#x6A;&#x20;&equals;&#x20;&#x61;&#x74;&#x74;&#x72;&#x69;&#x62;&#x75;&#x74;&#x65;&#x73;&period;&#x6C;&#x65;&#x6E;&#x67;&#x74;&#x68;&#x20;&#x2D;&#x20;&#x31;&semi;&#x20;&#x6A;&#x20;&gt;&equals;&#x20;&#x30;&semi;&#x20;&#x6A;&#x2D;&#x2D;&rpar;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x63;&#x6F;&#x6E;&#x73;&#x74;&#x20;&#x61;&#x74;&#x74;&#x72;&#x69;&#x62;&#x75;&#x74;&#x65;&#x20;&equals;&#x20;&#x61;&#x74;&#x74;&#x72;&#x69;&#x62;&#x75;&#x74;&#x65;&#x73;&lsqb;&#x6A;&rsqb;&semi;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x69;&#x66;&#x20;&lpar;&excl;&#x61;&#x6C;&#x6C;&#x6F;&#x77;&#x65;&#x64;&#x41;&#x74;&#x74;&#x72;&#x69;&#x62;&#x75;&#x74;&#x65;&#x73;&period;&#x69;&#x6E;&#x63;&#x6C;&#x75;&#x64;&#x65;&#x73;&lpar;&#x61;&#x74;&#x74;&#x72;&#x69;&#x62;&#x75;&#x74;&#x65;&period;&#x6E;&#x61;&#x6D;&#x65;&period;&#x74;&#x6F;&#x4C;&#x6F;&#x77;&#x65;&#x72;&#x43;&#x61;&#x73;&#x65;&lpar;&rpar;&rpar;&rpar;&#x20;&lcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x65;&#x6C;&#x65;&#x6D;&#x65;&#x6E;&#x74;&period;&#x72;&#x65;&#x6D;&#x6F;&#x76;&#x65;&#x41;&#x74;&#x74;&#x72;&#x69;&#x62;&#x75;&#x74;&#x65;&lpar;&#x61;&#x74;&#x74;&#x72;&#x69;&#x62;&#x75;&#x74;&#x65;&period;&#x6E;&#x61;&#x6D;&#x65;&rpar;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&rcub;&NewLine;&NewLine;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x72;&#x65;&#x74;&#x75;&#x72;&#x6E;&#x20;&#x64;&#x69;&#x76;&period;&#x69;&#x6E;&#x6E;&#x65;&#x72;&#x48;&#x54;&#x4D;&#x4C;&semi;&NewLine;&#x20;&#x20;&#x20;&#x20;&rcub;</code></pre>
             </div>
           </div>
         </div>
@@ -70,10 +69,45 @@
   <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
   <script src="../../dist/js/adminlte.js"></script>
   <script>
-    function submitText(){
-      let content = $("#own-text")[0].value.replaceAll("<script",'');
-      $("#notice")[0].innerHTML = generateNote("我不在乎你输入的是什么，就算是：" + content)
+    function submitText() {
+      const input = decodeURIComponent(JSON.parse('"' + $("#own-text").val().replace(/<\/?[^>]+(>|$)/g, "") + '"')).replace(/<.*?on.*?=.*?>/gim, "");
+      const allowedTags = ['p', 'a', 'br']; // 允许的标签
+      const allowedAttributes = ['href', 'src', 'alt']; // 允许的属性
+      const sanitizedInput = sanitizeInput(input, allowedTags, allowedAttributes);
+      console.log(input);
+      console.log(sanitizedInput);
+      document.getElementById("notice").innerHTML = generateNote("我不在乎你输入的是什么，就算是：" + sanitizedInput);
     }
+
+    function sanitizeInput(input, allowedTags, allowedAttributes) {
+      const div = document.createElement('div');
+      div.innerHTML = input;
+
+      const elements = div.querySelectorAll('*');
+
+      for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+
+        if (!allowedTags.includes(element.tagName.toLowerCase())) {
+          element.parentNode.removeChild(element);
+          continue;
+        }
+
+        const attributes = element.attributes;
+
+        for (let j = attributes.length - 1; j >= 0; j--) {
+          const attribute = attributes[j];
+
+          if (!allowedAttributes.includes(attribute.name.toLowerCase())) {
+            element.removeAttribute(attribute.name);
+          }
+        }
+      }
+
+      return div.innerHTML;
+    }
+
+    // \u003c\u0061\u0020\u0068\u0072\u0065\u0066\u003d\u0022\u006a\u0061\u0076\u0061\u0073\u0063\u0072\u0069\u0070\u0074\u003a\u0061\u006c\u0065\u0072\u0074\u0028\u0031\u0029\u0022\u0020\u0072\u0065\u006c\u003d\u0022\u006e\u006f\u006f\u0070\u0065\u006e\u0065\u0072\u0020\u006e\u006f\u0072\u0065\u0066\u0065\u0072\u0072\u0065\u0072\u0022\u003e\u0063\u006c\u0069\u0063\u006b\u0020\u006d\u0065\u003c\u002f\u0061\u003e
   </script>
 </body>
 </html>
