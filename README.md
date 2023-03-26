@@ -6,6 +6,9 @@
 ![](https://img.shields.io/github/forks/linjiananallnt/ElectricRat.svg)
 ![](https://img.shields.io/github/license/linjiananallnt/ElectricRat.svg)
 
+[中文文档](https://github.com/linjiananallnt/ElectricRat)
+[English documentation](https://github.com/linjiananallnt/ElectricRat/blob/master/EN_README.md)
+
 # ⛱ 项目介绍
 电气鼠靶场系统是一种带有漏洞的Web应用程序，旨在为Web安全渗透测试学习者提供学习和实践的机会。靶场系统包含了各种常见的Web安全漏洞，例如SQL注入、跨站脚本攻击、文件包含漏洞、代码注入漏洞等等，以帮助学习者熟悉和掌握这些漏洞的原理和实际利用方法。
 
