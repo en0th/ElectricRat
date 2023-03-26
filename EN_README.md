@@ -1,4 +1,5 @@
-
+[中文文档](https://github.com/linjiananallnt/ElectricRat)
+[English documentation](https://github.com/linjiananallnt/ElectricRat/blob/master/EN_README.md)
 
 # ⛱ Project Introduction:
 
