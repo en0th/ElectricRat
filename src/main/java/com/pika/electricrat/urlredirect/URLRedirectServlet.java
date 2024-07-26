@@ -12,13 +12,12 @@ public class URLRedirectServlet extends BaseServlet {
         String url = request.getParameter("url");
         String path = request.getContextPath();
 
-        // 获得当前服务器基本地址 http://localhost:8080
         String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
 
         if (url != null && url.startsWith(basePath) && url.contains(path)) {
             response.sendRedirect(url);
         } else {
-            response.setStatus(404);
+            response.sendError(500);
         }
     }
 }
