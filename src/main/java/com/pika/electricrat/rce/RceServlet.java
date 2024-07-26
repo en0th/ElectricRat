@@ -26,14 +26,27 @@ public class RceServlet extends BaseServlet {
     public Map<?, ?> ping(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, InterruptedException {
         String ip = request.getParameter("ip");
         HashMap<String, Object> data = new HashMap<>();
-        data.put("data", execCmd("ping -c 4 " + ip));
+        int os = SystemInfo();
+        String ping = "ping ";
+        if (os == 0) {
+            ping = "ping -n 4 ";
+        } else if (os == 2) {
+            ping = "ping -c 4 ";
+        }
+        data.put("data", execCmd(ping + ip));
         return data;
     }
 
     public static String execCmd(String cmd) throws IOException, InterruptedException {
         List<String> bash_cmd = new ArrayList<>();
-        bash_cmd.add("/bin/sh");
-        bash_cmd.add("-c");
+        int os = SystemInfo();
+        if (os == 0) {
+            bash_cmd.add("cmd");
+            bash_cmd.add("/c");
+        } else if (os == 2) {
+            bash_cmd.add("/bin/sh");
+            bash_cmd.add("-c");
+        }
         bash_cmd.add(cmd);
         Process p = Runtime.getRuntime().exec(bash_cmd.toArray(new String[bash_cmd.size()]));
         InputStream is = p.getInputStream();
@@ -48,5 +61,19 @@ public class RceServlet extends BaseServlet {
         reader.close();
         p.destroy();
         return text.toString();
+    }
+
+    public static int SystemInfo() {
+        String operatingSystem = System.getProperty("os.name").toLowerCase();
+
+        if (operatingSystem.contains("win")) {
+            return 0;
+        } else if (operatingSystem.contains("mac")) {
+            return 1;
+        } else if (operatingSystem.contains("nix") || operatingSystem.contains("gnu") || operatingSystem.contains("aix") || operatingSystem.contains("linux") || operatingSystem.contains("bsd") || operatingSystem.contains("solaris")) {
+            return 2;
+        } else {
+            return 3;
+        }
     }
 }
