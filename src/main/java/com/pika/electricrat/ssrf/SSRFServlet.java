@@ -40,7 +40,8 @@ public class SSRFServlet extends BaseServlet {
             response.getWriter().append("data:image/jpeg;base64,").append(
                     new String(Base64.getEncoder().encode(image2)));
         } catch (Exception e){
-            response.setStatus(400);
+            e.printStackTrace();
+            response.sendError(500);
         }
     }
 }
