@@ -9,6 +9,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Map;
@@ -21,12 +22,12 @@ public class FileActionServlet extends BaseServlet {
         return request.getServletContext().getRealPath(FileServerImpl.UPLOAD_DIRECTORY);
     };
 
-    public void getFile(HttpServletRequest request, HttpServletResponse response){
+    public void getFile(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String fileName = request.getParameter("fileName");
         String suffix = fileName.substring(fileName.lastIndexOf('.'));
-        response.setHeader("content-disposition", "attachment;filename=" + ((new ImageVerificationCode()).GetRandom(10) + suffix));
         try {
-            FileInputStream in = new FileInputStream(uploadPath(request) + "\\" + fileName);
+            FileInputStream in = new FileInputStream(uploadPath(request) + File.separator + fileName);
+            response.setHeader("content-disposition", "attachment;filename=" + ((new ImageVerificationCode()).GetRandom(10) + suffix));
             ServletOutputStream out = response.getOutputStream();
             byte[] buffer = new byte[1024];
             int length=-1;
@@ -37,6 +38,11 @@ public class FileActionServlet extends BaseServlet {
             out.close();
         } catch (Exception e){
             e.printStackTrace();
+            response.setStatus(500);
+            response.setContentType("text/html");
+            ServletOutputStream out = response.getOutputStream();
+            out.write(e.getLocalizedMessage().getBytes());
+            out.close();
         }
     }
 

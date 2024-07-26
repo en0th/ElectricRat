@@ -1,13 +1,13 @@
-<img src="https://socialify.git.ci/linjiananallnt/ElectricRat/image?description=1&font=Bitter&name=1&pattern=Floating%20Cogs&theme=Light" alt="ElectricRat" width="640" height="320" />
+<img src="https://socialify.git.ci/en0th/ElectricRat/image?description=1&font=Bitter&name=1&pattern=Floating%20Cogs&theme=Light" alt="ElectricRat" width="640" height="320" />
 
 ![](https://img.shields.io/badge/web安全-靶场-PTEST)
 ![](https://img.shields.io/badge/version-1.0-success)
-![](https://img.shields.io/github/stars/linjiananallnt/ElectricRat.svg)
-![](https://img.shields.io/github/forks/linjiananallnt/ElectricRat.svg)
-![](https://img.shields.io/github/license/linjiananallnt/ElectricRat.svg)
+![](https://img.shields.io/github/stars/en0th/ElectricRat.svg)
+![](https://img.shields.io/github/forks/en0th/ElectricRat.svg)
+![](https://img.shields.io/github/license/en0th/ElectricRat.svg)
 
-[中文文档](https://github.com/linjiananallnt/ElectricRat)
-[English documentation](https://github.com/linjiananallnt/ElectricRat/blob/master/EN_README.md)
+[中文文档](https://github.com/en0th/ElectricRat)
+[English documentation](https://github.com/en0th/ElectricRat/blob/master/EN_README.md)
 
 # ⛱ 项目介绍
 电气鼠靶场系统是一种带有漏洞的Web应用程序，旨在为Web安全渗透测试学习者提供学习和实践的机会。靶场系统包含了各种常见的Web安全漏洞，例如SQL注入、跨站脚本攻击、文件包含漏洞、代码注入漏洞等等，以帮助学习者熟悉和掌握这些漏洞的原理和实际利用方法。
@@ -20,7 +20,7 @@
 
 # 🚀 安装和使用说明
 此系统没有后门木马，但是实际的功能上可以让黑客轻松的攻击您的服务器。不建议将此系统安装到公网的云服务器最好的方案是在虚拟机中安装docker并使用docker安装ElectricRat。
-1. 点击下载[下载最新发布](https://github.com/linjiananallnt/ElectricRat/releases)。
+1. 点击下载[下载最新发布](https://github.com/en0th/ElectricRat/releases)。
 2. 解压并进入到项目目录下打开操控终端。
 3. 输入命令，使用`docker-compose`启动项目，并且导入数据库。
 ```
@@ -64,4 +64,4 @@ sudo docker exec electricrat-mysql /bin/bash -c 'cd /data && mysqladmin -u root 
 非常渴望对该系统的各种良好的建议，鼓励大家提交PR。
 
 # Star增长曲线
-![Star增长曲线](https://api.star-history.com/svg?repos=linjiananallnt/ElectricRat&type=Date)
+![Star增长曲线](https://star-history.com/#en0th/ElectricRat&Date)
