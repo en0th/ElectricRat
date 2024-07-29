@@ -30,6 +30,10 @@ public class UploadServlet extends BaseServlet {
         return request.getServletContext().getRealPath(FileServerImpl.UPLOAD_DIRECTORY);
     }
 
+    private String templatesPath(HttpServletRequest request){
+        return request.getServletContext().getRealPath(FileServerImpl.TEMPLATES_DIRECTORY);
+    }
+
     @Api({RequestMethodType.POST})
     public Map<?, ?> image(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         return uploadFile(request.getPart("image_file"), uploadPath(request));
@@ -52,7 +56,6 @@ public class UploadServlet extends BaseServlet {
         Part file = request.getPart("image_file");
         String fileName = file.getSubmittedFileName();
         String suffixName = fileName.substring(fileName.lastIndexOf("."));
-        System.out.println(suffixName);
         for(String i : FileServerImpl.BLACK_FILE_TYPE) {
             if (suffixName.equals(i)){
                 HashMap<String, Object> data= new HashMap<>();
@@ -88,6 +91,7 @@ public class UploadServlet extends BaseServlet {
         HashMap<String, Object> data= new HashMap<>();
         try {
             String fileName = imageFile.getSubmittedFileName();
+            System.out.println(fileName);
             long fileSize = imageFile.getSize();
             if(fileSize > FileServerImpl.MAX_FILE_SIZE){data.put("uploadStatus", false);return data;}
             String fileType = imageFile.getContentType();
@@ -144,7 +148,7 @@ public class UploadServlet extends BaseServlet {
         String fileName = file.getSubmittedFileName();
         String suffixName = fileName.substring(fileName.lastIndexOf(".")).toLowerCase();
         if (suffixName.equals(".zip")){
-            return uploadFileUnzip(file, uploadPath(request));
+            return uploadFileUnzip(file, templatesPath(request));
         }
         HashMap<String, Object> data= new HashMap<>();
         data.put("uploadStatus", false);

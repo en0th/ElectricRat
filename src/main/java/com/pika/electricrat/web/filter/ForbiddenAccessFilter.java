@@ -2,6 +2,7 @@ package com.pika.electricrat.web.filter;
 
 
 import com.pika.electricrat.fileinclude.FileIncludeServlet;
+import com.pika.electricrat.unsafeupload.bo.Impl.FileServerImpl;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/pages/fileinclude/templates/*"})
+@WebFilter(urlPatterns = {"/*"})
 public class ForbiddenAccessFilter implements Filter {
 
     @Override
@@ -19,14 +20,24 @@ public class ForbiddenAccessFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
-        String requestPath = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
-        if (requestPath.startsWith(FileIncludeServlet.FORBIDDEN_PATH)) {
+        String requestPath = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length()).replaceAll("/{2,}", "/");;
+        System.out.println(requestPath);
+        if (requestPath.startsWith(FileIncludeServlet.FORBIDDEN_PATH)
+                || requestPath.startsWith(FileServerImpl.TEMPLATES_DIRECTORY)) {
             HttpServletResponse httpResponse = (HttpServletResponse) response;
             httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
-            httpResponse.setStatus(404);
-        } else {
-            chain.doFilter(request, response);
+        } else if (requestPath.contains(FileIncludeServlet.FORBIDDEN_PATH)
+                || requestPath.contains(FileServerImpl.TEMPLATES_DIRECTORY)){
+            if (requestPath.contains("../")
+                    || requestPath.contains("./")
+                    || requestPath.contains("..\\")
+                    || requestPath.contains(".\\")
+                    || requestPath.contains(";")){
+                HttpServletResponse httpResponse = (HttpServletResponse) response;
+                httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
+            }
         }
+        chain.doFilter(request, response);
     }
 
     @Override

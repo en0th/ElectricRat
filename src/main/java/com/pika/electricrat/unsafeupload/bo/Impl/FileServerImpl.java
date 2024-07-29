@@ -11,6 +11,7 @@ public class FileServerImpl implements FileServer {
     FileDaoImpl fdi = new FileDaoImpl();
     // 上传文件存储目录
     public static final String UPLOAD_DIRECTORY = "/upload";
+    public static final String TEMPLATES_DIRECTORY = "/templates";
     public static final String[] IMAGE_FILE_TYPE = {"png", "jpg", "gif"};
     public static final String[] BLACK_FILE_TYPE = {".html", ".htm", ".phtml", ".jsp", ".jspa", ".jspx", ".jsw", ".jsv", ".jspf", ".jtml"};
     public static final String[] White_FILE_TYPE = {".png", ".jpg", ".gif"};
@@ -25,7 +26,7 @@ public class FileServerImpl implements FileServer {
         FileEntity fileObject = fdi.add(entity);
         if (fileObject != null){
             data.put("id", fileObject.getId());
-            data.put("url",UPLOAD_DIRECTORY + "/" + fileObject.getFileName());
+            data.put("url",(fileObject.getFilePath().contains("upload") ? UPLOAD_DIRECTORY : TEMPLATES_DIRECTORY) + "/" + fileObject.getFileName());
             data.put("type", fileObject.getFileType());
             data.put("name", fileObject.getFileName());
         }

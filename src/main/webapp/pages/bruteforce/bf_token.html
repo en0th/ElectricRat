@@ -20,7 +20,7 @@
         <div id="notice"></div>
         <div class="card card-primary card-outline">
           <div class="card-header">
-            <h3 class="card-title">验证码绕过(on server)</h3>
+            <h3 class="card-title">验证码绕过(token)</h3>
           </div>
           <div class="card-body">
             <div class="card card-primary">
@@ -92,7 +92,6 @@
       })
     }
     function doLogin(){
-      getToken();
       let data = {
         username: $("#username")[0].value,
         password: $("#password")[0].value,
@@ -114,6 +113,7 @@
           } else {
             $("#notice")[0].innerHTML = generateNote("登录失败，账号或者密码错误！");
           }
+          getToken();
         }
       })
     }
