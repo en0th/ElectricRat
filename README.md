@@ -1,13 +1,14 @@
 <img src="https://socialify.git.ci/en0th/ElectricRat/image?description=1&font=Bitter&name=1&pattern=Floating%20Cogs&theme=Light" alt="ElectricRat" width="640" height="320" />
 
 ![](https://img.shields.io/badge/web安全-靶场-PTEST)
-![](https://img.shields.io/badge/version-1.0-success)
+![](https://img.shields.io/badge/version-1.3-success)
 ![](https://img.shields.io/github/stars/en0th/ElectricRat.svg)
 ![](https://img.shields.io/github/forks/en0th/ElectricRat.svg)
 ![](https://img.shields.io/github/license/en0th/ElectricRat.svg)
 
 [中文文档](https://github.com/en0th/ElectricRat)
 [English documentation](https://github.com/en0th/ElectricRat/blob/master/EN_README.md)
+[中文Wiki](https://github.com/en0th/ElectricRat/wiki)
 
 # ⛱ 项目介绍
 电气鼠靶场系统是一种带有漏洞的Web应用程序，旨在为Web安全渗透测试学习者提供学习和实践的机会。靶场系统包含了各种常见的Web安全漏洞，例如SQL注入、跨站脚本攻击、文件包含漏洞、代码注入漏洞等等，以帮助学习者熟悉和掌握这些漏洞的原理和实际利用方法。
