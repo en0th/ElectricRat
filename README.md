@@ -1,7 +1,7 @@
 <img src="https://socialify.git.ci/en0th/ElectricRat/image?description=1&font=Bitter&name=1&pattern=Floating%20Cogs&theme=Light" alt="ElectricRat" width="640" height="320" />
 
 ![](https://img.shields.io/badge/web安全-靶场-PTEST)
-![](https://img.shields.io/badge/version-1.3-success)
+![](https://img.shields.io/badge/version-1.3.1-success)
 ![](https://img.shields.io/github/stars/en0th/ElectricRat.svg)
 ![](https://img.shields.io/github/forks/en0th/ElectricRat.svg)
 ![](https://img.shields.io/github/license/en0th/ElectricRat.svg)
