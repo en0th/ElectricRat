@@ -49,6 +49,7 @@ mysql -u root -pAAsd123rdsgA -Dmycms_gbk < dump-mycms_gbk.sql'
 ![img2.png](https://github.com/en0th/ElectricRat/blob/master/pic/img2.png)
 
 如需进一步验证，请通过工具连接 `127.0.0.1:33060`，默认密码为 `AAsd123rdsgA`
+
 6. 访问 `http://127.0.0.1:12666/ElectricRat/index.html` 。
 > 值得注意的是，为了解决runc版本问题，我在创建 electricrat-web 时使用了 privileged: true。这会造成 docker 逃逸漏洞，考虑到安全问题，搭建时不应放在公网，或者其他可能造成风险的地方。
 
