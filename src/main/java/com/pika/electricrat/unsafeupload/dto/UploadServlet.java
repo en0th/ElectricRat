@@ -98,9 +98,9 @@ public class UploadServlet extends BaseServlet {
             if (!file.exists() && !file.isDirectory()){
                 file.mkdir();
             }
-
-            imageFile.write(filePath+"\\"+fileName);
-            HashMap<String, Object> fileObject = fsi.uploadFile(new FileEntity(fileName, fileType, (filePath+"\\"+fileName),
+            String _filePath = filePath + File.separator + fileName;
+            imageFile.write(_filePath);
+            HashMap<String, Object> fileObject = fsi.uploadFile(new FileEntity(fileName, fileType, (_filePath),
                     System.currentTimeMillis(), fileSize, (new ImageVerificationCode()).GetRandom(8)));
             if (fileObject.isEmpty()){
                 data.put("uploadStatus", false);
@@ -191,12 +191,13 @@ public class UploadServlet extends BaseServlet {
                 file.mkdir();
             }
 
-            imageFile.write(filePath+"\\"+fileName);
+            String _filePath = filePath + File.separator + fileName;
+            imageFile.write(_filePath);
             if (!fileName.toLowerCase().endsWith(".zip")) {
                 data.put("uploadStatus", false);
                 return data;
             }
-            List<HashMap<String, Object>> fileObject = unZip(new File(filePath+"\\"+fileName));
+            List<HashMap<String, Object>> fileObject = unZip(new File(_filePath));
             if (fileObject.isEmpty()){
                 data.put("uploadStatus", false);
                 return data;

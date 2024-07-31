@@ -8,6 +8,8 @@
 
 [中文文档](https://github.com/en0th/ElectricRat)
 [English documentation](https://github.com/en0th/ElectricRat/blob/master/EN_README.md)
+
+如需要帮助请看：
 [中文Wiki](https://github.com/en0th/ElectricRat/wiki)
 
 # ⛱ 项目介绍
@@ -24,11 +26,30 @@
 1. 点击下载[下载最新发布](https://github.com/en0th/ElectricRat/releases)。
 2. 解压并进入到项目目录下打开操控终端。
 3. 输入命令，使用`docker-compose`启动项目，并且导入数据库。
-```
+```shell
 sudo docker-compose up -d
-sudo docker exec electricrat-mysql /bin/bash -c 'cd /data && mysqladmin -u root -pAAsd123rdsgA create mycms && mysqladmin -u root -pAAsd123rdsgA create mycms_gbk && mysql -u root -pAAsd123rdsgA -Dmycms < dump-mycms.sql && mysql -u root -pAAsd123rdsgA -Dmycms_gbk < dump-mycms_gbk.sql'
 ```
-4. 访问 `http://127.0.0.1:12666/ElectricRat/index.html` 。
+4. 查看Mysql服务启动情况
+```shell
+sudo docker logs electricrat-mysql
+```
+如下图情况说明启动完毕，与之不同则先耐心等待多通过命令检查几次。
+
+![img.png](https://github.com/en0th/ElectricRat/blob/master/pic/img.png)
+
+5. 输入命令，导入数据库文件。
+```shell
+sudo docker exec electricrat-mysql /bin/bash -c 'cd /data && \
+mysql -h 127.0.0.1 -P 3306 --protocol=tcp -u root -pAAsd123rdsgA -e "CREATE DATABASE mycms DEFAULT CHARACTER SET utf8mb4; CREATE DATABASE mycms_gbk DEFAULT CHARACTER SET gbk;" && \
+mysql -u root -pAAsd123rdsgA -Dmycms < dump-mycms.sql && \
+mysql -u root -pAAsd123rdsgA -Dmycms_gbk < dump-mycms_gbk.sql'
+```
+如下图所示，没有任何报错，即数据库导入成功。
+
+![img2.png](https://github.com/en0th/ElectricRat/blob/master/pic/img2.png)
+
+如需进一步验证，请通过工具连接 `127.0.0.1:33060`，默认密码为 `AAsd123rdsgA`
+6. 访问 `http://127.0.0.1:12666/ElectricRat/index.html` 。
 > 值得注意的是，为了解决runc版本问题，我在创建 electricrat-web 时使用了 privileged: true。这会造成 docker 逃逸漏洞，考虑到安全问题，搭建时不应放在公网，或者其他可能造成风险的地方。
 
 # 👩🏼‍💻 电气鼠上的漏洞类型列表如下：
@@ -65,4 +86,4 @@ sudo docker exec electricrat-mysql /bin/bash -c 'cd /data && mysqladmin -u root 
 非常渴望对该系统的各种良好的建议，鼓励大家提交PR。
 
 # Star增长曲线
-![Star增长曲线](https://star-history.com/#en0th/ElectricRat&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=en0th/ElectricRat&type=Date)](https://star-history.com/#en0th/ElectricRat&Date)
