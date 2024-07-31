@@ -10,7 +10,7 @@ import java.net.URL;
 
 @WebServlet("/fileInclude/*")
 public class FileIncludeServlet extends BaseServlet {
-    public static final String FORBIDDEN_PATH = "pages/fileinclude/templates";
+    public static final String FORBIDDEN_PATH = "/pages/fileinclude/templates";
 
     public void includeLocalFile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/fileIncludeAction/IncludeServlet").forward(request, response);

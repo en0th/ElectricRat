@@ -71,9 +71,7 @@ public class UploadServlet extends BaseServlet {
         String fileName = file.getSubmittedFileName();
         for(String i : FileServerImpl.IMAGE_FILE_TYPE){
             if (file.getContentType().equals("image/"+i)){
-                HashMap<String, Object> data= new HashMap<>();
-                data.put("uploadStatus", false);
-                return data;
+                break;
             }
         }
 

@@ -26,7 +26,7 @@ public class IncludeServlet extends HttpServlet {
         String realFilePath = currentFilePath(request) + File.separator + filePath;
         File file = new File(realFilePath);
         if (file.getName().endsWith(".jsp")) {
-            String name = File.separator + FileIncludeServlet.FORBIDDEN_PATH + File.separator + filePath;
+            String name = "/" + FileIncludeServlet.FORBIDDEN_PATH + File.separator + filePath;
             request.getRequestDispatcher(name).include(request, response);
         } else {
             FileInputStream fis = new FileInputStream(file);

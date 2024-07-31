@@ -74,13 +74,16 @@
   <script>
     let notice_dom = $("#notice")[0];
     function submitText(){
-      let path = $("#own-text")[0].value;
+      let path = encodeURI($("#own-text")[0].value);
       if(!path)notice_dom.innerHTML = generateNote("请输入服务地址");
       $.get({
         url: `${project_name}serializeAction/RMIExec?path=${path}`,
         success(resp){
           notice_dom.innerHTML = generateNote("输出结果：" + resp);
         },
+        fail() {
+          notice_dom.innerHTML = generateNote("发生错误。");
+        }
       })
     }
   </script>
